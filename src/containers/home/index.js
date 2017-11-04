@@ -2,6 +2,7 @@ import React from 'react'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { Helmet } from "react-helmet"
 import {
   increment,
   incrementAsync,
@@ -9,8 +10,12 @@ import {
   decrementAsync
 } from '../../modules/counter'
 
-const Home = props => (
-  <div>
+const Home = props => [
+  <Helmet key="title">
+      <title>Home</title>
+  </Helmet>,
+
+  <div key="content">
     <h1>Home</h1>
     <p>Count: {props.count}</p>
 
@@ -26,7 +31,7 @@ const Home = props => (
 
     <p><button onClick={() => props.changePage()}>Go to about page via redux</button></p>
   </div>
-)
+]
 
 const mapStateToProps = state => ({
   count: state.counter.count,
