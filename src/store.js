@@ -10,11 +10,12 @@ const initialState = {}
 const enhancers = []
 const middleware = [
   thunk,
-  routerMiddleware(history)
+  routerMiddleware(history),
 ]
 
 if (process.env.NODE_ENV === 'development') {
-  const devToolsExtension = window.devToolsExtension
+  // TODO: Use `window.__REDUX_DEVTOOLS_EXTENSION__`
+  const devToolsExtension = window.devToolsExtension // eslint-disable-line
 
   if (typeof devToolsExtension === 'function') {
     enhancers.push(devToolsExtension())
@@ -23,13 +24,13 @@ if (process.env.NODE_ENV === 'development') {
 
 const composedEnhancers = compose(
   applyMiddleware(...middleware),
-  ...enhancers
+  ...enhancers,
 )
 
 const store = createStore(
   rootReducer,
   initialState,
-  composedEnhancers
+  composedEnhancers,
 )
 
 export default store

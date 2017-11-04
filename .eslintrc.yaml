@@ -1,0 +1,11 @@
+extends: airbnb
+rules:
+  semi: ["error", "never"]
+  react/jsx-filename-extension: 0
+env:
+  node: true
+  browser: true
+  es6: true
+  jest: true
+plugins:
+- react

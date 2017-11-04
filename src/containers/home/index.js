@@ -2,17 +2,17 @@ import React from 'react'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Helmet } from "react-helmet"
+import { Helmet } from 'react-helmet'
 import {
   increment,
   incrementAsync,
   decrement,
-  decrementAsync
+  decrementAsync,
 } from '../../modules/counter'
 
 const Home = props => [
   <Helmet key="title">
-      <title>Home</title>
+    <title>Home</title>
   </Helmet>,
 
   <div key="content">
@@ -30,13 +30,13 @@ const Home = props => [
     </p>
 
     <p><button onClick={() => props.changePage()}>Go to about page via redux</button></p>
-  </div>
+  </div>,
 ]
 
 const mapStateToProps = state => ({
   count: state.counter.count,
   isIncrementing: state.counter.isIncrementing,
-  isDecrementing: state.counter.isDecrementing
+  isDecrementing: state.counter.isDecrementing,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -44,10 +44,10 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   incrementAsync,
   decrement,
   decrementAsync,
-  changePage: () => push('/about-us')
+  changePage: () => push('/about-us'),
 }, dispatch)
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Home)
