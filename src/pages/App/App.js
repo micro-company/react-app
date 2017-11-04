@@ -1,20 +1,48 @@
-import React from 'react'
-import { Route, Link } from 'react-router-dom'
-import Home from '../Home'
-import About from '../About'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { Switch, Route } from 'react-router-dom'
+import Helmet from 'react-helmet'
+import { connect } from 'react-redux'
+import Authenticated from '../../containers/Authenticated'
+import Main from '../Main'
+import Auth from '../Auth'
 
-const App = () => (
-  <div>
-    <header>
-      <Link to="/">Home</Link>
-      <Link to="/about-us">About</Link>
-    </header>
+class App extends PureComponent {
+  static propTypes = {
+    router: PropTypes.object.isRequired,
+  }
 
-    <main>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/about-us" component={About} />
-    </main>
-  </div>
-)
+  render() {
+    return ([
+      <Helmet
+        title=" "
+        titleTemplate="Hello - %s"
+      />,
 
-export default App
+      <Switch {...this.props.router}>
+        <Route
+          exac
+          path="/auth"
+          component={Auth}
+          onUpdate={App.logPageView}
+        />
+        <Authenticated path="*" component={Main} />
+      </Switch>,
+    ])
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+    router: state.router,
+  }
+}
+
+function mapDispatchToProps() {
+  return {}
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(App)
