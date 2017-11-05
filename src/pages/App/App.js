@@ -15,11 +15,12 @@ class App extends PureComponent {
   render() {
     return ([
       <Helmet
+        key="helmet"
         title=" "
         titleTemplate="Hello - %s"
       />,
 
-      <Switch {...this.props.router}>
+      <Switch key="switch" {...this.props.router}>
         <Route
           exac
           path="/auth"

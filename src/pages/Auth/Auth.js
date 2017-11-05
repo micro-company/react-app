@@ -2,18 +2,17 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import { Helmet } from 'react-helmet'
+import { reduxForm, Field } from 'redux-form'
 import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button'
-import Card, { CardActions, CardContent } from 'material-ui/Card'
-import { Form } from 'react-form'
 import { MenuItem } from 'material-ui/Menu'
-import TextField from 'material-ui/TextField'
-import Select from 'material-ui/Select'
-import IconButton from 'material-ui/IconButton'
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input'
-import Visibility from 'material-ui-icons/Visibility'
-import VisibilityOff from 'material-ui-icons/VisibilityOff'
+import Card, { CardActions, CardContent } from 'material-ui/Card'
+
+import {
+  TextField,
+  Select,
+} from 'redux-form-material-ui'
 
 const styles = () => ({
   root: {
@@ -38,6 +37,10 @@ class Auth extends PureComponent {
     }
   }
 
+  onChange(event, onChange) { // eslint-disable-line
+    console.warn('onChange', event)
+  }
+
   handleChange = prop => event => this.setState({
     [prop]: event.target.value,
   })
@@ -46,7 +49,6 @@ class Auth extends PureComponent {
 
   handleClickShowPasssword = () => {
     this.setState({
-      password: '',
       showPassword: !this.state.showPassword,
     })
   }
@@ -55,7 +57,7 @@ class Auth extends PureComponent {
     const { classes } = this.props
 
     return ([
-      <Helmet title="Auth" />,
+      <Helmet key="auth" title="Auth" />,
 
       <Grid container className={classes.root} key="content" alignItems="center">
         <Grid item xs={12}>
@@ -67,48 +69,30 @@ class Auth extends PureComponent {
                     Auth Us
                   </Typography>
 
-                  <Form>
-                    {
-                      formApi => (
-                        <form onSubmit={formApi.submitForm} id="authForm">
-                          <TextField
-                            label="Login"
-                            margin="normal"
-                            fullWidth
-                          />
+                  <form>
+                    <Field
+                      name="login"
+                      label="Login"
+                      component={TextField}
+                      fullWidth
+                    />
 
-                          <InputLabel htmlFor="password">Password</InputLabel>
-                          <Input
-                            id="password"
-                            label="password"
-                            type={this.state.showPassword ? 'text' : 'password'}
-                            value={this.state.password}
-                            onChange={this.handleChange('password')}
-                            endAdornment={
-                              <InputAdornment position="end">
-                                <IconButton
-                                  onClick={this.handleClickShowPasssword}
-                                  onMouseDown={this.handleMouseDownPassword}
-                                >
-                                  {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
-                                </IconButton>
-                              </InputAdornment>
-                            }
-                            fullWidth
-                          />
+                    <Field
+                      name="password"
+                      label="Password"
+                      component={TextField}
+                      fullWidth
+                    />
 
-                          <Select
-                            value="en_GB"
-                            input={<Input id="language" />}
-                            fullWidth
-                          >
-                            <MenuItem value="ru_RU">Russia</MenuItem>
-                            <MenuItem value="en_GB">English</MenuItem>
-                          </Select>
-                        </form>
-                      )
-                    }
-                  </Form>
+                    <Field
+                      name="language"
+                      component={Select}
+                      fullWidth
+                    >
+                      <MenuItem value="ru_RU">Russia</MenuItem>
+                      <MenuItem value="en_GB">English</MenuItem>
+                    </Field>
+                  </form>
                 </CardContent>
 
                 <CardActions>
@@ -131,4 +115,6 @@ class Auth extends PureComponent {
   }
 }
 
-export default withStyles(styles)(Auth)
+export default reduxForm({
+  form: 'AUTH_FORM',
+})(withStyles(styles)(Auth))

@@ -2,6 +2,7 @@ extends: airbnb
 rules:
   semi: ["error", "never"]
   max-len: ["error", { "code": 120, "ignoreTrailingComments": true, "ignoreUrls": true, "ignoreStrings": true, "ignoreComments": true }]
+  no-console: ["error", { allow: ["warn", "error", "group", "groupEnd"] }]
   react/jsx-filename-extension: 0
   import/no-extraneous-dependencies: 0 # Incorrect work with decorators
   jsx-a11y/anchor-is-valid: ["error", {"components": [], "specialLink": ["hrefLeft", "hrefRight"], "aspects": ["noHref", "invalidHref", "preferButton"]}]

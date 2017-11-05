@@ -22,7 +22,7 @@ class Home extends PureComponent {
 
   render() {
     return [
-      <Helmet title="Home" />,
+      <Helmet key="home" title="Home" />,
 
       <div key="content">
         <h1>Home</h1>
