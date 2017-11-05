@@ -14,8 +14,10 @@
   "dependencies": {
     "history": "^4.7.2",
     "material-ui": "^1.0.0-beta.19",
+    "material-ui-icons": "^1.0.0-beta.17",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-form": "^2.4.0",
     "react-redux": "^5.0.6",
     "react-router-redux": "^5.0.0-alpha.8",
     "react-scripts": "1.0.17",
