@@ -24,6 +24,5 @@ parserOptions:
     blockBindings: true
     arrowFunctions: true
     experimentalObjectRestSpread: true
-
 plugins:
 - react

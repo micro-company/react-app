@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "history": "^4.7.2",
+    "material-ui": "^1.0.0-beta.19",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
