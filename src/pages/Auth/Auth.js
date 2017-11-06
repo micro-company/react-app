@@ -8,11 +8,7 @@ import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button'
 import { MenuItem } from 'material-ui/Menu'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
-
-import {
-  TextField,
-  Select,
-} from 'redux-form-material-ui'
+import { TextField, Select } from 'redux-form-material-ui'
 
 const styles = () => ({
   root: {
@@ -62,7 +58,7 @@ class Auth extends PureComponent {
       <Grid container className={classes.root} key="content" alignItems="center">
         <Grid item xs={12}>
           <Grid container justify="center">
-            <Grid item xs={11} sm={8} md={4} lg={4} xl={3} sd={2}>
+            <Grid item xs={10} sm={5} md={4} lg={3} sd={2} xl={2}>
               <Card>
                 <CardContent>
                   <Typography type="display1" gutterBottom>
