@@ -5,6 +5,7 @@ rules:
   no-console: ["error", { allow: ["warn", "error", "group", "groupEnd"] }]
   react/jsx-filename-extension: 0
   import/no-extraneous-dependencies: 0 # Incorrect work with decorators
+  import/prefer-default-export: 0
   jsx-a11y/anchor-is-valid: ["error", {"components": [], "specialLink": ["hrefLeft", "hrefRight"], "aspects": ["noHref", "invalidHref", "preferButton"]}]
   jsx-a11y/href-no-hash: 0
   react/forbid-prop-types: 0

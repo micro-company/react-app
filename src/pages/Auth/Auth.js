@@ -1,14 +1,15 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import { withStyles } from 'material-ui/styles'
 import { Helmet } from 'react-helmet'
-import { reduxForm, Field } from 'redux-form'
 import Grid from 'material-ui/Grid'
 import Button from 'material-ui/Button'
-import { MenuItem } from 'material-ui/Menu'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
-import { TextField, Select } from 'redux-form-material-ui'
 import Tabs, { Tab } from 'material-ui/Tabs'
+import { submitForm } from '../../actions/form'
+import FormAuth from './UI/Form'
 
 const styles = () => ({
   root: {
@@ -23,6 +24,8 @@ const styles = () => ({
 class Auth extends PureComponent {
   static propTypes = {
     classes: PropTypes.object.isRequired,
+
+    submitFormActions: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -33,88 +36,18 @@ class Auth extends PureComponent {
     }
 
     this.onSelectTab = this.onSelectTab.bind(this)
+    this.onSendForm = this.onSendForm.bind(this)
+    this.onSubmitForm = this.onSubmitForm.bind(this)
   }
 
   onSelectTab(event, value) {
     this.setState({ currentTab: value })
   }
 
-  getForm(currentTab) { // eslint-disable-line
-    switch (currentTab) {
-      case 'signOn':
-        return [
-          <Field
-            key="login"
-            name="login"
-            label="Login"
-            component={TextField}
-            fullWidth
-          />,
+  onSendForm = () => this.props.submitFormActions('AUTH_FORM')
 
-          <Field
-            key="mail"
-            name="mail"
-            label="Mail"
-            component={TextField}
-            fullWidth
-          />,
-
-          <Field
-            key="password"
-            name="password"
-            label="Password"
-            component={TextField}
-            fullWidth
-          />,
-
-          <Field
-            key="retryPassword"
-            name="retryPassword"
-            label="Retry password"
-            component={TextField}
-            fullWidth
-          />,
-
-          <Field
-            key="language"
-            name="language"
-            component={Select}
-            fullWidth
-          >
-            <MenuItem value="ru_RU">Russia</MenuItem>
-            <MenuItem value="en_GB">English</MenuItem>
-          </Field>,
-        ]
-      case 'signIn':
-      default:
-        return [
-          <Field
-            key="mail"
-            name="mail"
-            label="Mail"
-            component={TextField}
-            fullWidth
-          />,
-
-          <Field
-            key="password"
-            name="password"
-            label="Password"
-            component={TextField}
-            fullWidth
-          />,
-
-          <Field
-            key="language"
-            name="language"
-            component={Select}
-            fullWidth
-          >
-            <MenuItem value="ru_RU">Russia</MenuItem>
-            <MenuItem value="en_GB">English</MenuItem>
-          </Field>,
-        ]
-    }
+  onSubmitForm(data) { // eslint-disable-line
+    console.warn('onSubmitForm', data)
   }
 
   render() {
@@ -139,14 +72,20 @@ class Auth extends PureComponent {
                     <Tab label="Sign On" value="signOn" />
                   </Tabs>
 
-                  <form>
-                    { this.getForm(currentTab) }
-                  </form>
+                  <FormAuth
+                    currentTab={currentTab}
+                    onSubmit={this.onSubmitForm}
+                  />
                 </CardContent>
 
                 <CardActions>
-                  <Button raised color="primary" className={classes.button}>
-                    Go
+                  <Button
+                    className={classes.button}
+                    color="primary"
+                    raised
+                    onClick={this.onSendForm}
+                  >
+                    Send
                   </Button>
                 </CardActions>
               </Card>
@@ -158,6 +97,17 @@ class Auth extends PureComponent {
   }
 }
 
-export default reduxForm({
-  form: 'AUTH_FORM',
-})(withStyles(styles)(Auth))
+function mapStateToProps() {
+  return {}
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    submitFormActions: bindActionCreators(submitForm, dispatch),
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withStyles(styles)(Auth))
