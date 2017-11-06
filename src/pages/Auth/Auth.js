@@ -4,11 +4,11 @@ import { withStyles } from 'material-ui/styles'
 import { Helmet } from 'react-helmet'
 import { reduxForm, Field } from 'redux-form'
 import Grid from 'material-ui/Grid'
-import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button'
 import { MenuItem } from 'material-ui/Menu'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
 import { TextField, Select } from 'redux-form-material-ui'
+import Tabs, { Tab } from 'material-ui/Tabs'
 
 const styles = () => ({
   root: {
@@ -29,28 +29,101 @@ class Auth extends PureComponent {
     super(props)
 
     this.state = {
-      showPassword: false,
+      currentTab: 'signIn',
     }
+
+    this.onSelectTab = this.onSelectTab.bind(this)
   }
 
   onChange(event, onChange) { // eslint-disable-line
     console.warn('onChange', event)
   }
 
-  handleChange = prop => event => this.setState({
-    [prop]: event.target.value,
-  })
+  onSelectTab(event, value) {
+    this.setState({ currentTab: value })
+  }
 
-  handleMouseDownPassword = event => event.preventDefault()
+  getForm(currentTab) { // eslint-disable-line
+    switch (currentTab) {
+      case 'signOn':
+        return [
+          <Field
+            key="login"
+            name="login"
+            label="Login"
+            component={TextField}
+            fullWidth
+          />,
 
-  handleClickShowPasssword = () => {
-    this.setState({
-      showPassword: !this.state.showPassword,
-    })
+          <Field
+            key="mail"
+            name="mail"
+            label="Mail"
+            component={TextField}
+            fullWidth
+          />,
+
+          <Field
+            key="password"
+            name="password"
+            label="Password"
+            component={TextField}
+            fullWidth
+          />,
+
+          <Field
+            key="retryPassword"
+            name="retryPassword"
+            label="Retry password"
+            component={TextField}
+            fullWidth
+          />,
+
+          <Field
+            key="language"
+            name="language"
+            component={Select}
+            fullWidth
+          >
+            <MenuItem value="ru_RU">Russia</MenuItem>
+            <MenuItem value="en_GB">English</MenuItem>
+          </Field>,
+        ]
+      case 'signIn':
+      default:
+        return [
+          <Field
+            key="login"
+            name="login"
+            label="Login"
+            component={TextField}
+            fullWidth
+          />,
+
+          <Field
+            key="password"
+            name="password"
+            label="Password"
+            component={TextField}
+            fullWidth
+          />,
+
+          <Field
+            key="language"
+            name="language"
+            component={Select}
+            fullWidth
+          >
+            <MenuItem value="ru_RU">Russia</MenuItem>
+            <MenuItem value="en_GB">English</MenuItem>
+          </Field>,
+        ]
+    }
   }
 
   render() {
     const { classes } = this.props
+    const { currentTab } = this.state
 
     return ([
       <Helmet key="auth" title="Auth" />,
@@ -61,44 +134,24 @@ class Auth extends PureComponent {
             <Grid item xs={10} sm={5} md={4} lg={3} sd={2} xl={2}>
               <Card>
                 <CardContent>
-                  <Typography type="display1" gutterBottom>
-                    Auth Us
-                  </Typography>
+                  <Tabs
+                    value={currentTab}
+                    onChange={this.onSelectTab}
+                    centered
+                  >
+                    <Tab label="Sign In" value="signIn" />
+                    <Tab label="Sign On" value="signOn" />
+                  </Tabs>
 
                   <form>
-                    <Field
-                      name="login"
-                      label="Login"
-                      component={TextField}
-                      fullWidth
-                    />
-
-                    <Field
-                      name="password"
-                      label="Password"
-                      component={TextField}
-                      fullWidth
-                    />
-
-                    <Field
-                      name="language"
-                      component={Select}
-                      fullWidth
-                    >
-                      <MenuItem value="ru_RU">Russia</MenuItem>
-                      <MenuItem value="en_GB">English</MenuItem>
-                    </Field>
+                    { this.getForm(currentTab) }
                   </form>
                 </CardContent>
 
                 <CardActions>
                   <Grid container>
                     <Button raised color="primary" className={classes.button}>
-                      Sigh In
-                    </Button>
-
-                    <Button raised color="primary" className={classes.button}>
-                      Sign on
+                      Go
                     </Button>
                   </Grid>
                 </CardActions>
