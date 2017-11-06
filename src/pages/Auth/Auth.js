@@ -35,10 +35,6 @@ class Auth extends PureComponent {
     this.onSelectTab = this.onSelectTab.bind(this)
   }
 
-  onChange(event, onChange) { // eslint-disable-line
-    console.warn('onChange', event)
-  }
-
   onSelectTab(event, value) {
     this.setState({ currentTab: value })
   }
@@ -93,9 +89,9 @@ class Auth extends PureComponent {
       default:
         return [
           <Field
-            key="login"
-            name="login"
-            label="Login"
+            key="mail"
+            name="mail"
+            label="Mail"
             component={TextField}
             fullWidth
           />,
@@ -149,11 +145,9 @@ class Auth extends PureComponent {
                 </CardContent>
 
                 <CardActions>
-                  <Grid container>
-                    <Button raised color="primary" className={classes.button}>
-                      Go
-                    </Button>
-                  </Grid>
+                  <Button raised color="primary" className={classes.button}>
+                    Go
+                  </Button>
                 </CardActions>
               </Card>
             </Grid>
