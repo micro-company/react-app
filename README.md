@@ -4,6 +4,7 @@ An example of demonstration work with a microservice architecture
 
 #### Enviroment variables
 
-| **NAME**          | **VALUE**             |
-| ----------------- | --------------------- |
-| REACT_APP_API_URL | http://localhost:4070 |
+| **NAME**                           | **VALUE**             |
+| ---------------------------------- | --------------------- |
+| REACT_APP_API_URL                  | http://localhost:4070 |
+| REACT_APP_GOOGLE_RECAPTCHA_SITEKEY | <STRING>              |

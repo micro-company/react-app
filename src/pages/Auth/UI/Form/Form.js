@@ -57,12 +57,12 @@ class Auth extends PureComponent {
             <Tab label="SIGN ON" value="signOn" />
           </Tabs>
 
-          <form key="form" onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             { getForm(currentTab) }
           </form>
 
           <Recaptcha
-            key="captcha"
+            className={this.props.classes.recaptcha}
             sitekey={process.env.REACT_APP_GOOGLE_RECAPTCHA_SITEKEY}
             onChange={this.onRecaptcha}
             theme="light"

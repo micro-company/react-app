@@ -17,6 +17,10 @@ const styles = () => ({
   button: {
     flex: 1,
   },
+  recaptcha: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
 })
 
 class Auth extends PureComponent {
