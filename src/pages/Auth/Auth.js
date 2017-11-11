@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { SubmissionError } from 'redux-form'
 import { withStyles } from 'material-ui/styles'
 import { Helmet } from 'react-helmet'
 import Grid from 'material-ui/Grid'
@@ -45,10 +46,15 @@ class Auth extends PureComponent {
   onSendForm = () => this.props.submitFormActions('AUTH_FORM')
   onRecaptcha = value => this.setState({ captcha: value })
 
-  onSubmitForm = data => this.props.loginActions({
-    ...data,
-    captcha: this.state.captcha,
-  })
+  onSubmitForm(data) {
+    return this.props.loginActions({
+      ...data,
+      captcha: this.state.captcha,
+    })
+      .catch(error => {
+        throw new SubmissionError(error.error)
+      })
+  }
 
   render() {
     const { classes } = this.props

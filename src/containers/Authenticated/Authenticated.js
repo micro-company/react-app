@@ -6,19 +6,18 @@ import { Route, Redirect } from 'react-router-dom'
 class Authenticated extends PureComponent {
   static propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
-    component: PropTypes.node.isRequired,
+    children: PropTypes.node.isRequired,
     location: PropTypes.object.isRequired,
   }
 
   render() {
+    const { isAuthenticated } = this.props
+
     return (
       <Route
-        exac
         path="*"
         render={() => (
-          this.props.isAuthenticated ? (
-            React.createElement(this.props.component, this.props)
-          ) : (
+          isAuthenticated ? this.props.children : (
             <Redirect
               to={{
                 pathname: '/auth',

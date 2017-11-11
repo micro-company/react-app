@@ -10,10 +10,15 @@ import getForm from './getForm'
 class Auth extends PureComponent {
   static propTypes = {
     classes: PropTypes.object.isRequired,
+    error: PropTypes.array,
 
     handleSubmit: PropTypes.func.isRequired,
     onSendForm: PropTypes.func.isRequired,
     onRecaptcha: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    error: [],
   }
 
   constructor(props) {
@@ -31,7 +36,7 @@ class Auth extends PureComponent {
   }
 
   render() {
-    const { handleSubmit } = this.props
+    const { error, handleSubmit } = this.props
     const { currentTab } = this.state
 
     return (
@@ -56,6 +61,13 @@ class Auth extends PureComponent {
             onChange={this.props.onRecaptcha}
             theme="light"
           />
+
+          <p>
+            { error.length ? 'We have probelem:' : null }
+            {
+              error.map((issue, index) => <p key={index}>{issue}</p>) // eslint-disable-line
+            }
+          </p>
         </CardContent>
 
         <CardActions>

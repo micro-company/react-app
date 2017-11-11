@@ -22,12 +22,12 @@ class App extends PureComponent {
 
       <Switch key="switch" {...this.props.router}>
         <Route
-          exac
           path="/auth"
           component={Auth}
-          onUpdate={App.logPageView}
         />
-        <Authenticated path="*" component={Main} />
+        <Authenticated>
+          <Main {...this.props} />
+        </Authenticated>
       </Switch>,
     ])
   }
