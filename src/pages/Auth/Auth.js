@@ -34,7 +34,7 @@ class Auth extends PureComponent {
     super(props)
 
     this.state = {
-      currentTab: 'signIn',
+      currentTab: 'logIn',
     }
 
     this.onSelectTab = this.onSelectTab.bind(this)
@@ -68,8 +68,8 @@ class Auth extends PureComponent {
                     onChange={this.onSelectTab}
                     centered
                   >
-                    <Tab label="Sign In" value="signIn" />
-                    <Tab label="Sign On" value="signOn" />
+                    <Tab label="LOG IN" value="logIn" />
+                    <Tab label="SIGN ON" value="signOn" />
                   </Tabs>
 
                   <FormAuth

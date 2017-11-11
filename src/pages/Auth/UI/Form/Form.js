@@ -57,13 +57,13 @@ class Auth extends PureComponent {
             <MenuItem value="en_GB">English</MenuItem>
           </Field>,
         ]
-      case 'signIn':
+      case 'logIn':
       default:
         return [
           <Field
-            key="mail"
-            name="mail"
-            label="Mail"
+            key="login"
+            name="login"
+            label="Login"
             component={TextField}
             fullWidth
           />,
