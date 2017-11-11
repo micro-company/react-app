@@ -9,6 +9,7 @@ import Button from 'material-ui/Button'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Tabs, { Tab } from 'material-ui/Tabs'
 import { submitForm } from '../../actions/form'
+import { login } from '../../actions/session'
 import FormAuth from './UI/Form'
 
 const styles = () => ({
@@ -26,6 +27,7 @@ class Auth extends PureComponent {
     classes: PropTypes.object.isRequired,
 
     submitFormActions: PropTypes.func.isRequired,
+    loginActions: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -46,9 +48,7 @@ class Auth extends PureComponent {
 
   onSendForm = () => this.props.submitFormActions('AUTH_FORM')
 
-  onSubmitForm(data) { // eslint-disable-line
-    console.warn('onSubmitForm', data)
-  }
+  onSubmitForm = data => this.props.loginActions(data)
 
   render() {
     const { classes } = this.props
@@ -104,6 +104,7 @@ function mapStateToProps() {
 function mapDispatchToProps(dispatch) {
   return {
     submitFormActions: bindActionCreators(submitForm, dispatch),
+    loginActions: bindActionCreators(login, dispatch),
   }
 }
 
