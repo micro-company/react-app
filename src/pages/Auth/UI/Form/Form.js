@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { reduxForm, Field } from 'redux-form'
+import Recaptcha from 'react-google-recaptcha'
 import { MenuItem } from 'material-ui/Menu'
 import { TextField, Select } from 'redux-form-material-ui'
 
@@ -93,11 +94,18 @@ class Auth extends PureComponent {
   render() {
     const { handleSubmit, currentTab } = this.props
 
-    return (
-      <form onSubmit={handleSubmit}>
+    return [
+      <form key="form" onSubmit={handleSubmit}>
         { this.getForm(currentTab) }
-      </form>
-    )
+      </form>,
+
+      <Recaptcha
+        key="captcha"
+        sitekey={process.env.REACT_APP_GOOGLE_RECAPTCHA_SITEKEY}
+        onChange={this.onRecaptcha}
+        theme="light"
+      />,
+    ]
   }
 }
 
