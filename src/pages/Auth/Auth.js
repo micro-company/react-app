@@ -5,9 +5,6 @@ import { connect } from 'react-redux'
 import { withStyles } from 'material-ui/styles'
 import { Helmet } from 'react-helmet'
 import Grid from 'material-ui/Grid'
-import Button from 'material-ui/Button'
-import Card, { CardActions, CardContent } from 'material-ui/Card'
-import Tabs, { Tab } from 'material-ui/Tabs'
 import { submitForm } from '../../actions/form'
 import { login } from '../../actions/session'
 import FormAuth from './UI/Form'
@@ -33,17 +30,8 @@ class Auth extends PureComponent {
   constructor(props) {
     super(props)
 
-    this.state = {
-      currentTab: 'logIn',
-    }
-
-    this.onSelectTab = this.onSelectTab.bind(this)
     this.onSendForm = this.onSendForm.bind(this)
     this.onSubmitForm = this.onSubmitForm.bind(this)
-  }
-
-  onSelectTab(event, value) {
-    this.setState({ currentTab: value })
   }
 
   onSendForm = () => this.props.submitFormActions('AUTH_FORM')
@@ -52,7 +40,6 @@ class Auth extends PureComponent {
 
   render() {
     const { classes } = this.props
-    const { currentTab } = this.state
 
     return ([
       <Helmet key="auth" title="Auth" />,
@@ -61,34 +48,12 @@ class Auth extends PureComponent {
         <Grid item xs={12}>
           <Grid container justify="center">
             <Grid item xs={10} sm={5} md={4} lg={3} sd={2} xl={2}>
-              <Card>
-                <CardContent>
-                  <Tabs
-                    value={currentTab}
-                    onChange={this.onSelectTab}
-                    centered
-                  >
-                    <Tab label="LOG IN" value="logIn" />
-                    <Tab label="SIGN ON" value="signOn" />
-                  </Tabs>
+              <FormAuth
+                classes={classes}
 
-                  <FormAuth
-                    currentTab={currentTab}
-                    onSubmit={this.onSubmitForm}
-                  />
-                </CardContent>
-
-                <CardActions>
-                  <Button
-                    className={classes.button}
-                    color="primary"
-                    raised
-                    onClick={this.onSendForm}
-                  >
-                    Send
-                  </Button>
-                </CardActions>
-              </Card>
+                onSendForm={this.onSendForm}
+                onSubmit={this.onSubmitForm}
+              />
             </Grid>
           </Grid>
         </Grid>

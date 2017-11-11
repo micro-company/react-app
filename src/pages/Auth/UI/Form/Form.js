@@ -1,111 +1,86 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { reduxForm, Field } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import Recaptcha from 'react-google-recaptcha'
-import { MenuItem } from 'material-ui/Menu'
-import { TextField, Select } from 'redux-form-material-ui'
+import Button from 'material-ui/Button'
+import Card, { CardActions, CardContent } from 'material-ui/Card'
+import Tabs, { Tab } from 'material-ui/Tabs'
+import getForm from './getForm'
 
 class Auth extends PureComponent {
   static propTypes = {
-    currentTab: PropTypes.string.isRequired,
+    classes: PropTypes.object.isRequired,
 
     handleSubmit: PropTypes.func.isRequired,
+    onSendForm: PropTypes.func.isRequired,
   }
 
-  getForm(currentTab) { // eslint-disable-line
-    switch (currentTab) {
-      case 'signOn':
-        return [
-          <Field
-            key="login"
-            name="login"
-            label="Login"
-            component={TextField}
-            fullWidth
-          />,
+  constructor(props) {
+    super(props)
 
-          <Field
-            key="mail"
-            name="mail"
-            label="Mail"
-            component={TextField}
-            fullWidth
-          />,
-
-          <Field
-            key="password"
-            name="password"
-            label="Password"
-            component={TextField}
-            fullWidth
-          />,
-
-          <Field
-            key="retryPassword"
-            name="retryPassword"
-            label="Retry password"
-            component={TextField}
-            fullWidth
-          />,
-
-          <Field
-            key="language"
-            name="language"
-            component={Select}
-            fullWidth
-          >
-            <MenuItem value="ru_RU">Russia</MenuItem>
-            <MenuItem value="en_GB">English</MenuItem>
-          </Field>,
-        ]
-      case 'logIn':
-      default:
-        return [
-          <Field
-            key="login"
-            name="login"
-            label="Login"
-            component={TextField}
-            fullWidth
-          />,
-
-          <Field
-            key="password"
-            name="password"
-            label="Password"
-            type="password"
-            component={TextField}
-            fullWidth
-          />,
-
-          <Field
-            key="language"
-            name="language"
-            component={Select}
-            fullWidth
-          >
-            <MenuItem value="ru_RU">Russia</MenuItem>
-            <MenuItem value="en_GB">English</MenuItem>
-          </Field>,
-        ]
+    this.state = {
+      currentTab: 'logIn',
+      captcha: '',
     }
+
+    this.onSubmit = this.onSubmit.bind(this)
+    this.onSelectTab = this.onSelectTab.bind(this)
+    this.onRecaptcha = this.onRecaptcha.bind(this)
+  }
+
+  onSelectTab(event, value) {
+    this.setState({ currentTab: value })
+  }
+
+  onRecaptcha = value => this.setState({ captcha: value })
+
+  onSubmit(value) {
+    this.props.handleSubmit({
+      ...value,
+      captcha: this.state.captcha,
+    })
   }
 
   render() {
-    const { handleSubmit, currentTab } = this.props
+    const { handleSubmit } = this.props
+    const { currentTab } = this.state
 
-    return [
-      <form key="form" onSubmit={handleSubmit}>
-        { this.getForm(currentTab) }
-      </form>,
+    return (
+      <Card>
+        <CardContent>
+          <Tabs
+            value={currentTab}
+            onChange={this.onSelectTab}
+            centered
+          >
+            <Tab label="LOG IN" value="logIn" />
+            <Tab label="SIGN ON" value="signOn" />
+          </Tabs>
 
-      <Recaptcha
-        key="captcha"
-        sitekey={process.env.REACT_APP_GOOGLE_RECAPTCHA_SITEKEY}
-        onChange={this.onRecaptcha}
-        theme="light"
-      />,
-    ]
+          <form key="form" onSubmit={handleSubmit}>
+            { getForm(currentTab) }
+          </form>
+
+          <Recaptcha
+            key="captcha"
+            sitekey={process.env.REACT_APP_GOOGLE_RECAPTCHA_SITEKEY}
+            onChange={this.onRecaptcha}
+            theme="light"
+          />
+        </CardContent>
+
+        <CardActions>
+          <Button
+            className={this.props.classes.button}
+            color="primary"
+            raised
+            onClick={this.props.onSendForm}
+          >
+            Send
+          </Button>
+        </CardActions>
+      </Card>
+    )
   }
 }
 
