@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import { Route, Redirect } from 'react-router-dom'
 
 class Authenticated extends PureComponent {
@@ -40,7 +41,7 @@ function mapDispatchToProps() {
   return {}
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Authenticated)
+)(Authenticated))

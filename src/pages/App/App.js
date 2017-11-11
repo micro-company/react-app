@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Switch, Route } from 'react-router-dom'
 import Helmet from 'react-helmet'
+import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import Authenticated from '../../containers/Authenticated'
 import Main from '../Main'
@@ -43,7 +44,7 @@ function mapDispatchToProps() {
   return {}
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps,
-)(App)
+)(App))
