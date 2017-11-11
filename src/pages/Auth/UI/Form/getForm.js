@@ -8,14 +8,6 @@ export default function getForm(currentTab) {
     case 'signOn':
       return [
         <Field
-          key="login"
-          name="login"
-          label="Login"
-          component={TextField}
-          fullWidth
-        />,
-
-        <Field
           key="mail"
           name="mail"
           label="Mail"
@@ -53,9 +45,9 @@ export default function getForm(currentTab) {
     default:
       return [
         <Field
-          key="login"
-          name="login"
-          label="Login"
+          key="mail"
+          name="mail"
+          label="Mail"
           component={TextField}
           fullWidth
         />,
