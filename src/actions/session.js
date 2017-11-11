@@ -11,7 +11,7 @@ function checkStatus(response) {
 }
 
 export function login(data) {
-  return dispatch => fetch(`${process.env.REACT_APP_API_URL}/login`, {
+  return dispatch => fetch(`${process.env.REACT_APP_API_URL}/auth`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
