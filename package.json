@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "history": "^4.7.2",
+    "localforage": "^1.5.3",
     "material-ui": "^1.0.0-beta.20",
     "material-ui-icons": "^1.0.0-beta.17",
     "react": "^16.1.0",
@@ -25,6 +26,7 @@
     "redux": "^3.7.2",
     "redux-form": "^7.1.2",
     "redux-form-material-ui": "^5.0.0-beta.2",
+    "redux-persist": "^5.3.4",
     "redux-thunk": "^2.2.0",
     "whatwg-fetch": "^2.0.3"
   },
