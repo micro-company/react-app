@@ -34,13 +34,21 @@ class Auth extends PureComponent {
   constructor(props) {
     super(props)
 
+    this.state = {
+      captcha: '',
+    }
+
     this.onSendForm = this.onSendForm.bind(this)
     this.onSubmitForm = this.onSubmitForm.bind(this)
   }
 
   onSendForm = () => this.props.submitFormActions('AUTH_FORM')
+  onRecaptcha = value => this.setState({ captcha: value })
 
-  onSubmitForm = data => this.props.loginActions(data)
+  onSubmitForm = data => this.props.loginActions({
+    ...data,
+    captcha: this.state.captcha,
+  })
 
   render() {
     const { classes } = this.props
@@ -55,6 +63,7 @@ class Auth extends PureComponent {
               <FormAuth
                 classes={classes}
 
+                onRecaptcha={this.onRecaptcha}
                 onSendForm={this.onSendForm}
                 onSubmit={this.onSubmitForm}
               />

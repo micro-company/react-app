@@ -13,6 +13,7 @@ class Auth extends PureComponent {
 
     handleSubmit: PropTypes.func.isRequired,
     onSendForm: PropTypes.func.isRequired,
+    onRecaptcha: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -20,25 +21,13 @@ class Auth extends PureComponent {
 
     this.state = {
       currentTab: 'logIn',
-      captcha: '',
     }
 
-    this.onSubmit = this.onSubmit.bind(this)
     this.onSelectTab = this.onSelectTab.bind(this)
-    this.onRecaptcha = this.onRecaptcha.bind(this)
   }
 
   onSelectTab(event, value) {
     this.setState({ currentTab: value })
-  }
-
-  onRecaptcha = value => this.setState({ captcha: value })
-
-  onSubmit(value) {
-    this.props.handleSubmit({
-      ...value,
-      captcha: this.state.captcha,
-    })
   }
 
   render() {
@@ -64,7 +53,7 @@ class Auth extends PureComponent {
           <Recaptcha
             className={this.props.classes.recaptcha}
             sitekey={process.env.REACT_APP_GOOGLE_RECAPTCHA_SITEKEY}
-            onChange={this.onRecaptcha}
+            onChange={this.props.onRecaptcha}
             theme="light"
           />
         </CardContent>
