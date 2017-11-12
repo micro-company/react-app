@@ -1,6 +1,7 @@
 import { persistCombineReducers, persistReducer } from 'redux-persist'
 import { routerReducer as router } from 'react-router-redux'
-import { reducer as formReducer } from 'redux-form'
+import { reducer as form } from 'redux-form'
+import { reducer as ui } from 'redux-ui'
 import localForage from 'localforage'
 import counter from './counter'
 import session from './session'
@@ -8,7 +9,7 @@ import session from './session'
 const config = {
   key: 'react-app',
   storage: localForage,
-  blacklist: ['router', 'form'],
+  blacklist: ['router', 'form', 'ui'],
 }
 
 const sessionPersistConfig = {
@@ -18,7 +19,8 @@ const sessionPersistConfig = {
 
 export default persistCombineReducers(config, {
   router,
-  form: formReducer,
+  form,
+  ui,
 
   session: persistReducer(sessionPersistConfig, session),
   counter,

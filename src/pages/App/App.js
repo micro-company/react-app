@@ -17,7 +17,6 @@ class App extends PureComponent {
     return ([
       <Helmet
         key="helmet"
-        title=" "
         titleTemplate="Hello - %s"
       />,
 
