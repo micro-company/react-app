@@ -8,6 +8,7 @@ import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
 import InboxIcon from 'material-ui-icons/Inbox'
 import Person from 'material-ui-icons/Person'
+import Button from 'material-ui/Button'
 
 const drawerWidth = 240
 
@@ -42,8 +43,12 @@ const styles = theme => ({
   },
   user: {
     flex: 0,
-    paddingLeft: 5,
+    paddingLeft: 0,
     backgroundColor: theme.palette.background.default,
+  },
+  userItem: {
+    paddingLeft: 10,
+    justifyContent: 'space-between',
   },
 })
 
@@ -89,18 +94,18 @@ class MiniDrawer extends PureComponent {
 
           <div className={classes.divider} />
 
-          <List className={classes.user} >
-            <Link to="#user">
-              <ListItem button className={classes.user}>
-                <ListItemIcon>
-                  <Avatar alt="Remy Sharp">
-                    <Person />
-                  </Avatar>
-                </ListItemIcon>
+          <List className={classes.user}>
+            <ListItem className={classes.userItem}>
+              <ListItemIcon>
+                <Avatar alt="Remy Sharp">
+                  <Person />
+                </Avatar>
+              </ListItemIcon>
 
-                <ListItemText primary="USER" />
-              </ListItem>
-            </Link>
+              <Button raised color="accent" className={classes.button}>
+                Logout
+              </Button>
+            </ListItem>
           </List>
         </div>
       </Drawer>
