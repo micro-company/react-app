@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
+import Button from 'material-ui/Button'
 
 import * as COUNTER from '../../actions/counter'
 
@@ -17,7 +17,6 @@ class Home extends PureComponent {
     incrementAsyncActions: PropTypes.func.isRequired,
     decrementActions: PropTypes.func.isRequired,
     decrementAsyncActions: PropTypes.func.isRequired,
-    changePageActions: PropTypes.func.isRequired,
   }
 
   render() {
@@ -29,38 +28,48 @@ class Home extends PureComponent {
         <p>Count: {this.props.count}</p>
 
         <p>
-          <button
-            onClick={this.props.incrementActions}
+          <Button
+            raised
+            color="primary"
             disabled={this.props.isIncrementing}
+
+            onClick={this.props.incrementActions}
           >
             Increment
-          </button>
+          </Button>
 
-          <button
-            onClick={this.props.incrementAsyncActions}
+          <Button
+            raised
+            color="primary"
             disabled={this.props.isIncrementing}
+
+            onClick={this.props.incrementAsyncActions}
           >
             Increment Async
-          </button>
+          </Button>
         </p>
 
         <p>
-          <button
-            onClick={this.props.decrementActions}
+          <Button
+            raised
+            color="accent"
             disabled={this.props.isDecrementing}
+
+            onClick={this.props.decrementActions}
           >
             Decrementing
-          </button>
+          </Button>
 
-          <button
-            onClick={this.props.decrementAsyncActions}
+          <Button
+            raised
+            color="accent"
             disabled={this.props.isDecrementing}
+
+            onClick={this.props.decrementAsyncActions}
           >
             Decrement Async
-          </button>
+          </Button>
         </p>
-
-        <p><button onClick={() => this.props.changePageActions()}>Go to about page via redux</button></p>
       </div>,
     ]
   }
@@ -80,7 +89,6 @@ function mapDispatchToProps(dispatch) {
     incrementAsyncActions: bindActionCreators(COUNTER.incrementAsync, dispatch),
     decrementActions: bindActionCreators(COUNTER.decrement, dispatch),
     decrementAsyncActions: bindActionCreators(COUNTER.decrementAsync, dispatch),
-    changePageActions: () => push('/about-us'),
   }
 }
 
