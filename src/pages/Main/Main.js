@@ -1,23 +1,35 @@
 import React from 'react'
-import { Route, Link } from 'react-router-dom'
 import Grid from 'material-ui/Grid'
+import { Route } from 'react-router-dom'
+import Paper from 'material-ui/Paper'
+import Header from './UI/Header'
+import Drawer from './UI/Drawer'
 import Home from '../Home'
 import About from '../About'
 
 export default () => (
-  <Grid container>
+  <Grid container direction="column">
     <Grid item xs={12}>
-      <header key="header">
-        <Link to="/">Home</Link>
-        <Link to="/about-us">About</Link>
-      </header>
-    </Grid>
+      <Header />
 
-    <Grid item xs={12}>
-      <main key="main">
-        <Route exact path="/" component={Home} />
-        <Route exact path="/about-us" component={About} />
-      </main>
+      <Grid container direction="row">
+        <Grid item xs={12}>
+
+          <Grid container>
+            <Grid item>
+              <Drawer />
+            </Grid>
+
+            <Grid item>
+              <Paper elevation={4}>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/about-us" component={About} />
+              </Paper>
+            </Grid>
+          </Grid>
+
+        </Grid>
+      </Grid>
     </Grid>
   </Grid>
 )

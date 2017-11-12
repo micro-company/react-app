@@ -12,6 +12,7 @@
     "flow": "flow"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
     "history": "^4.7.2",
     "localforage": "^1.5.3",
     "material-ui": "^1.0.0-beta.20",
