@@ -7,6 +7,7 @@ import ui from 'redux-ui'
 import Header from './UI/Header'
 import Drawer from './UI/Drawer'
 import Home from '../Home'
+import User from '../User'
 import About from '../About'
 
 const styles = theme => ({
@@ -50,6 +51,7 @@ class Main extends PureComponent {
 
                 <main className={classes.content}>
                   <Route exact path="/" component={Home} />
+                  <Route exact path="/users" component={User} />
                   <Route exact path="/about-us" component={About} />
                 </main>
               </Grid>

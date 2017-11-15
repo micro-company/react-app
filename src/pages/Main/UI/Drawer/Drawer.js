@@ -81,6 +81,16 @@ class MiniDrawer extends PureComponent {
               </ListItem>
             </Link>
 
+            <Link to="/users">
+              <ListItem button>
+                <ListItemIcon>
+                  <InboxIcon />
+                </ListItemIcon>
+
+                <ListItemText primary="Users" />
+              </ListItem>
+            </Link>
+
             <Link to="/about-us">
               <ListItem button>
                 <ListItemIcon>
