@@ -5,6 +5,7 @@ import { reducer as ui } from 'redux-ui'
 import localForage from 'localforage'
 import counter from './counter'
 import session from './session'
+import user from './user'
 
 const config = {
   key: 'react-app',
@@ -23,5 +24,6 @@ export default persistCombineReducers(config, {
   ui,
 
   session: persistReducer(sessionPersistConfig, session),
+  user,
   counter,
 })

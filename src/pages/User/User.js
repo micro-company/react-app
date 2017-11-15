@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-// import { bindActionCreators } from 'redux'
+import { bindActionCreators } from 'redux'
 import { withStyles } from 'material-ui/styles'
 import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
@@ -9,6 +9,8 @@ import Button from 'material-ui/Button'
 import Grid from 'material-ui/Grid'
 import Typography from 'material-ui/Typography'
 import AddIcon from 'material-ui-icons/Add'
+import { list, add, update, remove } from '../../actions/users'
+import { objectListToArrayList } from '../../utils/structure'
 
 const styles = () => ({
   header: {
@@ -21,7 +23,33 @@ const styles = () => ({
 
 class User extends PureComponent {
   static propTypes = {
-    classes: PropTypes.string.isRequired,
+    classes: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
+
+    listActions: PropTypes.func.isRequired,
+    // addActions: PropTypes.func.isRequired,
+    // updateActions: PropTypes.func.isRequired,
+    // removeActions: PropTypes.func.isRequired,
+  }
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      users: objectListToArrayList(props.user.users),
+    }
+  }
+
+  componentWillMount() {
+    const { loaded } = this.props.user
+
+    if (!loaded) {
+      this.props.listActions()
+    }
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState({ users: objectListToArrayList(props.user.users) })
   }
 
   render() {
@@ -47,7 +75,7 @@ class User extends PureComponent {
 
         <Grid item>
           <ReactTable
-            data={[]}
+            data={this.state.users}
             columns={[
               {
                 Header: 'Mail',
@@ -61,12 +89,19 @@ class User extends PureComponent {
   }
 }
 
-function mapStateToProps() {
-  return {}
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+  }
 }
 
-function mapDispatchToProps() {
-  return {}
+function mapDispatchToProps(dispatch) {
+  return {
+    listActions: bindActionCreators(list, dispatch),
+    addActions: bindActionCreators(add, dispatch),
+    updateActions: bindActionCreators(update, dispatch),
+    removeActions: bindActionCreators(remove, dispatch),
+  }
 }
 
 export default connect(
