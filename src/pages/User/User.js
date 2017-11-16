@@ -15,6 +15,7 @@ import Dialog, {
   DialogContent,
   DialogTitle,
 } from 'material-ui/Dialog'
+import Tooltip from 'material-ui/Tooltip'
 import { LinearProgress } from 'material-ui/Progress'
 import Typography from 'material-ui/Typography'
 import UpdateIcon from 'material-ui-icons/Update'
@@ -147,20 +148,25 @@ class User extends PureComponent {
 
         <div className={this.props.classes.dividers} />
 
-        <IconButton
-          color="primary"
-          aria-label="edit"
-          onClick={() => this.onChangeUpdateUserDialog(row.original)}
-        >
-          <EditIcon />
-        </IconButton>
-        <IconButton
-          color="accent"
-          aria-label="delete"
-          onClick={() => this.onChangeDeleteUserDialog(row.original)}
-        >
-          <DeleteIcon />
-        </IconButton>
+        <Tooltip placement="bottom" title="Edit user">
+          <IconButton
+            color="primary"
+            aria-label="edit"
+            onClick={() => this.onChangeUpdateUserDialog(row.original)}
+          >
+            <EditIcon />
+          </IconButton>
+        </Tooltip>
+
+        <Tooltip placement="bottom" title="Delete user">
+          <IconButton
+            color="accent"
+            aria-label="delete"
+            onClick={() => this.onChangeDeleteUserDialog(row.original)}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </Tooltip>
       </div>
     )
   }
@@ -280,25 +286,29 @@ class User extends PureComponent {
 
             <div className={classes.dividers} />
 
-            <Button
-              fab
-              color="primary"
-              aria-label="update"
-              className={classes.button}
-              onClick={this.props.listActions}
-            >
-              <UpdateIcon />
-            </Button>
+            <Tooltip placement="bottom" title="Update users list">
+              <Button
+                fab
+                color="primary"
+                aria-label="update"
+                className={classes.button}
+                onClick={this.props.listActions}
+              >
+                <UpdateIcon />
+              </Button>
+            </Tooltip>
 
-            <Button
-              fab
-              color="primary"
-              aria-label="add"
-              className={classes.button}
-              onClick={this.onChangeAddUserDialog}
-            >
-              <AddIcon />
-            </Button>
+            <Tooltip placement="bottom" title="Add user">
+              <Button
+                fab
+                color="primary"
+                aria-label="add"
+                className={classes.button}
+                onClick={this.onChangeAddUserDialog}
+              >
+                <AddIcon />
+              </Button>
+            </Tooltip>
           </Grid>
         </Grid>
 
