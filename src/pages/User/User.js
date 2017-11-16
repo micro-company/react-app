@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import ui from 'redux-ui'
+import { SubmissionError } from 'redux-form'
 import { withStyles } from 'material-ui/styles'
 import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
@@ -13,6 +14,7 @@ import Dialog, {
   DialogContent,
   DialogTitle,
 } from 'material-ui/Dialog'
+import { LinearProgress } from 'material-ui/Progress'
 import Typography from 'material-ui/Typography'
 import AddIcon from 'material-ui-icons/Add'
 import { submitForm } from '../../actions/form'
@@ -47,16 +49,18 @@ class User extends PureComponent {
     super(props)
 
     this.state = {
+      loading: false,
       users: objectListToArrayList(props.user.users),
     }
 
     this.onSendForm = this.onSendForm.bind(this)
+    this.onSubmitForm = this.onSubmitForm.bind(this)
   }
 
   componentWillMount() {
-    const { loaded } = this.props.user
+    const { loaded, users } = this.props.user
 
-    if (!loaded) {
+    if (!loaded && Object.keys(users) === 0) {
       this.props.listActions()
     }
 
@@ -75,7 +79,16 @@ class User extends PureComponent {
 
   onSendForm = () => {
     this.props.submitFormActions('ADD_USER_FORM')
-    this.onChangeAddUserDialog()
+    this.setState({ loading: true })
+  }
+
+  onSubmitForm(data) {
+    return this.props.addActions(data)
+      .then(this.onChangeAddUserDialog)
+      .catch(error => {
+        this.setState({ loading: false })
+        throw new SubmissionError(error.error)
+      })
   }
 
   render() {
@@ -91,9 +104,10 @@ class User extends PureComponent {
       >
         <DialogTitle>Add new user</DialogTitle>
         <DialogContent>
-          <Form
-            onSubmit={form => this.props.addActions(form)}
-          />
+          {
+            this.state.loading && <LinearProgress />
+          }
+          <Form onSubmit={this.onSubmitForm} />
         </DialogContent>
         <DialogActions>
           <Button
