@@ -24,6 +24,7 @@ import { submitForm } from '../../actions/form'
 import { list, add, update, remove } from '../../actions/users'
 import { objectListToArrayList } from '../../utils/structure'
 import Form from './UI/Form'
+import ConfirmDeleteUser from './UI/ConfirmDeleteUser'
 
 const styles = () => ({
   box: {
@@ -45,7 +46,7 @@ class User extends PureComponent {
     listActions: PropTypes.func.isRequired,
     addActions: PropTypes.func.isRequired,
     updateActions: PropTypes.func.isRequired,
-    // removeActions: PropTypes.func.isRequired,
+    removeActions: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -63,6 +64,8 @@ class User extends PureComponent {
     this.onUpdateSubmitForm = this.onUpdateSubmitForm.bind(this)
     this.onChangeAddUserDialog = this.onChangeAddUserDialog.bind(this)
     this.onChangeUpdateUserDialog = this.onChangeUpdateUserDialog.bind(this)
+    this.onChangeDeleteUserDialog = this.onChangeDeleteUserDialog.bind(this)
+    this.onConfirmDeleteUser = this.onConfirmDeleteUser.bind(this)
   }
 
   componentWillMount() {
@@ -90,8 +93,16 @@ class User extends PureComponent {
     this.props.updateUI({ updateUserDialog: !this.props.ui.updateUserDialog })
   }
 
+  onChangeDeleteUserDialog(data) {
+    this.setState({
+      currentUser: { ...data, password: undefined },
+      loading: false,
+    })
+    this.props.updateUI({ deleteUserDialog: !this.props.ui.deleteUserDialog })
+  }
+
   onSendForm = () => {
-    this.props.submitFormActions('ADD_USER_FORM')
+    this.props.submitFormActions('USER_FORM')
     this.setState({ loading: true })
   }
 
@@ -107,6 +118,15 @@ class User extends PureComponent {
   onUpdateSubmitForm(data) {
     return this.props.updateActions(data)
       .then(this.onChangeUpdateUserDialog)
+      .catch(error => {
+        this.setState({ loading: false })
+        throw new SubmissionError(error.error)
+      })
+  }
+
+  onConfirmDeleteUser(data) {
+    return this.props.removeActions(data)
+      .then(this.onChangeDeleteUserDialog)
       .catch(error => {
         this.setState({ loading: false })
         throw new SubmissionError(error.error)
@@ -130,7 +150,7 @@ class User extends PureComponent {
         <IconButton
           color="accent"
           aria-label="delete"
-          onClick={this.onChangeUpdateUserDialog}
+          onClick={() => this.onChangeDeleteUserDialog(row.original)}
         >
           <DeleteIcon />
         </IconButton>
@@ -205,6 +225,41 @@ class User extends PureComponent {
         </DialogActions>
       </Dialog>,
 
+      <Dialog
+        key="deleteUserDialog"
+        open={this.props.ui.deleteUserDialog}
+        onRequestClose={this.onChangeDeleteUserDialog}
+      >
+        <DialogTitle>Confirm delete this user</DialogTitle>
+        <DialogContent>
+          {
+            this.state.loading && <LinearProgress />
+          }
+          <ConfirmDeleteUser
+            initialValues={this.state.currentUser}
+            onSubmit={this.onConfirmDeleteUser}
+          />
+          <Typography gutterBottom>
+            By this action, you permanently delete the user
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={this.onChangeDeleteUserDialog}
+            color="primary"
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={this.onSendForm}
+            color="accent"
+            autoFocus
+          >
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>,
+
       <Grid container direction="column" key="content">
         <Grid item>
           <Grid container direction="row" key="content">
@@ -263,6 +318,7 @@ export default ui({
   state: {
     addUserDialog: false,
     updateUserDialog: false,
+    deleteUserDialog: false,
   },
 })(connect(
   mapStateToProps,

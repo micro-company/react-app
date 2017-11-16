@@ -64,7 +64,7 @@ export function update(data) {
 }
 
 export function remove(data) {
-  return dispatch => fetch(`${process.env.REACT_APP_API_URL}/users`, {
+  return dispatch => fetch(`${process.env.REACT_APP_API_URL}/users/${data.id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',

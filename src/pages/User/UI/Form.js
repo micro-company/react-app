@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form'
 import { MenuItem } from 'material-ui/Menu'
 import { TextField, Select } from 'redux-form-material-ui'
 
-class Auth extends PureComponent {
+class Form extends PureComponent {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
   }
@@ -52,4 +52,4 @@ class Auth extends PureComponent {
 export default reduxForm({
   form: 'ADD_USER_FORM',
   anyTouched: true,
-})(Auth)
+})(Form)
