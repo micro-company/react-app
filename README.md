@@ -2,6 +2,8 @@
 
 An example of demonstration work with a microservice architecture
 
+![UserPage](./docs/UserPage.png)
+
 #### Enviroment variables
 
 | **NAME**                           | **VALUE**             |
