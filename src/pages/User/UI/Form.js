@@ -29,6 +29,13 @@ class Auth extends PureComponent {
           fullWidth
         />
         <Field
+          key="retryPassword"
+          name="retryPassword"
+          label="Retry password"
+          component={TextField}
+          fullWidth
+        />
+        <Field
           key="language"
           name="language"
           component={Select}

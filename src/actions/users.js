@@ -46,8 +46,8 @@ export function add(data) {
 }
 
 export function update(data) {
-  return dispatch => fetch(`${process.env.REACT_APP_API_URL}/users`, {
-    method: 'PUT',
+  return dispatch => fetch(`${process.env.REACT_APP_API_URL}/users/${data.id}`, {
+    method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
     },

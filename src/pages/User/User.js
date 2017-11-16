@@ -7,6 +7,7 @@ import { withStyles } from 'material-ui/styles'
 import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
 import ReactTable from 'react-table'
+import IconButton from 'material-ui/IconButton'
 import Button from 'material-ui/Button'
 import Grid from 'material-ui/Grid'
 import Dialog, {
@@ -17,16 +18,18 @@ import Dialog, {
 import { LinearProgress } from 'material-ui/Progress'
 import Typography from 'material-ui/Typography'
 import AddIcon from 'material-ui-icons/Add'
+import EditIcon from 'material-ui-icons/ModeEdit'
+import DeleteIcon from 'material-ui-icons/Delete'
 import { submitForm } from '../../actions/form'
 import { list, add, update, remove } from '../../actions/users'
 import { objectListToArrayList } from '../../utils/structure'
 import Form from './UI/Form'
 
 const styles = () => ({
-  header: {
+  box: {
     display: 'flex',
   },
-  add: {
+  dividers: {
     flex: 1,
   },
 })
@@ -41,7 +44,7 @@ class User extends PureComponent {
     updateUI: PropTypes.func.isRequired,
     listActions: PropTypes.func.isRequired,
     addActions: PropTypes.func.isRequired,
-    // updateActions: PropTypes.func.isRequired,
+    updateActions: PropTypes.func.isRequired,
     // removeActions: PropTypes.func.isRequired,
   }
 
@@ -51,10 +54,15 @@ class User extends PureComponent {
     this.state = {
       loading: false,
       users: objectListToArrayList(props.user.users),
+      currentUser: undefined,
     }
 
+    this.renderCell = this.renderCell.bind(this)
     this.onSendForm = this.onSendForm.bind(this)
-    this.onSubmitForm = this.onSubmitForm.bind(this)
+    this.onAddSubmitForm = this.onAddSubmitForm.bind(this)
+    this.onUpdateSubmitForm = this.onUpdateSubmitForm.bind(this)
+    this.onChangeAddUserDialog = this.onChangeAddUserDialog.bind(this)
+    this.onChangeUpdateUserDialog = this.onChangeUpdateUserDialog.bind(this)
   }
 
   componentWillMount() {
@@ -63,8 +71,6 @@ class User extends PureComponent {
     if (!loaded && Object.keys(users) === 0) {
       this.props.listActions()
     }
-
-    this.onChangeAddUserDialog = this.onChangeAddUserDialog.bind(this)
   }
 
   componentWillReceiveProps(props) {
@@ -72,9 +78,16 @@ class User extends PureComponent {
   }
 
   onChangeAddUserDialog() {
-    this.props.updateUI({
-      addUserDialog: !this.props.ui.addUserDialog,
+    this.setState({ loading: false })
+    this.props.updateUI({ addUserDialog: !this.props.ui.addUserDialog })
+  }
+
+  onChangeUpdateUserDialog(data) {
+    this.setState({
+      currentUser: { ...data, password: undefined },
+      loading: false,
     })
+    this.props.updateUI({ updateUserDialog: !this.props.ui.updateUserDialog })
   }
 
   onSendForm = () => {
@@ -82,13 +95,47 @@ class User extends PureComponent {
     this.setState({ loading: true })
   }
 
-  onSubmitForm(data) {
+  onAddSubmitForm(data) {
     return this.props.addActions(data)
       .then(this.onChangeAddUserDialog)
       .catch(error => {
         this.setState({ loading: false })
         throw new SubmissionError(error.error)
       })
+  }
+
+  onUpdateSubmitForm(data) {
+    return this.props.updateActions(data)
+      .then(this.onChangeUpdateUserDialog)
+      .catch(error => {
+        this.setState({ loading: false })
+        throw new SubmissionError(error.error)
+      })
+  }
+
+  renderCell(row) {
+    return (
+      <div className={this.props.classes.box}>
+        {row.value}
+
+        <div className={this.props.classes.dividers} />
+
+        <IconButton
+          color="primary"
+          aria-label="edit"
+          onClick={() => this.onChangeUpdateUserDialog(row.original)}
+        >
+          <EditIcon />
+        </IconButton>
+        <IconButton
+          color="accent"
+          aria-label="delete"
+          onClick={this.onChangeUpdateUserDialog}
+        >
+          <DeleteIcon />
+        </IconButton>
+      </div>
+    )
   }
 
   render() {
@@ -107,7 +154,7 @@ class User extends PureComponent {
           {
             this.state.loading && <LinearProgress />
           }
-          <Form onSubmit={this.onSubmitForm} />
+          <Form onSubmit={this.onAddSubmitForm} />
         </DialogContent>
         <DialogActions>
           <Button
@@ -126,6 +173,38 @@ class User extends PureComponent {
         </DialogActions>
       </Dialog>,
 
+      <Dialog
+        key="updateUserDialog"
+        open={this.props.ui.updateUserDialog}
+        onRequestClose={this.onChangeUpdateUserDialog}
+      >
+        <DialogTitle>Update this user</DialogTitle>
+        <DialogContent>
+          {
+            this.state.loading && <LinearProgress />
+          }
+          <Form
+            initialValues={this.state.currentUser}
+            onSubmit={this.onUpdateSubmitForm}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={this.onChangeUpdateUserDialog}
+            color="primary"
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={this.onSendForm}
+            color="primary"
+            autoFocus
+          >
+            Update
+          </Button>
+        </DialogActions>
+      </Dialog>,
+
       <Grid container direction="column" key="content">
         <Grid item>
           <Grid container direction="row" key="content">
@@ -133,7 +212,7 @@ class User extends PureComponent {
               Users list
             </Typography>
 
-            <div className={classes.add} />
+            <div className={classes.dividers} />
 
             <Button
               fab
@@ -153,8 +232,10 @@ class User extends PureComponent {
               {
                 Header: 'Mail',
                 accessor: 'mail',
+                Cell: this.renderCell,
               },
             ]}
+            defaultPageSize={10}
           />
         </Grid>
       </Grid>,
@@ -181,6 +262,7 @@ function mapDispatchToProps(dispatch) {
 export default ui({
   state: {
     addUserDialog: false,
+    updateUserDialog: false,
   },
 })(connect(
   mapStateToProps,
