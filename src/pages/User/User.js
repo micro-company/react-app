@@ -17,6 +17,7 @@ import Dialog, {
 } from 'material-ui/Dialog'
 import { LinearProgress } from 'material-ui/Progress'
 import Typography from 'material-ui/Typography'
+import UpdateIcon from 'material-ui-icons/Update'
 import AddIcon from 'material-ui-icons/Add'
 import EditIcon from 'material-ui-icons/ModeEdit'
 import DeleteIcon from 'material-ui-icons/Delete'
@@ -26,12 +27,18 @@ import { objectListToArrayList } from '../../utils/structure'
 import Form from './UI/Form'
 import ConfirmDeleteUser from './UI/ConfirmDeleteUser'
 
-const styles = () => ({
+const styles = theme => ({
   box: {
     display: 'flex',
   },
   dividers: {
     flex: 1,
+  },
+  button: {
+    margin: theme.spacing.unit,
+  },
+  typography: {
+    margin: theme.spacing.unit,
   },
 })
 
@@ -263,7 +270,11 @@ class User extends PureComponent {
       <Grid container direction="column" key="content">
         <Grid item>
           <Grid container direction="row" key="content">
-            <Typography type="display1" gutterBottom>
+            <Typography
+              type="display1"
+              gutterBottom
+              className={classes.typography}
+            >
               Users list
             </Typography>
 
@@ -272,7 +283,18 @@ class User extends PureComponent {
             <Button
               fab
               color="primary"
+              aria-label="update"
+              className={classes.button}
+              onClick={this.props.listActions}
+            >
+              <UpdateIcon />
+            </Button>
+
+            <Button
+              fab
+              color="primary"
               aria-label="add"
+              className={classes.button}
               onClick={this.onChangeAddUserDialog}
             >
               <AddIcon />

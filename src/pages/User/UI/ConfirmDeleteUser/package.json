@@ -1,0 +1,6 @@
+{
+  "name": "ConfirmDeleteUser",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./ConfirmDeleteUser"
+}
