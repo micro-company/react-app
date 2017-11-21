@@ -1,8 +1,14 @@
 import * as USER from '../constants/user'
+import { history } from '../store/configureStore'
 
 function checkStatus(response) {
+  console.warn('response', response)
   if (response.status >= 200 && response.status < 300) {
     return response.json()
+  }
+
+  if (response.status === 401) {
+    return history.push('/auth')
   }
 
   throw response.json()
@@ -14,6 +20,7 @@ export function list() {
     headers: {
       'Content-Type': 'application/json',
     },
+    credentials: 'include',
   })
     .then(checkStatus)
     .then(response => {
@@ -31,6 +38,7 @@ export function add(data) {
     headers: {
       'Content-Type': 'application/json',
     },
+    credentials: 'include',
     body: JSON.stringify(data),
   })
     .then(checkStatus)
@@ -51,6 +59,7 @@ export function update(data) {
     headers: {
       'Content-Type': 'application/json',
     },
+    credentials: 'include',
     body: JSON.stringify(data),
   })
     .then(checkStatus)
@@ -69,6 +78,7 @@ export function remove(data) {
     headers: {
       'Content-Type': 'application/json',
     },
+    credentials: 'include',
     body: JSON.stringify(data),
   })
     .then(checkStatus)

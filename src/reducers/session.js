@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken'
 import * as SESSION from '../constants/session'
 
 const initialState = {
@@ -13,8 +14,9 @@ export default function update(state: Object = initialState, action: Object): Ob
     case SESSION.LOGIN: {
       return {
         ...state,
+        ...action.payload,
+        user: jwt.decode(action.payload.tokens.access),
         isAuthenticated: true,
-        tokens: action.payload,
       }
     }
     default:
