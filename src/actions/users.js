@@ -2,13 +2,13 @@ import * as USER from '../constants/user'
 import { history } from '../store/configureStore'
 
 function checkStatus(response) {
-  console.warn('response', response)
   if (response.status >= 200 && response.status < 300) {
     return response.json()
   }
 
   if (response.status === 401) {
-    return history.push('/auth')
+    history.push('/auth')
+    throw response.json()
   }
 
   throw response.json()
