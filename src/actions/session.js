@@ -6,6 +6,11 @@ function checkStatus(response) {
     return response.json()
   }
 
+  if (response.status === 401) {
+    history.push('/auth')
+    throw response.json()
+  }
+
   throw response.json()
 }
 
