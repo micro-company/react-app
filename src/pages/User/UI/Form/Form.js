@@ -50,6 +50,6 @@ class Form extends PureComponent {
 }
 
 export default reduxForm({
-  form: 'ADD_USER_FORM',
+  form: 'USER_FORM',
   anyTouched: true,
 })(Form)

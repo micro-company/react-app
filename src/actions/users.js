@@ -15,10 +15,12 @@ function checkStatus(response) {
 }
 
 export function list() {
-  return dispatch => fetch(`${process.env.REACT_APP_API_URL}/users`, {
+  return (dispatch, getState) => fetch(`${process.env.REACT_APP_API_URL}/users`, {
     method: 'GET',
     headers: {
+      'Accept': 'application/json',
       'Content-Type': 'application/json',
+      'Authorization': getState().session.tokens.access,
     },
     credentials: 'include',
   })
@@ -33,10 +35,12 @@ export function list() {
 }
 
 export function add(data) {
-  return dispatch => fetch(`${process.env.REACT_APP_API_URL}/users`, {
+  return (dispatch, getState) => fetch(`${process.env.REACT_APP_API_URL}/users`, {
     method: 'POST',
     headers: {
+      'Accept': 'application/json',
       'Content-Type': 'application/json',
+      'Authorization': getState().session.tokens.access,
     },
     credentials: 'include',
     body: JSON.stringify(data),
@@ -54,10 +58,12 @@ export function add(data) {
 }
 
 export function update(data) {
-  return dispatch => fetch(`${process.env.REACT_APP_API_URL}/users/${data.id}`, {
+  return (dispatch, getState) => fetch(`${process.env.REACT_APP_API_URL}/users/${data.id}`, {
     method: 'PATCH',
     headers: {
+      'Accept': 'application/json',
       'Content-Type': 'application/json',
+      'Authorization': getState().session.tokens.access,
     },
     credentials: 'include',
     body: JSON.stringify(data),
@@ -73,10 +79,12 @@ export function update(data) {
 }
 
 export function remove(data) {
-  return dispatch => fetch(`${process.env.REACT_APP_API_URL}/users/${data.id}`, {
+  return (dispatch, getState) => fetch(`${process.env.REACT_APP_API_URL}/users/${data.id}`, {
     method: 'DELETE',
     headers: {
+      'Accept': 'application/json',
       'Content-Type': 'application/json',
+      'Authorization': getState().session.tokens.access,
     },
     credentials: 'include',
     body: JSON.stringify(data),

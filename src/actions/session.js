@@ -15,10 +15,12 @@ function checkStatus(response) {
 }
 
 export function login(data) {
-  return dispatch => fetch(`${process.env.REACT_APP_API_URL}/auth`, {
+  return (dispatch, getState) => fetch(`${process.env.REACT_APP_API_URL}/auth`, {
     method: 'POST',
     headers: {
+      'Accept': 'application/json',
       'Content-Type': 'application/json',
+      'Authorization': getState().session.tokens.access,
     },
     body: JSON.stringify(data),
   })
