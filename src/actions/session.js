@@ -1,4 +1,5 @@
 import * as SESSION from '../constants/session'
+import * as EVENT from '../constants/event'
 import { history } from '../store/configureStore'
 
 function checkStatus(response) {
@@ -15,12 +16,11 @@ function checkStatus(response) {
 }
 
 export function login(data) {
-  return (dispatch, getState) => fetch(`${process.env.REACT_APP_API_URL}/auth`, {
+  return dispatch => fetch(`${process.env.REACT_APP_API_URL}/auth`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': getState().session.tokens.access,
     },
     body: JSON.stringify(data),
   })
@@ -32,6 +32,28 @@ export function login(data) {
       })
 
       history.push('/')
+    })
+    .catch(error => error.then(response => { throw response }))
+}
+
+export function registration(data) {
+  return dispatch => fetch(`${process.env.REACT_APP_API_URL}/auth/new`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then(checkStatus)
+    .then(response => {
+      dispatch({
+        type: EVENT.ADD,
+        payload: {
+          message: "Success registration. Need log in.",
+          created_at: new Date(),
+        },
+      })
     })
     .catch(error => error.then(response => { throw response }))
 }

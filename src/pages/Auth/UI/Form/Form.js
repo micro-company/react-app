@@ -11,8 +11,10 @@ class Auth extends PureComponent {
   static propTypes = {
     classes: PropTypes.object.isRequired,
     error: PropTypes.array,
+    mode: PropTypes.string.isRequired,
 
     handleSubmit: PropTypes.func.isRequired,
+    onChangeMode: PropTypes.func.isRequired,
     onSendForm: PropTypes.func.isRequired,
     onRecaptcha: PropTypes.func.isRequired,
   }
@@ -21,30 +23,15 @@ class Auth extends PureComponent {
     error: [],
   }
 
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      currentTab: 'logIn',
-    }
-
-    this.onSelectTab = this.onSelectTab.bind(this)
-  }
-
-  onSelectTab(event, value) {
-    this.setState({ currentTab: value })
-  }
-
   render() {
-    const { error, handleSubmit } = this.props
-    const { currentTab } = this.state
+    const { mode, error, handleSubmit, onChangeMode } = this.props
 
     return (
       <Card>
         <CardContent>
           <Tabs
-            value={currentTab}
-            onChange={this.onSelectTab}
+            value={mode}
+            onChange={onChangeMode}
             centered
           >
             <Tab label="LOG IN" value="logIn" />
@@ -52,7 +39,7 @@ class Auth extends PureComponent {
           </Tabs>
 
           <form onSubmit={handleSubmit}>
-            { getForm(currentTab) }
+            { getForm(mode) }
           </form>
 
           <Recaptcha

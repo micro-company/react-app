@@ -6,6 +6,7 @@ import localForage from 'localforage'
 import counter from './counter'
 import session from './session'
 import user from './user'
+import event from './event'
 
 const config = {
   key: 'react-app',
@@ -25,5 +26,6 @@ export default persistCombineReducers(config, {
 
   session: persistReducer(sessionPersistConfig, session),
   user,
+  event,
   counter,
 })

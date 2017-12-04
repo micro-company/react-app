@@ -7,7 +7,7 @@ import { withStyles } from 'material-ui/styles'
 import { Helmet } from 'react-helmet'
 import Grid from 'material-ui/Grid'
 import { submitForm } from '../../actions/form'
-import { login } from '../../actions/session'
+import { login, registration } from '../../actions/session'
 import FormAuth from './UI/Form'
 
 const styles = () => ({
@@ -37,23 +37,40 @@ class Auth extends PureComponent {
 
     this.state = {
       captcha: '',
+      mode: 'logIn',
     }
 
     this.onSendForm = this.onSendForm.bind(this)
     this.onSubmitForm = this.onSubmitForm.bind(this)
+    this.onChangeMode = this.onChangeMode.bind(this)
   }
 
+  onChangeMode(event, value) { this.setState({ mode: value }) }
   onSendForm = () => this.props.submitFormActions('AUTH_FORM')
   onRecaptcha = value => this.setState({ captcha: value })
 
   onSubmitForm(data) {
-    return this.props.loginActions({
-      ...data,
-      captcha: this.state.captcha,
-    })
-      .catch(error => {
-        throw new SubmissionError(error.error)
-      })
+    switch (this.state.mode) {
+      case 'logIn':
+        return this.props.loginActions({
+          ...data,
+          captcha: this.state.captcha,
+        })
+          .catch(error => {
+            throw new SubmissionError(error.error)
+          })
+      case 'signOn':
+        return this.props.registrationActions({
+          ...data,
+          captcha: this.state.captcha,
+        })
+          .catch(error => {
+            throw new SubmissionError(error.error)
+          })
+      default:
+        break
+    }
+
   }
 
   render() {
@@ -68,7 +85,9 @@ class Auth extends PureComponent {
             <Grid item xs={10} sm={5} md={4} lg={3} sd={2} xl={2}>
               <FormAuth
                 classes={classes}
+                mode={this.state.mode}
 
+                onChangeMode={this.onChangeMode}
                 onRecaptcha={this.onRecaptcha}
                 onSendForm={this.onSendForm}
                 onSubmit={this.onSubmitForm}
@@ -89,6 +108,7 @@ function mapDispatchToProps(dispatch) {
   return {
     submitFormActions: bindActionCreators(submitForm, dispatch),
     loginActions: bindActionCreators(login, dispatch),
+    registrationActions: bindActionCreators(registration, dispatch),
   }
 }
 
