@@ -19,6 +19,9 @@ export default function update(state: Object = initialState, action: Object): Ob
         isAuthenticated: true,
       }
     }
+    case SESSION.LOGOUT: {
+      return initialState
+    }
     default:
       return state
   }

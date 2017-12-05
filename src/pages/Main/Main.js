@@ -5,7 +5,7 @@ import Grid from 'material-ui/Grid'
 import { Route } from 'react-router-dom'
 import ui from 'redux-ui'
 import Header from './UI/Header'
-import Drawer from './UI/Drawer'
+import MainMenu from '../../containers/MainMenu'
 import Home from '../Home'
 import User from '../User'
 import About from '../About'
@@ -48,7 +48,7 @@ class Main extends PureComponent {
           <Grid container spacing={0} className={classes.box}>
             <Grid item xs={12} className={classes.boxItem}>
               <Grid container direction="row" spacing={0}>
-                <Drawer openDrawer={this.props.ui.openDrawer} />
+                <MainMenu openDrawer={this.props.ui.openDrawer} />
 
                 <main className={classes.content}>
                   <Route exact path="/" component={Home} />

@@ -24,7 +24,9 @@ class Auth extends PureComponent {
   }
 
   render() {
-    const { mode, error, handleSubmit, onChangeMode } = this.props
+    const {
+      mode, error, handleSubmit, onChangeMode,
+    } = this.props
 
     return (
       <Card>

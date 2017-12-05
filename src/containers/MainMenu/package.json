@@ -1,6 +1,6 @@
 {
-  "name": "Drawer",
+  "name": "MainMenu",
   "version": "0.0.0",
   "private": true,
-  "main": "./Drawer"
+  "main": "./MainMenu"
 }

@@ -18,9 +18,9 @@ export function list() {
   return (dispatch, getState) => fetch(`${process.env.REACT_APP_API_URL}/users`, {
     method: 'GET',
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': getState().session.tokens.access,
+      Authorization: getState().session.tokens.access,
     },
     credentials: 'include',
   })
@@ -38,9 +38,9 @@ export function add(data) {
   return (dispatch, getState) => fetch(`${process.env.REACT_APP_API_URL}/users`, {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': getState().session.tokens.access,
+      Authorization: getState().session.tokens.access,
     },
     credentials: 'include',
     body: JSON.stringify(data),
@@ -61,9 +61,9 @@ export function update(data) {
   return (dispatch, getState) => fetch(`${process.env.REACT_APP_API_URL}/users/${data.id}`, {
     method: 'PATCH',
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': getState().session.tokens.access,
+      Authorization: getState().session.tokens.access,
     },
     credentials: 'include',
     body: JSON.stringify(data),
@@ -82,9 +82,9 @@ export function remove(data) {
   return (dispatch, getState) => fetch(`${process.env.REACT_APP_API_URL}/users/${data.id}`, {
     method: 'DELETE',
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': getState().session.tokens.access,
+      Authorization: getState().session.tokens.access,
     },
     credentials: 'include',
     body: JSON.stringify(data),

@@ -30,6 +30,7 @@ class Auth extends PureComponent {
 
     submitFormActions: PropTypes.func.isRequired,
     loginActions: PropTypes.func.isRequired,
+    registrationActions: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -68,9 +69,8 @@ class Auth extends PureComponent {
             throw new SubmissionError(error.error)
           })
       default:
-        break
+        return false
     }
-
   }
 
   render() {
