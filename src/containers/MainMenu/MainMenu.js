@@ -98,16 +98,6 @@ class MainMenu extends PureComponent {
                     <ListItemText primary="Users" />
                   </ListItem>
                 </Link>
-
-                <Link to="/about-us">
-                  <ListItem button>
-                    <ListItemIcon>
-                      <InboxIcon />
-                    </ListItemIcon>
-
-                    <ListItemText primary="About" />
-                  </ListItem>
-                </Link>
               </List>
             </Grid>
 
