@@ -76,33 +76,11 @@ export function logout() {
     },
   })
     .then(checkStatus)
-    .then(() => {
-      const timeout = new Date(new Date().getTime() + (1 * 10000))
-
-      dispatch({
-        type: EVENT.ADD,
-        payload: {
-          message: 'Goodbuy',
-          created_at: new Date(),
-          timeout,
-        },
-      })
-
-      dispatch({
-        type: SESSION.LOGOUT,
-        payload: null,
-      })
-    })
+    .then(() => dispatch({
+      type: SESSION.LOGOUT,
+      payload: null,
+    }))
     .catch(error => {
-      dispatch({
-        type: EVENT.ADD,
-        payload: {
-          message: 'Goodbuy',
-          created_at: new Date(),
-          timeout: 60,
-        },
-      })
-
       dispatch({
         type: SESSION.LOGOUT,
         payload: null,
