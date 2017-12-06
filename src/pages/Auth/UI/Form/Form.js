@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
 import { reduxForm } from 'redux-form'
 import Recaptcha from 'react-google-recaptcha'
 import Button from 'material-ui/Button'
@@ -7,7 +8,27 @@ import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Tabs, { Tab } from 'material-ui/Tabs'
 import { FormHelperText } from 'material-ui/Form'
 import Typography from 'material-ui/Typography'
+import AppBar from 'material-ui/AppBar'
 import getForm from './getForm'
+
+const styles = () => ({
+  root: {
+    padding: 0,
+  },
+  form: {
+    margin: '1em',
+  },
+  button: {
+    flex: 1,
+    padding: 0,
+    margin: 0,
+    height: '100%',
+  },
+  recaptcha: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+})
 
 class Auth extends PureComponent {
   static propTypes = {
@@ -32,17 +53,23 @@ class Auth extends PureComponent {
 
     return (
       <Card>
-        <CardContent>
-          <Tabs
-            value={mode}
-            onChange={onChangeMode}
-            centered
-          >
-            <Tab label="LOG IN" value="logIn" />
-            <Tab label="SIGN ON" value="signOn" />
-          </Tabs>
+        <CardContent className={this.props.classes.root}>
+          <AppBar position="static">
+            <Tabs
+              value={mode}
+              onChange={onChangeMode}
+              fullWidth
+            >
+              <Tab label="LOG IN" value="logIn" />
+              <Tab label="SIGN ON" value="signOn" />
+              <Tab label="RECOVERY" value="recovery" />
+            </Tabs>
+          </AppBar>
 
-          <form onSubmit={handleSubmit}>
+          <form
+            className={this.props.classes.form}
+            onSubmit={handleSubmit}
+          >
             { getForm(mode) }
           </form>
 
@@ -65,7 +92,7 @@ class Auth extends PureComponent {
           </ul>
         </CardContent>
 
-        <CardActions>
+        <CardActions className={this.props.classes.root}>
           <Button
             className={this.props.classes.button}
             color="primary"
@@ -83,4 +110,4 @@ class Auth extends PureComponent {
 export default reduxForm({
   form: 'AUTH_FORM',
   anyTouched: true,
-})(Auth)
+})(withStyles(styles)(Auth))

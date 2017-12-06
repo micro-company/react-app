@@ -5,6 +5,16 @@ import { TextField, Select } from 'redux-form-material-ui'
 
 export default function getForm(currentTab) {
   switch (currentTab) {
+    case 'recovery':
+      return [
+        <Field
+          key="mail"
+          name="mail"
+          label="Mail"
+          component={TextField}
+          fullWidth
+        />,
+      ]
     case 'signOn':
       return [
         <Field

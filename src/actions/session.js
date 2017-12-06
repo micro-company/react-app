@@ -89,3 +89,16 @@ export function logout() {
       formError(error)
     })
 }
+
+export function recovery(data) {
+  return () => fetch(`${process.env.REACT_APP_API_URL}/auth/recovery`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then(checkStatus)
+    .catch(error => formError(error))
+}
