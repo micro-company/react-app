@@ -7,6 +7,12 @@ const initialState = {
 
 export default function update(state: Object = initialState, action: Object): Object {
   switch (action.type) {
+    case EVENT.CHECK: {
+      return {
+        ...state,
+        event: state.event.filter(item => new Date(item.timeout) > new Date()),
+      }
+    }
     case EVENT.ADD: {
       return {
         ...state,

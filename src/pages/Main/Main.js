@@ -5,10 +5,11 @@ import Grid from 'material-ui/Grid'
 import { Route } from 'react-router-dom'
 import ui from 'redux-ui'
 import Header from './UI/Header'
-import MainMenu from '../../containers/MainMenu'
 import Home from '../Home'
 import User from '../User'
 import About from '../About'
+import MainMenu from '../../containers/MainMenu'
+import Notify from '../../containers/Notify'
 
 const styles = theme => ({
   rootItem: {
@@ -40,8 +41,9 @@ class Main extends PureComponent {
   render() {
     const { classes } = this.props
 
-    return (
-      <Grid container direction="column" spacing={0}>
+    return [
+      <Notify key="notify" />,
+      <Grid key="grid" container direction="column" spacing={0}>
         <Grid item xs={12} className={classes.rootItem}>
           <Header openDrawer={this.props.ui.openDrawer} updateUI={this.props.updateUI} />
 
@@ -59,8 +61,8 @@ class Main extends PureComponent {
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    )
+      </Grid>,
+    ]
   }
 }
 

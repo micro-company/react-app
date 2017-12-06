@@ -6,3 +6,10 @@ export const remove = index => dispatch => {
     payload: index,
   })
 }
+
+export const check = () => dispatch => {
+  dispatch({
+    type: EVENT.CHECK,
+    payload: null,
+  })
+}
