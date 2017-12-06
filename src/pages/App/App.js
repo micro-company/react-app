@@ -11,11 +11,6 @@ import Auth from '../Auth'
 class App extends PureComponent {
   static propTypes = {
     router: PropTypes.object.isRequired,
-    event: PropTypes.object.isRequired,
-    classes: PropTypes.object.isRequired,
-
-    removeEventAction: PropTypes.func.isRequired,
-    checkEventAction: PropTypes.func.isRequired,
   }
 
   render() {
@@ -41,7 +36,6 @@ class App extends PureComponent {
 function mapStateToProps(state) {
   return {
     router: state.router,
-    event: state.event,
   }
 }
 
