@@ -5,6 +5,8 @@ import Recaptcha from 'react-google-recaptcha'
 import Button from 'material-ui/Button'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Tabs, { Tab } from 'material-ui/Tabs'
+import { FormHelperText } from 'material-ui/Form'
+import Typography from 'material-ui/Typography'
 import getForm from './getForm'
 
 class Auth extends PureComponent {
@@ -51,12 +53,16 @@ class Auth extends PureComponent {
             theme="light"
           />
 
-          <p>
-            { error.length ? 'We have probelem:' : null }
+          { error.length ? (
+            <Typography type="subheading" gutterBottom>
+              We have probelem:
+            </Typography>
+          ) : null }
+          <ul>
             {
-              error.map((issue, index) => <p key={index}>{issue}</p>) // eslint-disable-line
+              error.map((issue, index) => <FormHelperText error key={index}>{issue}</FormHelperText>) // eslint-disable-line
             }
-          </p>
+          </ul>
         </CardContent>
 
         <CardActions>
