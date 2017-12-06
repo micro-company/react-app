@@ -7,7 +7,6 @@ import ui from 'redux-ui'
 import Header from './UI/Header'
 import Home from '../Home'
 import User from '../User'
-import About from '../About'
 import MainMenu from '../../containers/MainMenu'
 import Notify from '../../containers/Notify'
 
@@ -55,7 +54,6 @@ class Main extends PureComponent {
                 <main className={classes.content}>
                   <Route exact path="/" component={Home} />
                   <Route exact path="/users" component={User} />
-                  <Route exact path="/about-us" component={About} />
                 </main>
               </Grid>
             </Grid>
