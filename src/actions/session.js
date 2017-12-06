@@ -15,6 +15,14 @@ function checkStatus(response) {
   throw response.json()
 }
 
+function formError(error) {
+  if (error && typeof error.then === 'function') {
+    return error.then(response => { throw response })
+  }
+
+  throw { error: { _error: ['Problem with connect to server'] } } // eslint-disable-line
+}
+
 export function login(data) {
   return dispatch => fetch(`${process.env.REACT_APP_API_URL}/auth`, {
     method: 'POST',
@@ -33,13 +41,7 @@ export function login(data) {
 
       history.push('/')
     })
-    .catch(error => {
-      if (typeof error === 'object') {
-        throw { error: { _error: ['Problem with connect to server'] } } // eslint-disable-line
-      } else {
-        error.then(response => { throw response })
-      }
-    })
+    .catch(error => formError(error))
 }
 
 export function registration(data) {
@@ -61,13 +63,7 @@ export function registration(data) {
         },
       })
     })
-    .catch(error => {
-      if (typeof error === 'object') {
-        throw { error: { _error: ['Problem with connect to server'] } } // eslint-disable-line
-      } else {
-        error.then(response => { throw response })
-      }
-    })
+    .catch(error => formError(error))
 }
 
 export function logout() {
@@ -112,6 +108,6 @@ export function logout() {
         payload: null,
       })
 
-      error.then(response => { throw response })
+      formError(error)
     })
 }
