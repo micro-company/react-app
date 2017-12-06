@@ -61,7 +61,13 @@ export function registration(data) {
         },
       })
     })
-    .catch(error => error.then(response => { throw response }))
+    .catch(error => {
+      if (typeof error === 'object') {
+        throw { error: { _error: ['Problem with connect to server'] } } // eslint-disable-line
+      } else {
+        error.then(response => { throw response })
+      }
+    })
 }
 
 export function logout() {
