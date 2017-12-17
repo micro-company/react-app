@@ -23,7 +23,7 @@
     "react-dom": "^16.2.0",
     "react-google-recaptcha": "^0.9.9",
     "react-redux": "^5.0.6",
-    "react-router-redux": "^5.0.0-alpha.8",
+    "react-router-redux": "^5.0.0-alpha.9",
     "react-scripts": "1.0.17",
     "react-table": "^6.7.5",
     "redux": "^3.7.2",
