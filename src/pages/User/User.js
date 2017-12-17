@@ -180,7 +180,7 @@ class User extends PureComponent {
       <Dialog
         key="addUserDialog"
         open={this.props.ui.addUserDialog}
-        onRequestClose={this.onChangeAddUserDialog}
+        onClose={this.onChangeAddUserDialog}
       >
         <DialogTitle>Add new user</DialogTitle>
         <DialogContent>
@@ -209,7 +209,7 @@ class User extends PureComponent {
       <Dialog
         key="updateUserDialog"
         open={this.props.ui.updateUserDialog}
-        onRequestClose={this.onChangeUpdateUserDialog}
+        onClose={this.onChangeUpdateUserDialog}
       >
         <DialogTitle>Update this user</DialogTitle>
         <DialogContent>
@@ -241,7 +241,7 @@ class User extends PureComponent {
       <Dialog
         key="deleteUserDialog"
         open={this.props.ui.deleteUserDialog}
-        onRequestClose={this.onChangeDeleteUserDialog}
+        onClose={this.onChangeDeleteUserDialog}
       >
         <DialogTitle>Confirm delete this user</DialogTitle>
         <DialogContent>

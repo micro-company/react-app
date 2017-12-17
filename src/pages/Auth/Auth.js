@@ -90,7 +90,7 @@ class Auth extends PureComponent {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         open={this.state.isNotify}
         autoHideDuration={6000}
-        onRequestClose={this.handleRequestClose}
+        onClose={this.handleRequestClose}
         message={<span>Data sent to the specified mail</span>}
         action={[
           <IconButton
