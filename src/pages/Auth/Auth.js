@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
+import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { SubmissionError } from 'redux-form'
 import { withStyles } from 'material-ui/styles'
@@ -10,7 +11,7 @@ import Snackbar from 'material-ui/Snackbar'
 import IconButton from 'material-ui/IconButton'
 import CloseIcon from 'material-ui-icons/Close'
 import { submitForm } from '../../actions/form'
-import { login, registration, recovery } from '../../actions/session'
+import { login, registration, recovery, recoveryPassword } from '../../actions/session'
 import FormAuth from './UI/Form'
 
 const styles = () => ({
@@ -23,19 +24,23 @@ const styles = () => ({
 class Auth extends PureComponent {
   static propTypes = {
     classes: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
 
     submitFormActions: PropTypes.func.isRequired,
     loginActions: PropTypes.func.isRequired,
     registrationActions: PropTypes.func.isRequired,
     recoveryActions: PropTypes.func.isRequired,
+    recoveryPasswordActions: PropTypes.func.isRequired,
   }
 
   constructor(props) {
     super(props)
 
+    const mode = props.match.params.recoveryToken ? 'recoveryPassword' : 'logIn'
+
     this.state = {
       captcha: '',
-      mode: 'logIn',
+      mode,
       isNotify: false,
     }
 
@@ -66,6 +71,14 @@ class Auth extends PureComponent {
         return this.props.recoveryActions({
           ...data,
           captcha: this.state.captcha,
+        })
+          .then(() => { this.setState({ isNotify: true }) })
+          .catch(error => { throw new SubmissionError(error.error) })
+      case 'recoveryPassword':
+        return this.props.recoveryPasswordActions({
+          ...data,
+          captcha: this.state.captcha,
+          recoveryToken: this.props.match.params.recoveryToken,
         })
           .then(() => { this.setState({ isNotify: true }) })
           .catch(error => { throw new SubmissionError(error.error) })
@@ -133,10 +146,11 @@ function mapDispatchToProps(dispatch) {
     loginActions: bindActionCreators(login, dispatch),
     registrationActions: bindActionCreators(registration, dispatch),
     recoveryActions: bindActionCreators(recovery, dispatch),
+    recoveryPasswordActions: bindActionCreators(recoveryPassword, dispatch),
   }
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(withStyles(styles)(Auth))
+)(withStyles(styles)(withRouter(Auth)))

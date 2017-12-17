@@ -15,6 +15,23 @@ export default function getForm(currentTab) {
           fullWidth
         />,
       ]
+    case 'recoveryPassword':
+      return [
+        <Field
+          key="password"
+          name="password"
+          label="Password"
+          component={TextField}
+          fullWidth
+        />,
+        <Field
+          key="retryPassword"
+          name="retryPassword"
+          label="Retry password"
+          component={TextField}
+          fullWidth
+        />,
+      ]
     case 'signOn':
       return [
         <Field
@@ -24,7 +41,6 @@ export default function getForm(currentTab) {
           component={TextField}
           fullWidth
         />,
-
         <Field
           key="password"
           name="password"
@@ -32,7 +48,6 @@ export default function getForm(currentTab) {
           component={TextField}
           fullWidth
         />,
-
         <Field
           key="retryPassword"
           name="retryPassword"
@@ -40,7 +55,6 @@ export default function getForm(currentTab) {
           component={TextField}
           fullWidth
         />,
-
         <Field
           key="language"
           name="language"

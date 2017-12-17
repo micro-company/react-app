@@ -102,3 +102,16 @@ export function recovery(data) {
     .then(checkStatus)
     .catch(error => formError(error))
 }
+
+export function recoveryPassword(data) {
+  return () => fetch(`${process.env.REACT_APP_API_URL}/auth/recovery/${data.recoveryToken}`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then(checkStatus)
+    .catch(error => formError(error))
+}

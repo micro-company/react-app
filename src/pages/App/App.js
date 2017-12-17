@@ -22,6 +22,10 @@ class App extends PureComponent {
 
       <Switch key="switch" {...this.props.router}>
         <Route
+          path="/recovery/:recoveryToken"
+          component={Auth}
+        />
+        <Route
           path="/auth"
           component={Auth}
         />
