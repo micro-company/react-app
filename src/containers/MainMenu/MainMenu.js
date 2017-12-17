@@ -8,10 +8,11 @@ import { Link } from 'react-router-dom'
 import Drawer from 'material-ui/Drawer'
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
-import InboxIcon from 'material-ui-icons/Inbox'
-import Person from 'material-ui-icons/Person'
 import Button from 'material-ui/Button'
 import Grid from 'material-ui/Grid'
+import ExitIcon from 'material-ui-icons/ExitToApp'
+import PersonIcon from 'material-ui-icons/Person'
+import HomeIcon from 'material-ui-icons/Home'
 import { logout } from '../../actions/session'
 
 const drawerWidth = 240
@@ -82,7 +83,7 @@ class MainMenu extends PureComponent {
                 <Link to="/">
                   <ListItem button>
                     <ListItemIcon>
-                      <InboxIcon />
+                      <HomeIcon />
                     </ListItemIcon>
 
                     <ListItemText primary="Home" />
@@ -92,7 +93,7 @@ class MainMenu extends PureComponent {
                 <Link to="/users">
                   <ListItem button>
                     <ListItemIcon>
-                      <InboxIcon />
+                      <PersonIcon />
                     </ListItemIcon>
 
                     <ListItemText primary="Users" />
@@ -106,7 +107,7 @@ class MainMenu extends PureComponent {
                 <ListItem className={classes.userItem}>
                   <ListItemIcon>
                     <Avatar alt="Remy Sharp">
-                      <Person />
+                      <PersonIcon />
                     </Avatar>
                   </ListItemIcon>
 
@@ -115,7 +116,8 @@ class MainMenu extends PureComponent {
                     color="accent"
                     onClick={this.props.logoutAction}
                   >
-                    Logout
+                    Logout &nbsp;
+                    <ExitIcon />
                   </Button>
                 </ListItem>
               </List>
