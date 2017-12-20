@@ -1,0 +1,111 @@
+.job_template_build: &job_build
+  type: build
+  retry: 2
+  only:
+  - tags
+  when: on_success
+
+.job_template_best_practices: &job_best_practices
+  type: best_practices
+  before_script:
+  - npm i --ignore-scripts
+  retry: 1
+  only:
+  - tags
+  allow_failure: true
+
+.job_template_deploy: &job_deploy
+  type: deploy
+  script:
+  - export DEPLOYS=$(helm ls | grep $RELEASE_NAME | wc -l)
+  - if [ ${DEPLOYS}  -eq 0 ]; then
+      helm --kube-context $HELM_NAMESPACE install
+        --name $RELEASE_NAME
+        --namespace=$CI_PROJECT_NAMESPACE
+        --set CI_PROJECT_NAME=$CI_PROJECT_NAME
+        --set CI_PIPELINE_ID=$CI_PIPELINE_ID
+        --set CI_BUILD_ID=$CI_BUILD_ID
+        --set image.tag=$CI_COMMIT_TAG
+        --set CI_COMMIT_SHA=$CI_COMMIT_SHA
+        $HELM_PATH;
+    else
+      helm --kube-context $HELM_NAMESPACE upgrade $RELEASE_NAME $HELM_PATH
+        --namespace=$CI_PROJECT_NAMESPACE
+        --set CI_PROJECT_NAME=$CI_PROJECT_NAME
+        --set CI_PIPELINE_ID=$CI_PIPELINE_ID
+        --set CI_BUILD_ID=$CI_BUILD_ID
+        --set image.tag=$CI_COMMIT_TAG
+        --set CI_COMMIT_SHA=$CI_COMMIT_SHA;
+    fi
+  except:
+  - branches
+
+.job_template_registry: &job_registry
+  type: publish
+  except:
+  - branches
+  when: on_success
+
+stages:
+- build
+- best_practices
+- publish
+- deploy
+
+variables:
+  RELEASE_NAME: frontend
+  HELM_PATH: ops/Helm/react-app
+
+build:staging:
+  <<: *job_build
+  script:
+  - npm i --ignore-scripts
+  - npm run build
+
+  # Docker
+  - docker build -t $CI_REGISTRY_IMAGE .
+  - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG .
+
+eslint:
+  <<: *job_best_practices
+  script:
+  - npm run lint
+
+unit-test:
+  <<: *job_best_practices
+  script:
+  - npm test
+
+flow typing:
+  <<: *job_best_practices
+  script:
+  - npm run flow
+
+registry:
+  <<: *job_registry
+  script:
+  - docker push $CI_REGISTRY_IMAGE
+  - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
+  only:
+  - /^(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)-rc(?:0|[1-9]\d*)$/
+
+chart:
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+  script:
+  - git clone https://$GITHUB_USER:$GITHUB_PASSWORD@github.com/micro-company/charts.git
+  - helm package $HELM_PATH
+  - mv *.tgz charts/docs
+  - timeout 3 helm serve --repo-path ./charts/docs/
+  - cd charts \
+    && git add . \
+    && git commit -m "Add/Update chart: $CI_PROJECT_NAME:$CI_COMMIT_TAG" \
+    && git push
+
+
+# deploy:staging:
+#   <<: *job_deploy
+#   variables:
+#     HELM_NAMESPACE: minikube
+#   only:
+#   - /^(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)-rc(?:0|[1-9]\d*)$/
