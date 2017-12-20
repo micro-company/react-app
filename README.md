@@ -6,6 +6,12 @@ An example of demonstration work with a microservice architecture
 
 ![UserPage](./docs/UserPage.png)
 
+### Getting start
+
+1. Create `.env` file with ENV variables
+2. Install depdednecies `npm i`
+3. Run application `npm start`
+
 #### Enviroment variables
 
 | **NAME**                           | **VALUE**             |
