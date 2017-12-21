@@ -66,6 +66,7 @@ class Auth extends PureComponent {
           ...data,
           captcha: this.state.captcha,
         })
+          .then(() => { this.setState({ isNotify: true }) })
           .catch(error => { throw new SubmissionError(error.error) })
       case 'recovery':
         return this.props.recoveryActions({
