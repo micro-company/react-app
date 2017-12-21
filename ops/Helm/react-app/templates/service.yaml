@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.CI_PROJECT_NAME }}
+  labels:
+    app: {{ .Values.CI_PROJECT_NAME }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    heritage: "{{ .Release.Service }}"
+    release: "{{ .Release.Name }}"
+    pipeline_id: "{{ .Values.CI_PIPELINE_ID }}"
+    build_id: "{{ .Values.CI_BUILD_ID }}"
+    commit_sha: "{{ .Values.CI_COMMIT_SHA }}"
+    component: react-app
+spec:
+  ports:
+  - name: web
+    port: 3000
+    targetPort: web
+  selector:
+    app: {{ .Values.CI_PROJECT_NAME }}
+    component: react-app

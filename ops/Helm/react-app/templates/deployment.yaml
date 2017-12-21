@@ -1,0 +1,58 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ .Values.CI_PROJECT_NAME }}
+  labels:
+    app: {{ .Values.CI_PROJECT_NAME }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    heritage: "{{ .Release.Service }}"
+    release: "{{ .Release.Name }}"
+    pipeline_id: "{{ .Values.CI_PIPELINE_ID }}"
+    build_id: "{{ .Values.CI_BUILD_ID }}"
+    commit_sha: "{{ .Values.CI_COMMIT_SHA }}"
+    component: react-app
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: {{ .Values.CI_PROJECT_NAME }}
+      component: react-app
+  template:
+    metadata:
+      annotations:
+      {{- range $key, $value := .Values.annotations }}
+        {{ $key }}: {{ $value }}
+      {{- end }}
+      labels:
+        app: {{ .Values.CI_PROJECT_NAME }}
+        chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+        pipeline_id: "{{ .Values.CI_PIPELINE_ID }}"
+        build_id: "{{ .Values.CI_BUILD_ID }}"
+        component: react-app
+    spec:
+      containers:
+      - name: {{ .Values.CI_PROJECT_NAME }}
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: Always
+        ports:
+        - name: web
+          containerPort: 3000
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 5
+          timeoutSeconds: 15
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 5
+          timeoutSeconds: 3
+        resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- if .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+    {{- end }}

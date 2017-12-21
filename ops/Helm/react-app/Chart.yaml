@@ -1,0 +1,14 @@
+name: react-app
+version: 0.1.0
+description: Front-End instance for micro-company
+keywords:
+  - micro-company
+  - react
+  - go-auth
+home: https://github.com/micro-company/react-app
+sources:
+- https://github.com/micro-company/react-app
+maintainers:
+- email: batazor111@gmail.com
+  name: Login Victor
+engine: gotpl

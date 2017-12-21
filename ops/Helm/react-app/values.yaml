@@ -1,0 +1,59 @@
+annotations: {}
+
+service:
+
+  ## Annotations to be added to the Service
+  ##
+  annotations: {}
+
+  ## Cluster-internal IP address for Alertmanager Service
+  ##
+  clusterIP: ""
+
+  ## List of external IP addresses at which the Alertmanager Service will be available
+  ##
+  externalIPs: []
+
+  ## External IP address to assign to Alertmanager Service
+  ## Only used if service.type is 'LoadBalancer' and supported by cloud provider
+  ##
+  loadBalancerIP: ""
+
+  ## List of client IPs allowed to access Alertmanager Service
+  ## Only used if service.type is 'LoadBalancer' and supported by cloud provider
+  ##
+  loadBalancerSourceRanges: []
+
+  ## Service type
+  ##
+  # type: NodePort
+
+  ## Port to expose on each node
+  ## Only used if service.type is 'NodePort'
+  ##
+  # nodePort: 30902
+
+## Analytics frontend Docker image
+##
+image:
+  repository: batazor/react-app
+  tag: latest
+
+storageSpec: {}
+#   class: default
+#   accessMode:
+#   resources:
+#     requests:
+#       storage: 2Gi
+#   selector: {}
+
+resources:
+  limits:
+    cpu: 300m
+    memory: 300Mi
+  requests:
+    cpu: 300m
+    memory: 300Mi
+
+nodeSelector:
+  node: "true"
