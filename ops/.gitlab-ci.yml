@@ -39,6 +39,7 @@
     fi
   except:
   - branches
+  when: manual
 
 .job_template_registry: &job_registry
   type: publish
@@ -103,9 +104,9 @@ chart:
     && git push
 
 
-# deploy:staging:
-#   <<: *job_deploy
-#   variables:
-#     HELM_NAMESPACE: minikube
-#   only:
-#   - /^(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)-rc(?:0|[1-9]\d*)$/
+deploy:staging:
+  <<: *job_deploy
+  variables:
+    HELM_NAMESPACE: minikube
+  only:
+  - /^(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)-rc(?:0|[1-9]\d*)$/
