@@ -4,7 +4,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { withStyles } from 'material-ui/styles'
-import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router'
+import { NavLink } from 'react-router-dom'
 import Drawer from 'material-ui/Drawer'
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List'
 import Avatar from 'material-ui/Avatar'
@@ -55,6 +56,11 @@ const styles = theme => ({
     paddingLeft: 10,
     justifyContent: 'space-between',
   },
+  activeLink: {
+    '&>li': {
+      background: theme.palette.primary[100],
+    },
+  },
 })
 
 class MainMenu extends PureComponent {
@@ -80,7 +86,7 @@ class MainMenu extends PureComponent {
           <Grid container direction="column" justify="space-between" classes={{ typeContainer: classes.typeContainer }} spacing={0}>
             <Grid item>
               <List>
-                <Link to="/">
+                <NavLink to="/" exact activeClassName={classes.activeLink}>
                   <ListItem button>
                     <ListItemIcon>
                       <HomeIcon />
@@ -88,9 +94,9 @@ class MainMenu extends PureComponent {
 
                     <ListItemText primary="Home" />
                   </ListItem>
-                </Link>
+                </NavLink>
 
-                <Link to="/users">
+                <NavLink to="/users" exact activeClassName={classes.activeLink}>
                   <ListItem button>
                     <ListItemIcon>
                       <PersonIcon />
@@ -98,7 +104,7 @@ class MainMenu extends PureComponent {
 
                     <ListItemText primary="Users" />
                   </ListItem>
-                </Link>
+                </NavLink>
               </List>
             </Grid>
 
@@ -139,7 +145,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps,
-)(withStyles(styles)(MainMenu))
+)(withStyles(styles)(MainMenu)))
