@@ -17,4 +17,4 @@ An example of demonstration work with a microservice architecture
 | **NAME**                           | **VALUE**             |
 | ---------------------------------- | --------------------- |
 | REACT_APP_API_URL                  | http://localhost:4070 |
-| REACT_APP_GOOGLE_RECAPTCHA_SITEKEY | <STRING>              |
+| REACT_APP_GOOGLE_RECAPTCHA_SITEKEY | secretKey             |

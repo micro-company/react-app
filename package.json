@@ -9,7 +9,7 @@
     "eject": "react-scripts eject",
     "lint": "$(npm bin)/eslint ./src",
     "lint:fix": "$(npm bin)/eslint --fix ./src",
-    "flow": "flow"
+    "flow": "$(npm bin)/flow"
   },
   "dependencies": {
     "classnames": "^2.2.5",
