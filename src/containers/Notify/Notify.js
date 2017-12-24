@@ -42,7 +42,7 @@ class Notify extends PureComponent {
         {
           event.event.map((item, indexEvent) => (
             <SnackbarContent
-              key={indexEvent} // eslint-disable-line
+              key={`${indexEvent}-${item.message}`} // eslint-disable-line
               className={classes.snackbar}
               message={item.message}
               action={
