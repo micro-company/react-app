@@ -10,13 +10,7 @@ import ReactTable from 'react-table'
 import IconButton from 'material-ui/IconButton'
 import Button from 'material-ui/Button'
 import Grid from 'material-ui/Grid'
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from 'material-ui/Dialog'
 import Tooltip from 'material-ui/Tooltip'
-import { LinearProgress } from 'material-ui/Progress'
 import Typography from 'material-ui/Typography'
 import UpdateIcon from 'material-ui-icons/Update'
 import AddIcon from 'material-ui-icons/Add'
@@ -25,8 +19,9 @@ import DeleteIcon from 'material-ui-icons/Delete'
 import { submitForm } from '../../actions/form'
 import { list, add, update, remove } from '../../actions/users'
 import { objectListToArrayList } from '../../utils/structure'
-import Form from './UI/Form'
-import ConfirmDeleteUser from './UI/ConfirmDeleteUser'
+import AddUserDialog from './UI/AddUserDialog'
+import UpdateUserDialog from './UI/UpdateUserDialog'
+import DeleteUserDialog from './UI/DeleteUserDialog'
 
 const styles = theme => ({
   box: {
@@ -63,7 +58,7 @@ class User extends PureComponent {
     this.state = {
       loading: false,
       users: objectListToArrayList(props.user.users),
-      currentUser: undefined,
+      currentUser: {},
     }
 
     this.renderCell = this.renderCell.bind(this)
@@ -177,107 +172,43 @@ class User extends PureComponent {
     return [
       <Helmet key="user" title="User" />,
 
-      <Dialog
-        key="addUserDialog"
-        open={this.props.ui.addUserDialog}
-        onClose={this.onChangeAddUserDialog}
-      >
-        <DialogTitle>Add new user</DialogTitle>
-        <DialogContent>
-          {
-            this.state.loading && <LinearProgress />
-          }
-          <Form onSubmit={this.onAddSubmitForm} />
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={this.onChangeAddUserDialog}
-            color="primary"
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={this.onSendForm}
-            color="primary"
-            autoFocus
-          >
-            Add
-          </Button>
-        </DialogActions>
-      </Dialog>,
+      <AddUserDialog
+        key="AddUserDialog"
+        ui={this.props.ui}
+        loading={this.state.loading}
 
-      <Dialog
-        key="updateUserDialog"
-        open={this.props.ui.updateUserDialog}
-        onClose={this.onChangeUpdateUserDialog}
-      >
-        <DialogTitle>Update this user</DialogTitle>
-        <DialogContent>
-          {
-            this.state.loading && <LinearProgress />
-          }
-          <Form
-            initialValues={this.state.currentUser}
-            onSubmit={this.onUpdateSubmitForm}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={this.onChangeUpdateUserDialog}
-            color="primary"
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={this.onSendForm}
-            color="primary"
-            autoFocus
-          >
-            Update
-          </Button>
-        </DialogActions>
-      </Dialog>,
+        onAddSubmitForm={this.onAddSubmitForm}
+        onChangeAddUserDialog={this.onChangeAddUserDialog}
+        onSendForm={this.onSendForm}
+      />,
 
-      <Dialog
-        key="deleteUserDialog"
-        open={this.props.ui.deleteUserDialog}
-        onClose={this.onChangeDeleteUserDialog}
-      >
-        <DialogTitle>Confirm delete this user</DialogTitle>
-        <DialogContent>
-          {
-            this.state.loading && <LinearProgress />
-          }
-          <ConfirmDeleteUser
-            initialValues={this.state.currentUser}
-            onSubmit={this.onConfirmDeleteUser}
-          />
-          <Typography gutterBottom>
-            By this action, you permanently delete the user
-          </Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={this.onChangeDeleteUserDialog}
-            color="primary"
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={this.onSendForm}
-            color="accent"
-            autoFocus
-          >
-            Delete
-          </Button>
-        </DialogActions>
-      </Dialog>,
+      <UpdateUserDialog
+        key="UpdateUserDialog"
+        ui={this.props.ui}
+        loading={this.state.loading}
+        currentUser={this.state.currentUser}
+
+        onChangeUpdateUserDialog={this.onChangeUpdateUserDialog}
+        onUpdateSubmitForm={this.onUpdateSubmitForm}
+        onSendForm={this.onSendForm}
+      />,
+
+      <DeleteUserDialog
+        key="DeleteUserDialog"
+        ui={this.props.ui}
+        loading={this.state.loading}
+        currentUser={this.state.currentUser}
+
+        onSendForm={this.onSendForm}
+        onConfirmDeleteUser={this.onConfirmDeleteUser}
+        onChangeDeleteUserDialog={this.onChangeDeleteUserDialog}
+      />,
 
       <Grid container direction="column" key="content">
         <Grid item>
           <Grid container direction="row" key="content">
             <Typography
-              type="display1"
+              type="headline"
               gutterBottom
               className={classes.typography}
             >
