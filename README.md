@@ -18,6 +18,9 @@ An example of demonstration work with a microservice architecture
 | ---------------------------------- | --------------------- |
 | REACT_APP_API_URL                  | http://localhost:4070 |
 | REACT_APP_GOOGLE_RECAPTCHA_SITEKEY | secretKey             |
+| **For CI**                         | -                     |
+| GITHUB_USER                        | -                     |
+| GITHUB_PASSWORD                    | -                     |
 
 #### CI FLOW
 
