@@ -1,4 +1,10 @@
-annotations: {}
+CI_PROJECT_NAME: react-app
+
+deployment:
+
+  ## Annotations to be added to the Service
+  ##
+  annotations: {}
 
 service:
 
