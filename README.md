@@ -12,6 +12,19 @@ An example of demonstration work with a microservice architecture
 2. Install depdednecies `npm i`
 3. Run application `npm start`
 
+#### Kubernetes
+
+```
+# Add repo to Helm
+helm repo add micro-company https://micro-company.github.io/charts/
+
+# Update repo charts
+helm repo update
+
+# Install project
+helm install micro-company/react-app
+```
+
 #### Enviroment variables
 
 | **NAME**                           | **VALUE**             |
