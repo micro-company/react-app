@@ -65,6 +65,7 @@ variables:
 
 build:staging:
   <<: *job_build
+  retry: 2
   script:
     - docker build -t $CI_REGISTRY_IMAGE --build-arg REACT_APP_API_URL=$REACT_APP_API_URL --build-arg REACT_APP_GOOGLE_RECAPTCHA_SITEKEY=$REACT_APP_GOOGLE_RECAPTCHA_SITEKEY .
     - docker push $CI_REGISTRY_IMAGE
