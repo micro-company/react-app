@@ -1,6 +1,6 @@
 FROM node:8-alpine as builder
 
-ENV NODE_ENV=production
+ENV NODE_ENV production
 
 # Configuration
 ARG REACT_APP_API_URL
