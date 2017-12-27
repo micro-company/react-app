@@ -1,7 +1,5 @@
 FROM node:8-alpine as builder
 
-ENV NODE_ENV production
-
 # Configuration
 ARG REACT_APP_API_URL
 ENV REACT_APP_API_URL ${REACT_APP_API_URL:-http://localhost:4070}
