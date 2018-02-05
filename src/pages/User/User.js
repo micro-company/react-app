@@ -208,7 +208,7 @@ class User extends PureComponent {
         <Grid item>
           <Grid container direction="row" key="content">
             <Typography
-              type="headline"
+              variant="headline"
               gutterBottom
               className={classes.typography}
             >
@@ -219,7 +219,7 @@ class User extends PureComponent {
 
             <Tooltip placement="bottom" title="Update users list">
               <Button
-                fab
+                variant="fab"
                 color="primary"
                 aria-label="update"
                 className={classes.button}
@@ -231,7 +231,7 @@ class User extends PureComponent {
 
             <Tooltip placement="bottom" title="Add user">
               <Button
-                fab
+                variant="fab"
                 color="primary"
                 aria-label="add"
                 className={classes.button}

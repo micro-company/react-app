@@ -33,7 +33,7 @@ function Header(props) {
             <MenuIcon />
           </IconButton>
 
-          <Typography type="title" color="inherit">
+          <Typography variant="title" color="inherit">
             Hello World
           </Typography>
         </Toolbar>

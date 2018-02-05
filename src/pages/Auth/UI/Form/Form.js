@@ -81,7 +81,7 @@ class Auth extends PureComponent {
           />
 
           { error.length ? (
-            <Typography type="subheading" gutterBottom>
+            <Typography variant="subheading" gutterBottom>
               We have probelem:
             </Typography>
           ) : null }
@@ -96,7 +96,7 @@ class Auth extends PureComponent {
           <Button
             className={this.props.classes.button}
             color="primary"
-            raised
+            variant="raised"
             onClick={this.props.onSendForm}
           >
             Send

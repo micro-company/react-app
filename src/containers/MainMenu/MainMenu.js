@@ -118,7 +118,7 @@ class MainMenu extends PureComponent {
                   </ListItemIcon>
 
                   <Button
-                    raised
+                    variant="raised"
                     color="accent"
                     onClick={this.props.logoutAction}
                   >
