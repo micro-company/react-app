@@ -1,8 +1,8 @@
 include:
-  - '/template_ci/job_best_practices.yml'
-  - '/template_ci/job_build.yml'
-  - '/template_ci/job_deploy.yml'
-  - '/template_ci/job_publish.yml'
+  - 'template_ci/job_best_practices.yml'
+  - 'template_ci/job_build.yml'
+  - 'template_ci/job_deploy.yml'
+  - 'template_ci/job_publish.yml'
 
 image: docker:latest
 before_script:
