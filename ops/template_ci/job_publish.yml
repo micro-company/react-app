@@ -1,0 +1,5 @@
+.job_template_publish: &job_publish
+  type: publish
+  except:
+    - branches
+  when: on_success

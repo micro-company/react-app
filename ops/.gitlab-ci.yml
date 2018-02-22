@@ -1,50 +1,8 @@
-.job_template_build: &job_build
-  type: build
-  before_script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-  when: on_success
-
-.job_template_best_practices: &job_best_practices
-  image: node:8-alpine
-  type: best_practices
-  before_script:
-    - npm i --ignore-scripts
-  only:
-    - tags
-  allow_failure: true
-
-.job_template_deploy: &job_deploy
-  type: deploy
-  script:
-    - export DEPLOYS=$(helm ls | grep $RELEASE_NAME | wc -l)
-    - if [ ${DEPLOYS}  -eq 0 ]; then
-        helm --kube-context $HELM_NAMESPACE install
-          --name $RELEASE_NAME
-          --namespace=$CI_PROJECT_NAMESPACE
-          --set CI_PROJECT_NAME=$CI_PROJECT_NAME
-          --set CI_PIPELINE_ID=$CI_PIPELINE_ID
-          --set CI_BUILD_ID=$CI_BUILD_ID
-          --set image.tag=$CI_COMMIT_TAG
-          --set CI_COMMIT_SHA=$CI_COMMIT_SHA
-          $HELM_PATH;
-      else
-        helm --kube-context $HELM_NAMESPACE upgrade $RELEASE_NAME $HELM_PATH
-          --namespace=$CI_PROJECT_NAMESPACE
-          --set CI_PROJECT_NAME=$CI_PROJECT_NAME
-          --set CI_PIPELINE_ID=$CI_PIPELINE_ID
-          --set CI_BUILD_ID=$CI_BUILD_ID
-          --set image.tag=$CI_COMMIT_TAG
-          --set CI_COMMIT_SHA=$CI_COMMIT_SHA;
-      fi
-  except:
-    - branches
-  when: manual
-
-.job_template_publish: &job_publish
-  type: publish
-  except:
-    - branches
-  when: on_success
+include:
+  - '/template_ci/job_best_practices.yml'
+  - '/template_ci/job_build.yml'
+  - '/template_ci/job_deploy.yml'
+  - '/template_ci/job_publish.yml'
 
 image: docker:latest
 before_script:
