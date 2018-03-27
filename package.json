@@ -17,7 +17,7 @@
     "jsonwebtoken": "^8.2.0",
     "localforage": "^1.6.0",
     "material-ui": "^1.0.0-beta.38",
-    "material-ui-icons": "^1.0.0-beta.17",
+    "material-ui-icons": "^1.0.0-beta.36",
     "react": "^16.2.0",
     "react-async-script": "^0.9.1",
     "react-dom": "^16.2.0",
