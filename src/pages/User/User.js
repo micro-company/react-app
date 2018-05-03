@@ -155,7 +155,7 @@ class User extends PureComponent {
 
         <Tooltip placement="bottom" title="Delete user">
           <IconButton
-            color="accent"
+            color="secondary"
             aria-label="delete"
             onClick={() => this.onChangeDeleteUserDialog(row.original)}
           >

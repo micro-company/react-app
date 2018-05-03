@@ -47,7 +47,7 @@ class Notify extends PureComponent {
               message={item.message}
               action={
                 <IconButton
-                  color="accent"
+                  color="secondary"
                   onClick={() => this.props.removeEventAction(indexEvent)}
                 >
                   <DeleteIcon />

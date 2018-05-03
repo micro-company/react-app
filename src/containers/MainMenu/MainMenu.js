@@ -119,7 +119,7 @@ class MainMenu extends PureComponent {
 
                   <Button
                     variant="raised"
-                    color="accent"
+                    color="secondary"
                     onClick={this.props.logoutAction}
                   >
                     Logout &nbsp;

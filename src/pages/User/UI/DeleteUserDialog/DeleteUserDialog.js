@@ -49,7 +49,7 @@ class DeleteUserDialog extends PureComponent {
           </Button>
           <Button
             onClick={this.props.onSendForm}
-            color="accent"
+            color="secondary"
             autoFocus
           >
             Delete

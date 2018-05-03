@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Field } from 'redux-form'
 import { MenuItem } from 'material-ui/Menu'
 import { TextField, Select } from 'redux-form-material-ui'
@@ -8,98 +8,96 @@ import { InputLabel } from 'material-ui/Input'
 export default function getForm(currentTab) {
   switch (currentTab) {
     case 'recovery':
-      return [
-        <Field
-          key="mail"
-          name="mail"
-          label="Mail"
-          component={TextField}
-          fullWidth
-        />,
-      ]
-    case 'recoveryPassword':
-      return [
-        <Field
-          key="password"
-          name="password"
-          label="Password"
-          component={TextField}
-          fullWidth
-        />,
-        <Field
-          key="retryPassword"
-          name="retryPassword"
-          label="Retry password"
-          component={TextField}
-          fullWidth
-        />,
-      ]
-    case 'signOn':
-      return [
-        <Field
-          key="mail"
-          name="mail"
-          label="Mail"
-          component={TextField}
-          fullWidth
-        />,
-        <Field
-          key="password"
-          name="password"
-          label="Password"
-          component={TextField}
-          fullWidth
-        />,
-        <Field
-          key="retryPassword"
-          name="retryPassword"
-          label="Retry password"
-          component={TextField}
-          fullWidth
-        />,
-        <FormControl style={{ width: '100%' }}>
-          <InputLabel htmlFor="controlled-open-select">Language</InputLabel>
+      return (
+        <Fragment>
           <Field
-            key="language"
-            name="language"
-            component={Select}
+            name="mail"
+            label="Mail"
+            component={TextField}
             fullWidth
-          >
-            <MenuItem value="ru_RU">Russia</MenuItem>
-            <MenuItem value="en_GB">English</MenuItem>
-          </Field>
-        </FormControl>,
-      ]
+          />
+        </Fragment>
+      )
+    case 'recoveryPassword':
+      return (
+        <Fragment>
+          <Field
+            name="password"
+            label="Password"
+            component={TextField}
+            fullWidth
+          />
+          <Field
+            name="retryPassword"
+            label="Retry password"
+            component={TextField}
+            fullWidth
+          />
+        </Fragment>
+      )
+    case 'signOn':
+      return (
+        <Fragment>
+          <Field
+            name="mail"
+            label="Mail"
+            component={TextField}
+            fullWidth
+          />
+          <Field
+            name="password"
+            label="Password"
+            component={TextField}
+            fullWidth
+          />
+          <Field
+            name="retryPassword"
+            label="Retry password"
+            component={TextField}
+            fullWidth
+          />
+          <FormControl style={{ width: '100%' }}>
+            <InputLabel htmlFor="controlled-open-select">Language</InputLabel>
+            <Field
+              name="language"
+              component={Select}
+              fullWidth
+            >
+              <MenuItem value="ru_RU">Russia</MenuItem>
+              <MenuItem value="en_GB">English</MenuItem>
+            </Field>
+          </FormControl>
+        </Fragment>
+      )
     case 'logIn':
     default:
-      return [
-        <Field
-          key="mail"
-          name="mail"
-          label="Mail"
-          component={TextField}
-          fullWidth
-        />,
-        <Field
-          key="password"
-          name="password"
-          label="Password"
-          type="password"
-          component={TextField}
-          fullWidth
-        />,
-        <FormControl style={{ width: '100%' }}>
-          <InputLabel htmlFor="controlled-open-select">Language</InputLabel>
+      return (
+        <Fragment>
           <Field
-            key="language"
-            name="language"
-            component={Select}
+            name="mail"
+            label="Mail"
+            component={TextField}
             fullWidth
-          >
-            <MenuItem value="ru_RU">Russia</MenuItem>
-            <MenuItem value="en_GB">English</MenuItem>
-          </Field>
-        </FormControl>,
-      ]
+          />
+          <Field
+            name="password"
+            label="Password"
+            type="password"
+            component={TextField}
+            fullWidth
+          />
+          <FormControl style={{ width: '100%' }}>
+            <InputLabel htmlFor="controlled-open-select">Language</InputLabel>
+            <Field
+              name="language"
+              component={Select}
+              fullWidth
+            >
+              <MenuItem value="ru_RU">Russia</MenuItem>
+              <MenuItem value="en_GB">English</MenuItem>
+            </Field>
+          </FormControl>
+        </Fragment>
+      )
   }
 }

@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router'
@@ -96,43 +96,44 @@ class Auth extends PureComponent {
   render() {
     const { classes } = this.props
 
-    return ([
-      <Helmet key="auth" title="Auth" />,
+    return (
+      <Fragment>
+        <Helmet title="Auth" />
 
-      <Snackbar
-        key="notify"
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-        open={this.state.isNotify}
-        autoHideDuration={6000}
-        onClose={this.handleRequestClose}
-        message={<span>Data sent to the specified mail</span>}
-        action={[
-          <IconButton
-            color="inherit"
-            onClick={this.handleRequestClose}
-          >
-            <CloseIcon />
-          </IconButton>,
-        ]}
-      />,
+        <Snackbar
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+          open={this.state.isNotify}
+          autoHideDuration={6000}
+          onClose={this.handleRequestClose}
+          message={<span>Data sent to the specified mail</span>}
+          action={[
+            <IconButton
+              color="inherit"
+              onClick={this.handleRequestClose}
+            >
+              <CloseIcon />
+            </IconButton>,
+          ]}
+        />
 
-      <Grid container className={classes.root} spacing={0} key="content" alignItems="center">
-        <Grid item xs={12}>
-          <Grid container spacing={0} justify="center">
-            <Grid item xs={10} sm={5} md={5} lg={5} xl={3} sd={2}>
-              <FormAuth
-                mode={this.state.mode}
+        <Grid container className={classes.root} spacing={0} alignItems="center">
+          <Grid item xs={12}>
+            <Grid container spacing={0} justify="center">
+              <Grid item xs={10} sm={5} md={5} lg={5} xl={3} sd={2}>
+                <FormAuth
+                  mode={this.state.mode}
 
-                onChangeMode={this.onChangeMode}
-                onRecaptcha={this.onRecaptcha}
-                onSendForm={this.onSendForm}
-                onSubmit={this.onSubmitForm}
-              />
+                  onChangeMode={this.onChangeMode}
+                  onRecaptcha={this.onRecaptcha}
+                  onSendForm={this.onSendForm}
+                  onSubmit={this.onSubmitForm}
+                />
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>,
-    ])
+      </Fragment>
+    )
   }
 }
 

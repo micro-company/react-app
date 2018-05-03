@@ -52,7 +52,7 @@ class Home extends PureComponent {
         <p>
           <Button
             variant="raised"
-            color="accent"
+            color="secondary"
             disabled={this.props.isDecrementing}
 
             onClick={this.props.decrementActions}
@@ -62,7 +62,7 @@ class Home extends PureComponent {
 
           <Button
             variant="raised"
-            color="accent"
+            color="secondary"
             disabled={this.props.isDecrementing}
 
             onClick={this.props.decrementAsyncActions}
