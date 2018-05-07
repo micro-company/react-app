@@ -6,7 +6,13 @@ An example of demonstration work with a microservice architecture
 
 ![UserPage](./docs/UserPage.png)
 
-### Getting start
+### Requirements
+
+1. [Docker](https://docs.docker.com/install/)
+1. [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
+1. [Helm](https://docs.helm.sh/using_helm/#installing-helm)
+
+### Getting start (only front-end)
 
 1. Create `.env` file with ENV variables
 2. Install depdednecies `npm i`
