@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/npm/l/sequelize.svg?maxAge=2592000?style=plastic)](https://github.com/micro-company/react-app/blob/master/LICENSE)
 
-An example of demonstration work with a microservice architecture
+An example of demonstration work with a micro-service architecture
 
 ![UserPage](./docs/UserPage.png)
 
@@ -15,7 +15,7 @@ An example of demonstration work with a microservice architecture
 ### Getting start (only front-end)
 
 1. Create `.env` file with ENV variables
-2. Install depdednecies `npm i`
+2. Install dependencies `npm i`
 3. Run application `npm start`
 
 #### Kubernetes
