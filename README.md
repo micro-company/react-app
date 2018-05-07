@@ -6,12 +6,6 @@ An example of demonstration work with a micro-service architecture
 
 ![UserPage](./docs/UserPage.png)
 
-### Requirements
-
-1. [Docker](https://docs.docker.com/install/)
-1. [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
-1. [Helm](https://docs.helm.sh/using_helm/#installing-helm)
-
 ### Getting start (only front-end)
 
 1. Create `.env` file with ENV variables
@@ -19,6 +13,12 @@ An example of demonstration work with a micro-service architecture
 3. Run application `npm start`
 
 #### Kubernetes
+
+##### Requirements
+
+1. [Docker](https://docs.docker.com/install/)
+1. [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/)
+1. [Helm](https://docs.helm.sh/using_helm/#installing-helm)
 
 ```
 # Add repo to Helm
