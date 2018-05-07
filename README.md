@@ -12,7 +12,7 @@ An example of demonstration work with a micro-service architecture
 2. Install dependencies `npm i`
 3. Run application `npm start`
 
-#### Kubernetes
+### Kubernetes
 
 ##### Requirements
 
