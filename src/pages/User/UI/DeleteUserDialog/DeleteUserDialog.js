@@ -1,13 +1,12 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from 'material-ui/Dialog'
-import { LinearProgress } from 'material-ui/Progress'
-import Button from 'material-ui/Button'
-import Typography from 'material-ui/Typography'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import LinearProgress from '@material-ui/core/LinearProgress'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
 import ConfirmDeleteUser from '../ConfirmDeleteUser'
 
 class DeleteUserDialog extends PureComponent {

@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react'
 import { Field } from 'redux-form'
-import { MenuItem } from 'material-ui/Menu'
-import { TextField, Select } from 'redux-form-material-ui'
-import { FormControl } from 'material-ui/Form'
-import { InputLabel } from 'material-ui/Input'
+import MenuItem from '@material-ui/core/MenuItem'
+import TextField from '@material-ui/core/TextField'
+import { Select } from 'redux-form-material-ui'
+import FormControl from '@material-ui/core/FormControl'
+import InputLabel from '@material-ui/core/InputLabel'
 
 export default function getForm(currentTab) {
   switch (currentTab) {

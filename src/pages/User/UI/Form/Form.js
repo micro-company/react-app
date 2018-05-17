@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
-import { MenuItem } from 'material-ui/Menu'
+import { MenuItem } from '@material-ui/core/Menu'
 import { TextField, Select } from 'redux-form-material-ui'
 
 class Form extends PureComponent {

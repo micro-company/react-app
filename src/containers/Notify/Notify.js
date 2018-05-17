@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui/styles'
+import { withStyles } from '@material-ui/core/styles'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
-import IconButton from 'material-ui/IconButton'
-import DeleteIcon from 'material-ui-icons/Delete'
-import { SnackbarContent } from 'material-ui/Snackbar'
+import IconButton from '@material-ui/core/IconButton'
+import SnackbarContent from '@material-ui/core/Snackbar'
+import DeleteIcon from '@material-ui/icons/Delete'
 import { remove, check } from '../../actions/event'
 
 const styles = theme => ({
