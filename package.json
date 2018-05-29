@@ -30,7 +30,7 @@
     "redux-form": "^7.3.0",
     "redux-form-material-ui": "^5.0.0-beta.3",
     "redux-persist": "^5.9.1",
-    "redux-thunk": "^2.2.0",
+    "redux-thunk": "^2.3.0",
     "redux-ui": "^0.1.1",
     "whatwg-fetch": "^2.0.4"
   },
