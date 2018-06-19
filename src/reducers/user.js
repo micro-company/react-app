@@ -20,7 +20,10 @@ export default function update(state: Object = initialState, action: Object): Ob
         ...state,
         users: {
           ...state.users,
-          [action.payload.id]: action.payload,
+          [action.payload.id]: {
+            ...state.users[action.payload.id],
+            ...action.payload,
+          },
         },
       }
     }
