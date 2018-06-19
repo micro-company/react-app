@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import { reduxForm } from 'redux-form'
+import { Form } from 'react-final-form'
 import Recaptcha from 'react-google-recaptcha'
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
@@ -39,7 +39,7 @@ class Auth extends PureComponent {
     error: PropTypes.array,
     mode: PropTypes.string.isRequired,
 
-    handleSubmit: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
     onChangeMode: PropTypes.func.isRequired,
     onSendForm: PropTypes.func.isRequired,
     onRecaptcha: PropTypes.func.isRequired,
@@ -51,7 +51,7 @@ class Auth extends PureComponent {
 
   render() {
     const {
-      mode, error, handleSubmit, onChangeMode,
+      mode, error, onSubmit, onChangeMode,
     } = this.props
 
     return (
@@ -69,12 +69,17 @@ class Auth extends PureComponent {
             </Tabs>
           </AppBar>
 
-          <form
-            className={this.props.classes.form}
-            onSubmit={handleSubmit}
-          >
-            { getForm(mode) }
-          </form>
+          <Form
+            onSubmit={onSubmit}
+            render={({ handleSubmit }) => (
+              <form
+                className={this.props.classes.form}
+                onSubmit={handleSubmit}
+              >
+                { getForm(mode) }
+              </form>
+            )}
+          />
 
           <Recaptcha
             className={this.props.classes.recaptcha}
@@ -110,7 +115,4 @@ class Auth extends PureComponent {
   }
 }
 
-export default reduxForm({
-  form: 'AUTH_FORM',
-  anyTouched: true,
-})(withStyles(styles)(Auth))
+export default withStyles(styles)(Auth)
