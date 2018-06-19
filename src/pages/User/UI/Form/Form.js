@@ -1,55 +1,67 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { Field, reduxForm } from 'redux-form'
-import { MenuItem } from '@material-ui/core/Menu'
-import { TextField, Select } from 'redux-form-material-ui'
+import { Form, Field } from 'react-final-form'
+import MenuItem from '@material-ui/core/MenuItem'
+import FormControl from '@material-ui/core/FormControl'
+import InputLabel from '@material-ui/core/InputLabel'
+import TextField from '../../../../components/Form/TextField'
+import Select from '../../../../components/Form/Select'
 
-class Form extends PureComponent {
+class FormUser extends PureComponent {
   static propTypes = {
-    handleSubmit: PropTypes.func.isRequired,
+    initialValues: PropTypes.object,
+
+    onSubmit: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    initialValues: {},
   }
 
   render() {
-    const { handleSubmit } = this.props
-
     return (
-      <form onSubmit={handleSubmit}>
-        <Field
-          key="mail"
-          name="mail"
-          label="Mail"
-          component={TextField}
-          fullWidth
-        />
-        <Field
-          key="password"
-          name="password"
-          label="Password"
-          component={TextField}
-          fullWidth
-        />
-        <Field
-          key="retryPassword"
-          name="retryPassword"
-          label="Retry password"
-          component={TextField}
-          fullWidth
-        />
-        <Field
-          key="language"
-          name="language"
-          component={Select}
-          fullWidth
-        >
-          <MenuItem value="ru_RU">Russia</MenuItem>
-          <MenuItem value="en_GB">English</MenuItem>
-        </Field>
-      </form>
+      <Form
+        onSubmit={this.props.onSubmit}
+        initialValues={this.props.initialValues}
+        render={({ handleSubmit }) => (
+          <form id="UserFormId" onSubmit={handleSubmit}>
+            <Field
+              key="mail"
+              name="mail"
+              label="Mail"
+              component={TextField}
+              fullWidth
+            />
+            <Field
+              key="password"
+              name="password"
+              label="Password"
+              component={TextField}
+              fullWidth
+            />
+            <Field
+              key="retryPassword"
+              name="retryPassword"
+              label="Retry password"
+              component={TextField}
+              fullWidth
+            />
+            <FormControl style={{ width: '100%' }}>
+              <InputLabel htmlFor="controlled-open-select">Language</InputLabel>
+              <Field
+                name="language"
+                component={Select}
+                fullWidth
+              >
+                <MenuItem value="ru_RU">Russia</MenuItem>
+                <MenuItem value="en_GB">English</MenuItem>
+              </Field>
+            </FormControl>
+          </form>
+        )}
+      />
     )
   }
 }
 
-export default reduxForm({
-  form: 'USER_FORM',
-  anyTouched: true,
-})(Form)
+export default FormUser

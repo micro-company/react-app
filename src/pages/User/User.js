@@ -101,9 +101,12 @@ class User extends PureComponent {
     this.props.updateUI({ deleteUserDialog: !this.props.ui.deleteUserDialog })
   }
 
-  onSendForm = value => {
-    console.warn('FORM', value)
+  onSendForm = () => {
     this.setState({ loading: true })
+
+    document
+      .getElementById('UserFormId')
+      .dispatchEvent(new Event('submit', { cancelable: true }))
   }
 
   onAddSubmitForm(data) {
