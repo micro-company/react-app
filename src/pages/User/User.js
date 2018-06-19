@@ -2,7 +2,6 @@ import React, { Fragment, PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import ui from 'redux-ui'
-import { SubmissionError } from 'redux-form'
 import { withStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
@@ -112,27 +111,27 @@ class User extends PureComponent {
   onAddSubmitForm(data) {
     return this.props.addActions(data)
       .then(this.onChangeAddUserDialog)
-      .catch(error => {
+      .catch(error => { // eslint-disable-line no-unused-vars
         this.setState({ loading: false })
-        throw new SubmissionError(error.error)
+        // throw new SubmissionError(error.error)
       })
   }
 
   onUpdateSubmitForm(data) {
     return this.props.updateActions(data)
       .then(this.onChangeUpdateUserDialog)
-      .catch(error => {
+      .catch(error => { // eslint-disable-line no-unused-vars
         this.setState({ loading: false })
-        throw new SubmissionError(error.error)
+        // throw new SubmissionError(error.error)
       })
   }
 
   onConfirmDeleteUser(data) {
     return this.props.removeActions(data)
       .then(this.onChangeDeleteUserDialog)
-      .catch(error => {
+      .catch(error => { // eslint-disable-line no-unused-vars
         this.setState({ loading: false })
-        throw new SubmissionError(error.error)
+        // throw new SubmissionError(error.error)
       })
   }
 

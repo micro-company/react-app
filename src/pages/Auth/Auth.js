@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
-import { SubmissionError } from 'redux-form'
 import { Helmet } from 'react-helmet'
 import Snackbar from '@material-ui/core/Snackbar'
 import IconButton from '@material-ui/core/IconButton'
@@ -46,21 +45,21 @@ class Auth extends PureComponent {
           ...data,
           captcha: this.state.captcha,
         })
-          .catch(error => { throw new SubmissionError(error.error) })
+        // .catch(error => { throw new SubmissionError(error.error) })
       case 'signOn':
         return this.props.registrationActions({
           ...data,
           captcha: this.state.captcha,
         })
           .then(() => { this.setState({ isNotify: true }) })
-          .catch(error => { throw new SubmissionError(error.error) })
+          // .catch(error => { throw new SubmissionError(error.error) })
       case 'recovery':
         return this.props.recoveryActions({
           ...data,
           captcha: this.state.captcha,
         })
           .then(() => { this.setState({ isNotify: true }) })
-          .catch(error => { throw new SubmissionError(error.error) })
+          // .catch(error => { throw new SubmissionError(error.error) })
       case 'recoveryPassword':
         return this.props.recoveryPasswordActions({
           ...data,
@@ -68,7 +67,7 @@ class Auth extends PureComponent {
           recoveryToken: this.props.match.params.recoveryToken,
         })
           .then(() => { this.setState({ isNotify: true }) })
-          .catch(error => { throw new SubmissionError(error.error) })
+          // .catch(error => { throw new SubmissionError(error.error) })
       default:
         return false
     }

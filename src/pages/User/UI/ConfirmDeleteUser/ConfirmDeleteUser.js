@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { reduxForm } from 'redux-form'
 
 class Form extends PureComponent {
   static propTypes = {
@@ -16,7 +15,4 @@ class Form extends PureComponent {
   }
 }
 
-export default reduxForm({
-  form: 'USER_FORM',
-  anyTouched: true,
-})(Form)
+export default Form

@@ -1,6 +1,5 @@
 import { persistCombineReducers, persistReducer } from 'redux-persist'
 import { routerReducer as router } from 'react-router-redux'
-import { reducer as form } from 'redux-form'
 import { reducer as ui } from 'redux-ui'
 import localForage from 'localforage'
 import counter from './counter'
@@ -21,7 +20,6 @@ const sessionPersistConfig = {
 
 export default persistCombineReducers(config, {
   router,
-  form,
   ui,
 
   session: persistReducer(sessionPersistConfig, session),
