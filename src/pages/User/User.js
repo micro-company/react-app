@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import ui from 'redux-ui'
@@ -9,7 +9,6 @@ import { Helmet } from 'react-helmet'
 import ReactTable from 'react-table'
 import IconButton from '@material-ui/core/IconButton'
 import Button from '@material-ui/core/Button'
-import Grid from '@material-ui/core/Grid'
 import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
 import UpdateIcon from '@material-ui/icons/Update'
@@ -167,95 +166,86 @@ class User extends PureComponent {
   render() {
     const { classes } = this.props
 
-    return [
-      <Helmet key="user" title="User" />,
+    return (
+      <Fragment>
+        <Helmet title="User" />
 
-      <AddUserDialog
-        key="AddUserDialog"
-        ui={this.props.ui}
-        loading={this.state.loading}
+        <AddUserDialog
+          ui={this.props.ui}
+          loading={this.state.loading}
 
-        onAddSubmitForm={this.onAddSubmitForm}
-        onChangeAddUserDialog={this.onChangeAddUserDialog}
-        onSendForm={this.onSendForm}
-      />,
+          onAddSubmitForm={this.onAddSubmitForm}
+          onChangeAddUserDialog={this.onChangeAddUserDialog}
+          onSendForm={this.onSendForm}
+        />
 
-      <UpdateUserDialog
-        key="UpdateUserDialog"
-        ui={this.props.ui}
-        loading={this.state.loading}
-        currentUser={this.state.currentUser}
+        <UpdateUserDialog
+          ui={this.props.ui}
+          loading={this.state.loading}
+          currentUser={this.state.currentUser}
 
-        onChangeUpdateUserDialog={this.onChangeUpdateUserDialog}
-        onUpdateSubmitForm={this.onUpdateSubmitForm}
-        onSendForm={this.onSendForm}
-      />,
+          onChangeUpdateUserDialog={this.onChangeUpdateUserDialog}
+          onUpdateSubmitForm={this.onUpdateSubmitForm}
+          onSendForm={this.onSendForm}
+        />
 
-      <DeleteUserDialog
-        key="DeleteUserDialog"
-        ui={this.props.ui}
-        loading={this.state.loading}
-        currentUser={this.state.currentUser}
+        <DeleteUserDialog
+          ui={this.props.ui}
+          loading={this.state.loading}
+          currentUser={this.state.currentUser}
 
-        onSendForm={this.onSendForm}
-        onConfirmDeleteUser={this.onConfirmDeleteUser}
-        onChangeDeleteUserDialog={this.onChangeDeleteUserDialog}
-      />,
+          onSendForm={this.onSendForm}
+          onConfirmDeleteUser={this.onConfirmDeleteUser}
+          onChangeDeleteUserDialog={this.onChangeDeleteUserDialog}
+        />
 
-      <Grid container direction="column" key="content">
-        <Grid item>
-          <Grid container direction="row" key="content">
-            <Typography
-              variant="headline"
-              gutterBottom
-              className={classes.typography}
-            >
-              Users list
-            </Typography>
+        <Typography
+          variant="headline"
+          gutterBottom
+          className={classes.typography}
+        >
+          Users list
+        </Typography>
 
-            <div className={classes.dividers} />
+        <div className={classes.dividers} />
 
-            <Tooltip placement="bottom" title="Update users list">
-              <Button
-                variant="fab"
-                color="primary"
-                aria-label="update"
-                className={classes.button}
-                onClick={this.props.listActions}
-              >
-                <UpdateIcon />
-              </Button>
-            </Tooltip>
+        <Tooltip placement="bottom" title="Update users list">
+          <Button
+            variant="fab"
+            color="primary"
+            aria-label="update"
+            className={classes.button}
+            onClick={this.props.listActions}
+          >
+            <UpdateIcon />
+          </Button>
+        </Tooltip>
 
-            <Tooltip placement="bottom" title="Add user">
-              <Button
-                variant="fab"
-                color="primary"
-                aria-label="add"
-                className={classes.button}
-                onClick={this.onChangeAddUserDialog}
-              >
-                <AddIcon />
-              </Button>
-            </Tooltip>
-          </Grid>
-        </Grid>
+        <Tooltip placement="bottom" title="Add user">
+          <Button
+            variant="fab"
+            color="primary"
+            aria-label="add"
+            className={classes.button}
+            onClick={this.onChangeAddUserDialog}
+          >
+            <AddIcon />
+          </Button>
+        </Tooltip>
 
-        <Grid item>
-          <ReactTable
-            data={this.state.users}
-            columns={[
-              {
-                Header: 'Mail',
-                accessor: 'mail',
-                Cell: this.renderCell,
-              },
-            ]}
-            defaultPageSize={10}
-          />
-        </Grid>
-      </Grid>,
-    ]
+        <ReactTable
+          data={this.state.users}
+          columns={[
+            {
+              Header: 'Mail',
+              accessor: 'mail',
+              Cell: this.renderCell,
+            },
+          ]}
+          defaultPageSize={10}
+        />
+      </Fragment>
+    )
   }
 }
 

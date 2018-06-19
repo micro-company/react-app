@@ -4,25 +4,15 @@ import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { SubmissionError } from 'redux-form'
-import { withStyles } from '@material-ui/core/styles'
 import { Helmet } from 'react-helmet'
-import Grid from '@material-ui/core/Grid'
 import Snackbar from '@material-ui/core/Snackbar'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import { login, registration, recovery, recoveryPassword } from '../../actions/session'
 import FormAuth from './UI/Form'
 
-const styles = () => ({
-  root: {
-    flexGrow: 1,
-    height: '100%',
-  },
-})
-
 class Auth extends PureComponent {
   static propTypes = {
-    classes: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired,
 
     loginActions: PropTypes.func.isRequired,
@@ -90,8 +80,6 @@ class Auth extends PureComponent {
   }
 
   render() {
-    const { classes } = this.props
-
     return (
       <Fragment>
         <Helmet title="Auth" />
@@ -112,21 +100,13 @@ class Auth extends PureComponent {
           ]}
         />
 
-        <Grid container className={classes.root} spacing={0} alignItems="center">
-          <Grid item xs={12}>
-            <Grid container spacing={0} justify="center">
-              <Grid item xs={10} sm={5} md={5} lg={5} xl={3} sd={2}>
-                <FormAuth
-                  mode={this.state.mode}
+        <FormAuth
+          mode={this.state.mode}
 
-                  onChangeMode={this.onChangeMode}
-                  onRecaptcha={this.onRecaptcha}
-                  onSubmit={this.onSubmitForm}
-                />
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
+          onChangeMode={this.onChangeMode}
+          onRecaptcha={this.onRecaptcha}
+          onSubmit={this.onSubmitForm}
+        />
       </Fragment>
     )
   }
@@ -148,4 +128,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(withStyles(styles)(withRouter(Auth)))
+)(withRouter(Auth))

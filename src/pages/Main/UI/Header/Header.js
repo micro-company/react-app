@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
@@ -21,32 +20,29 @@ const styles = () => ({
 
 function Header(props) {
   return (
-    <Grid item xs={12} className={props.classes.header}>
-      <AppBar
-        position="static"
-        color="default"
-        className={classNames(props.classes.appBar, props.openDrawer && props.classes.appBarShift)}
-        onClick={() => props.updateUI({ openDrawer: !props.openDrawer })}
-      >
-        <Toolbar>
-          <IconButton className={props.classes.menuButton} color="contrast" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
+    <AppBar
+      position="static"
+      color="default"
+      className={classNames(props.classes.appBar, props.classes.appBarShift)}
+      onClick={() => props.onChangeDrawer()}
+    >
+      <Toolbar>
+        <IconButton className={props.classes.menuButton} color="primary" aria-label="Menu">
+          <MenuIcon />
+        </IconButton>
 
-          <Typography variant="title" color="inherit">
-            Hello World
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    </Grid>
+        <Typography variant="title" color="inherit">
+          Hello World
+        </Typography>
+      </Toolbar>
+    </AppBar>
   )
 }
 
 Header.propTypes = {
-  openDrawer: PropTypes.bool.isRequired,
   classes: PropTypes.object.isRequired,
 
-  updateUI: PropTypes.func.isRequired,
+  onChangeDrawer: PropTypes.func.isRequired,
 }
 
 export default withStyles(styles)(Header)

@@ -15,17 +15,17 @@ import AppBar from '@material-ui/core/AppBar'
 import getForm from './getForm'
 
 const styles = () => ({
-  root: {
-    padding: 0,
+  Card: {
+    alignItems: 'center',
   },
   form: {
     margin: '1em',
   },
+  root: {
+    width: '70%',
+  },
   button: {
     flex: 1,
-    padding: 0,
-    margin: 0,
-    height: '100%',
   },
   recaptcha: {
     display: 'flex',
@@ -50,12 +50,12 @@ class Auth extends PureComponent {
 
   render() {
     const {
-      mode, error, onChangeMode, onSubmit,
+      mode, error, onChangeMode, onSubmit, classes,
     } = this.props
 
     return (
-      <Card>
-        <CardContent className={this.props.classes.root}>
+      <Card className={classes.Card}>
+        <CardContent className={classes.root}>
           <AppBar position="static">
             <Tabs
               value={mode}
@@ -73,7 +73,7 @@ class Auth extends PureComponent {
             render={({ handleSubmit }) => (
               <form
                 id="AuthFormId"
-                className={this.props.classes.form}
+                className={classes.form}
                 onSubmit={handleSubmit}
               >
                 { getForm(mode) }
@@ -82,7 +82,7 @@ class Auth extends PureComponent {
           />
 
           <Recaptcha
-            className={this.props.classes.recaptcha}
+            className={classes.recaptcha}
             sitekey={process.env.REACT_APP_GOOGLE_RECAPTCHA_SITEKEY}
             onChange={this.props.onRecaptcha}
             theme="light"
@@ -100,9 +100,9 @@ class Auth extends PureComponent {
           </ul>
         </CardContent>
 
-        <CardActions className={this.props.classes.root}>
+        <CardActions className={classes.root}>
           <Button
-            className={this.props.classes.button}
+            className={classes.button}
             color="primary"
             variant="raised"
             type="submit"
