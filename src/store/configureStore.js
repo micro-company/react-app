@@ -7,12 +7,7 @@ import rootReducer from '../reducers'
 
 export const history = createHistory()
 
-const initialState = {}
 const enhancers = []
-const middleware = [
-  thunk,
-  routerMiddleware(history),
-]
 
 if (process.env.NODE_ENV !== 'production') {
   /* eslint-disable no-underscore-dangle */
@@ -23,9 +18,8 @@ if (process.env.NODE_ENV !== 'production') {
 
 const store = createStore(
   rootReducer,
-  initialState,
   ...enhancers,
-  applyMiddleware(...middleware),
+  applyMiddleware(thunk, routerMiddleware(history)),
 )
 
 export const persistor = persistStore(store)
