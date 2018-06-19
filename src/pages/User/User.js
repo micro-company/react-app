@@ -16,7 +16,6 @@ import UpdateIcon from '@material-ui/icons/Update'
 import AddIcon from '@material-ui/icons/Add'
 import EditIcon from '@material-ui/icons/ModeEdit'
 import DeleteIcon from '@material-ui/icons/Delete'
-import { submitForm } from '../../actions/form'
 import { list, add, update, remove } from '../../actions/users'
 import { objectListToArrayList } from '../../utils/structure'
 import AddUserDialog from './UI/AddUserDialog'
@@ -44,7 +43,6 @@ class User extends PureComponent {
     user: PropTypes.object.isRequired,
     ui: PropTypes.object.isRequired,
 
-    submitFormActions: PropTypes.func.isRequired,
     updateUI: PropTypes.func.isRequired,
     listActions: PropTypes.func.isRequired,
     addActions: PropTypes.func.isRequired,
@@ -104,8 +102,8 @@ class User extends PureComponent {
     this.props.updateUI({ deleteUserDialog: !this.props.ui.deleteUserDialog })
   }
 
-  onSendForm = () => {
-    this.props.submitFormActions('USER_FORM')
+  onSendForm = value => {
+    console.warn('FORM', value)
     this.setState({ loading: true })
   }
 
@@ -269,7 +267,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    submitFormActions: bindActionCreators(submitForm, dispatch),
     listActions: bindActionCreators(list, dispatch),
     addActions: bindActionCreators(add, dispatch),
     updateActions: bindActionCreators(update, dispatch),

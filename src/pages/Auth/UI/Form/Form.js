@@ -41,7 +41,6 @@ class Auth extends PureComponent {
 
     onSubmit: PropTypes.func.isRequired,
     onChangeMode: PropTypes.func.isRequired,
-    onSendForm: PropTypes.func.isRequired,
     onRecaptcha: PropTypes.func.isRequired,
   }
 
@@ -51,7 +50,7 @@ class Auth extends PureComponent {
 
   render() {
     const {
-      mode, error, onSubmit, onChangeMode,
+      mode, error, onChangeMode, onSubmit,
     } = this.props
 
     return (
@@ -73,6 +72,7 @@ class Auth extends PureComponent {
             onSubmit={onSubmit}
             render={({ handleSubmit }) => (
               <form
+                id="AuthFormId"
                 className={this.props.classes.form}
                 onSubmit={handleSubmit}
               >
@@ -105,7 +105,14 @@ class Auth extends PureComponent {
             className={this.props.classes.button}
             color="primary"
             variant="raised"
-            onClick={this.props.onSendForm}
+            type="submit"
+            onClick={() =>
+              // { cancelable: true } required for Firefox
+              // https://github.com/facebook/react/issues/12639#issuecomment-382519193
+              document
+                .getElementById('AuthFormId')
+                .dispatchEvent(new Event('submit', { cancelable: true }))
+            }
           >
             Send
           </Button>

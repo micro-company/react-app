@@ -10,7 +10,6 @@ import Grid from '@material-ui/core/Grid'
 import Snackbar from '@material-ui/core/Snackbar'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
-import { submitForm } from '../../actions/form'
 import { login, registration, recovery, recoveryPassword } from '../../actions/session'
 import FormAuth from './UI/Form'
 
@@ -26,7 +25,6 @@ class Auth extends PureComponent {
     classes: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired,
 
-    submitFormActions: PropTypes.func.isRequired,
     loginActions: PropTypes.func.isRequired,
     registrationActions: PropTypes.func.isRequired,
     recoveryActions: PropTypes.func.isRequired,
@@ -44,13 +42,11 @@ class Auth extends PureComponent {
       isNotify: false,
     }
 
-    this.onSendForm = this.onSendForm.bind(this)
     this.onSubmitForm = this.onSubmitForm.bind(this)
     this.onChangeMode = this.onChangeMode.bind(this)
   }
 
   onChangeMode(event, value) { this.setState({ mode: value }) }
-  onSendForm = () => this.props.submitFormActions('AUTH_FORM')
   onRecaptcha = value => this.setState({ captcha: value })
 
   onSubmitForm(data) {
@@ -125,7 +121,6 @@ class Auth extends PureComponent {
 
                   onChangeMode={this.onChangeMode}
                   onRecaptcha={this.onRecaptcha}
-                  onSendForm={this.onSendForm}
                   onSubmit={this.onSubmitForm}
                 />
               </Grid>
@@ -143,8 +138,6 @@ function mapStateToProps() {
 
 function mapDispatchToProps(dispatch) {
   return {
-    submitFormActions: bindActionCreators(submitForm, dispatch),
-
     loginActions: bindActionCreators(login, dispatch),
     registrationActions: bindActionCreators(registration, dispatch),
     recoveryActions: bindActionCreators(recovery, dispatch),
