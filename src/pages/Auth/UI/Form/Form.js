@@ -23,6 +23,7 @@ const styles = () => ({
   },
   root: {
     width: '70%',
+    maxWidth: '30em',
   },
   button: {
     flex: 1,
@@ -54,7 +55,7 @@ class Auth extends PureComponent {
     } = this.props
 
     return (
-      <Card className={classes.Card}>
+      <Card className={classes.Card} elevation="0">
         <CardContent className={classes.root}>
           <AppBar position="static">
             <Tabs
