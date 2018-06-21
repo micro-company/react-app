@@ -12,11 +12,18 @@ import Tabs from '@material-ui/core/Tabs'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import Typography from '@material-ui/core/Typography'
 import AppBar from '@material-ui/core/AppBar'
+import SaveIcon from '@material-ui/icons/Send'
+import Icon from '../../../../components/Icon'
 import getForm from './getForm'
 
-const styles = () => ({
+const styles = theme => ({
   Card: {
     alignItems: 'center',
+    marginTop: '4em !important',
+    justifyContent: 'flex-start !important',
+  },
+  Icon: {
+    fontSize: '15em',
   },
   form: {
     margin: '1em',
@@ -27,6 +34,9 @@ const styles = () => ({
   },
   button: {
     flex: 1,
+  },
+  rightIcon: {
+    marginLeft: theme.spacing.unit,
   },
   recaptcha: {
     display: 'flex',
@@ -49,6 +59,23 @@ class Auth extends PureComponent {
     error: [],
   }
 
+  static getDerivedStateFromProps(nextProps) {
+    let iconName = 'login'
+
+    switch (nextProps.mode) {
+      case 'recovery':
+      case 'recoveryPassword':
+        iconName = 'forgotPassword'
+        break
+      default:
+        iconName = 'login'
+    }
+
+    return {
+      iconName,
+    }
+  }
+
   render() {
     const {
       mode, error, onChangeMode, onSubmit, classes,
@@ -56,6 +83,8 @@ class Auth extends PureComponent {
 
     return (
       <Card className={classes.Card} elevation={0}>
+        <Icon name={this.state.iconName} className={classes.Icon} />
+
         <CardContent className={classes.root}>
           <AppBar position="static">
             <Tabs
@@ -116,6 +145,7 @@ class Auth extends PureComponent {
             }
           >
             Send
+            <SaveIcon className={classes.rightIcon} />
           </Button>
         </CardActions>
       </Card>
