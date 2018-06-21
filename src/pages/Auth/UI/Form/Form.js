@@ -55,7 +55,7 @@ class Auth extends PureComponent {
     } = this.props
 
     return (
-      <Card className={classes.Card} elevation="0">
+      <Card className={classes.Card} elevation={0}>
         <CardContent className={classes.root}>
           <AppBar position="static">
             <Tabs
