@@ -214,6 +214,7 @@ class User extends PureComponent {
         <Tooltip placement="bottom" title="Update users list">
           <Button
             variant="fab"
+            mini
             color="primary"
             aria-label="update"
             className={classes.button}
@@ -226,6 +227,7 @@ class User extends PureComponent {
         <Tooltip placement="bottom" title="Add user">
           <Button
             variant="fab"
+            mini
             color="primary"
             aria-label="add"
             className={classes.button}

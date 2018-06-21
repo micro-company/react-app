@@ -3,14 +3,14 @@ import PropTypes from 'prop-types'
 
 class Form extends PureComponent {
   static propTypes = {
-    handleSubmit: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
   }
 
   render() {
-    const { handleSubmit } = this.props
+    const { onSubmit } = this.props
 
     return (
-      <form onSubmit={handleSubmit} />
+      <form onSubmit={onSubmit} />
     )
   }
 }
