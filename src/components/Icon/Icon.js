@@ -27,7 +27,6 @@ class Icon extends PureComponent {
   }
 
   render() {
-    console.warn('IconComponents', IconComponents)
     return (
       <span
         style={this.props.style}
