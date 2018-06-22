@@ -1,9 +1,9 @@
 // @flow
 
 // STATUS REQUEST
-export const REQUEST = 'SESSION_REQUEST'
-export const SUCCESS = 'SESSION_SUCCESS'
-export const FAILURE = 'SESSION_FAILURE'
+export const REQUEST = 'counter/REQUEST'
+export const SUCCESS = 'counter/SUCCESS'
+export const FAILURE = 'counter/FAILURE'
 
 // CRUD
 export const INCREMENT_REQUESTED = 'counter/INCREMENT_REQUESTED'

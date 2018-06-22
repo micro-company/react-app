@@ -7,6 +7,9 @@ const initialState = {
     access: null,
     refresh: null,
   },
+  request: {
+    refreshToken: false,
+  },
 }
 
 export default function update(state: Object = initialState, action: Object): Object {
@@ -21,6 +24,15 @@ export default function update(state: Object = initialState, action: Object): Ob
     }
     case SESSION.LOGOUT: {
       return initialState
+    }
+    case SESSION.REQUEST_REFRESH_TOKEN: {
+      return {
+        ...state,
+        request: {
+          ...state.request,
+          refreshToken: action.payload,
+        },
+      }
     }
     default:
       return state

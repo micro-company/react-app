@@ -1,10 +1,13 @@
 // @flow
 
 // STATUS REQUEST
-export const REQUEST = 'SESSION_REQUEST'
-export const SUCCESS = 'SESSION_SUCCESS'
-export const FAILURE = 'SESSION_FAILURE'
+export const REQUEST = 'session/REQUEST'
+export const SUCCESS = 'session/SUCCESS'
+export const FAILURE = 'session/FAILURE'
 
 // CRUD
-export const LOGIN = 'SESSION_LOGIN'
-export const LOGOUT = 'SESSION_LOGOUT'
+export const LOGIN = 'session/LOGIN'
+export const LOGOUT = 'session/LOGOUT'
+
+// TOKEN
+export const REQUEST_REFRESH_TOKEN = 'session/REQUEST_REFRESH_TOKEN'

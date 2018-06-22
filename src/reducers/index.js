@@ -10,7 +10,7 @@ import event from './event'
 const config = {
   key: 'react-app',
   storage: localForage,
-  blacklist: ['router', 'form', 'ui'],
+  blacklist: ['router', 'ui'],
 }
 
 const sessionPersistConfig = {

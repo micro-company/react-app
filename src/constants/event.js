@@ -1,6 +1,6 @@
 // @flow
 
 // CRUD
-export const ADD = 'EVENT_ADD'
-export const REMOVE = 'EVENT_REMOVE'
-export const CHECK = 'EVENT_CHECK'
+export const ADD = 'event/ADD'
+export const REMOVE = 'event/REMOVE'
+export const CHECK = 'event/CHECK'

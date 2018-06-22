@@ -115,3 +115,41 @@ export function recoveryPassword(data) {
     .then(checkStatus)
     .catch(error => formError(error))
 }
+
+export function refresh(tokenRefresh) {
+  return dispatch => {
+    dispatch({
+      type: SESSION.REQUEST_REFRESH_TOKEN,
+      payload: true,
+    })
+
+    return fetch(`${process.env.REACT_APP_API_URL}/auth/refresh`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: tokenRefresh,
+      },
+    })
+      .then(checkStatus)
+      .then(response => {
+        dispatch({
+          type: SESSION.REQUEST_REFRESH_TOKEN,
+          payload: false,
+        })
+
+        dispatch({
+          type: SESSION.LOGIN,
+          payload: response,
+        })
+      })
+      .catch(error => {
+        dispatch({
+          type: SESSION.REQUEST_REFRESH_TOKEN,
+          payload: false,
+        })
+
+        formError(error)
+      })
+  }
+}
