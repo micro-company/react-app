@@ -26,7 +26,9 @@ class DeleteUserDialog extends PureComponent {
         open={this.props.ui.deleteUserDialog}
         onClose={this.props.onChangeDeleteUserDialog}
       >
-        <DialogTitle>Confirm delete this user</DialogTitle>
+        <DialogTitle>
+Confirm delete this user
+        </DialogTitle>
         <DialogContent>
           {
             this.props.loading && <LinearProgress />

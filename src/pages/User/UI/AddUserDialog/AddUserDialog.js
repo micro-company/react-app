@@ -24,7 +24,9 @@ class AddUserDialog extends PureComponent {
         open={this.props.ui.addUserDialog}
         onClose={this.props.onChangeAddUserDialog}
       >
-        <DialogTitle>Add new user</DialogTitle>
+        <DialogTitle>
+Add new user
+        </DialogTitle>
         <DialogContent>
           {
             this.props.loading && <LinearProgress />

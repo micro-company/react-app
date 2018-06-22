@@ -33,9 +33,9 @@ class Main extends PureComponent {
   }
 
   onChangeDrawer = value => {
-    this.setState({
-      openDrawer: value !== undefined ? value : !this.state.openDrawer,
-    })
+    this.setState(state => ({
+      openDrawer: value !== undefined ? value : !state.openDrawer,
+    }))
   }
 
   render() {

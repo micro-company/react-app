@@ -24,8 +24,13 @@ class Home extends PureComponent {
       <Helmet key="home" title="Home" />,
 
       <div key="content">
-        <h1>Home</h1>
-        <p>Count: {this.props.count}</p>
+        <h1>
+Home
+        </h1>
+        <p>
+Count:
+          {this.props.count}
+        </p>
 
         <p>
           <Button

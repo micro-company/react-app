@@ -7,7 +7,9 @@ import { Helmet } from 'react-helmet'
 import Snackbar from '@material-ui/core/Snackbar'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
-import { login, registration, recovery, recoveryPassword } from '../../actions/session'
+import {
+  login, registration, recovery, recoveryPassword,
+} from '../../actions/session'
 import FormAuth from './UI/Form'
 
 class Auth extends PureComponent {
@@ -36,6 +38,7 @@ class Auth extends PureComponent {
   }
 
   onChangeMode(event, value) { this.setState({ mode: value }) }
+
   onRecaptcha = value => this.setState({ captcha: value })
 
   onSubmitForm(data) {
@@ -88,7 +91,11 @@ class Auth extends PureComponent {
           open={this.state.isNotify}
           autoHideDuration={6000}
           onClose={this.handleRequestClose}
-          message={<span>Data sent to the specified mail</span>}
+          message={(
+            <span>
+Data sent to the specified mail
+            </span>
+)}
           action={[
             <IconButton
               color="inherit"

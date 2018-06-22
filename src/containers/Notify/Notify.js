@@ -45,14 +45,14 @@ class Notify extends PureComponent {
               key={`${indexEvent}-${item.message}`} // eslint-disable-line
               className={classes.snackbar}
               message={item.message}
-              action={
+              action={(
                 <IconButton
                   color="secondary"
                   onClick={() => this.props.removeEventAction(indexEvent)}
                 >
                   <DeleteIcon />
                 </IconButton>
-              }
+)}
             />
           ))
         }

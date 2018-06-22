@@ -14,7 +14,9 @@ import UpdateIcon from '@material-ui/icons/Update'
 import AddIcon from '@material-ui/icons/Add'
 import EditIcon from '@material-ui/icons/ModeEdit'
 import DeleteIcon from '@material-ui/icons/Delete'
-import { list, add, update, remove } from '../../actions/users'
+import {
+  list, add, update, remove,
+} from '../../actions/users'
 import { objectListToArrayList } from '../../utils/structure'
 import AddUserDialog from './UI/AddUserDialog'
 import UpdateUserDialog from './UI/UpdateUserDialog'

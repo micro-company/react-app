@@ -136,12 +136,9 @@ class Auth extends PureComponent {
             color="primary"
             variant="raised"
             type="submit"
-            onClick={() =>
-              // { cancelable: true } required for Firefox
-              // https://github.com/facebook/react/issues/12639#issuecomment-382519193
-              document
-                .getElementById('AuthFormId')
-                .dispatchEvent(new Event('submit', { cancelable: true }))
+            onClick={() => document
+              .getElementById('AuthFormId')
+              .dispatchEvent(new Event('submit', { cancelable: true }))
             }
           >
             Send
