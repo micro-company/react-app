@@ -37,6 +37,8 @@ helm install micro-company/react-app
 | ---------------------------------- | --------------------- |
 | REACT_APP_API_URL                  | http://localhost:4070 |
 | REACT_APP_GOOGLE_RECAPTCHA_SITEKEY | secretKey             |
+| **Auth**                           | -                     |
+| REACT_REFRESH_TIME                 | 180 (seconds)         |
 | **For CI**                         | -                     |
 | GITHUB_USER                        | -                     |
 | GITHUB_PASSWORD                    | -                     |

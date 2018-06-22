@@ -9,8 +9,8 @@ export default store => next => action => {
 
   if (action.type && isAuthPage) {
     const time = _.get(store.getState(), 'session.user.exp', false)
-    const timeForRefresh = 30 * 1000
-    const expTime = new Date((time * 1000) - timeForRefresh)
+    const timeForRefresh = process.env.REACT_REFRESH_TIME || 180
+    const expTime = new Date((time - timeForRefresh) * 1000)
     const isExp = isFuture(expTime)
     const isAuthenticated = _.get(store.getState(), 'session.isAuthenticated')
 
@@ -20,7 +20,9 @@ export default store => next => action => {
 
       // make sure we are not already refreshing the token
       if (!isRequestRefreshToken && action.type && action.type !== SESSION.REQUEST_REFRESH_TOKEN) {
-        store.dispatch(refresh(tokenRefresh)).then(() => next(action))
+        store.dispatch(refresh(tokenRefresh))
+          .then(() => next(action))
+          .catch(error => console.warn('ERROR', error))
       }
     }
   }
