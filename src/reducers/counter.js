@@ -8,6 +8,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case COUNTER.INIT:
+      return {
+        isIncrementing: false,
+        isDecrementing: false,
+      }
     case COUNTER.INCREMENT_REQUESTED:
       return {
         ...state,

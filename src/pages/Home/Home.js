@@ -10,6 +10,7 @@ import * as COUNTER from '../../actions/counter'
 class Home extends PureComponent {
   static propTypes = {
     count: PropTypes.number.isRequired,
+    initActions: PropTypes.bool.isRequired,
     isIncrementing: PropTypes.bool.isRequired,
     isDecrementing: PropTypes.bool.isRequired,
 
@@ -17,6 +18,10 @@ class Home extends PureComponent {
     incrementAsyncActions: PropTypes.func.isRequired,
     decrementActions: PropTypes.func.isRequired,
     decrementAsyncActions: PropTypes.func.isRequired,
+  }
+
+  componentDidMount() {
+    this.props.initActions()
   }
 
   render() {
@@ -90,6 +95,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    initActions: bindActionCreators(COUNTER.init, dispatch),
     incrementActions: bindActionCreators(COUNTER.increment, dispatch),
     incrementAsyncActions: bindActionCreators(COUNTER.incrementAsync, dispatch),
     decrementActions: bindActionCreators(COUNTER.decrement, dispatch),

@@ -1,5 +1,11 @@
 import * as COUNTER from '../constants/counter'
 
+export const init = () => dispatch => {
+  dispatch({
+    type: COUNTER.INIT,
+  })
+}
+
 export const increment = () => dispatch => {
   dispatch({
     type: COUNTER.INCREMENT_REQUESTED,
