@@ -93,9 +93,9 @@ class Auth extends PureComponent {
           onClose={this.handleRequestClose}
           message={(
             <span>
-Data sent to the specified mail
+              Data sent to the specified mail
             </span>
-)}
+          )}
           action={[
             <IconButton
               color="inherit"

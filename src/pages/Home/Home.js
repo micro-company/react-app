@@ -25,10 +25,10 @@ class Home extends PureComponent {
 
       <div key="content">
         <h1>
-Home
+          Home
         </h1>
         <p>
-Count:
+          Count:
           {this.props.count}
         </p>
 

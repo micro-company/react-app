@@ -52,7 +52,7 @@ class Notify extends PureComponent {
                 >
                   <DeleteIcon />
                 </IconButton>
-)}
+              )}
             />
           ))
         }

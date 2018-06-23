@@ -25,7 +25,7 @@ class AddUserDialog extends PureComponent {
         onClose={this.props.onChangeAddUserDialog}
       >
         <DialogTitle>
-Add new user
+          Add new user
         </DialogTitle>
         <DialogContent>
           {

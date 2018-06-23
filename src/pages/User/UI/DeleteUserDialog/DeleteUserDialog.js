@@ -27,8 +27,9 @@ class DeleteUserDialog extends PureComponent {
         onClose={this.props.onChangeDeleteUserDialog}
       >
         <DialogTitle>
-Confirm delete this user
+          Confirm delete this user
         </DialogTitle>
+
         <DialogContent>
           {
             this.props.loading && <LinearProgress />
@@ -41,6 +42,7 @@ Confirm delete this user
             By this action, you permanently delete the user
           </Typography>
         </DialogContent>
+
         <DialogActions>
           <Button
             onClick={this.props.onChangeDeleteUserDialog}

@@ -76,6 +76,14 @@ class Auth extends PureComponent {
     }
   }
 
+  constructor() {
+    super()
+
+    this.state = {
+      iconName: 'login',
+    }
+  }
+
   render() {
     const {
       mode, error, onChangeMode, onSubmit, classes,

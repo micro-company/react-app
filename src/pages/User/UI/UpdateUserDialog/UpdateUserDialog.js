@@ -26,7 +26,7 @@ class UpdateUserDialog extends PureComponent {
         onClose={this.props.onChangeUpdateUserDialog}
       >
         <DialogTitle>
-Update this user
+          Update this user
         </DialogTitle>
         <DialogContent>
           {

@@ -48,7 +48,7 @@ class FormUser extends PureComponent {
             />
             <FormControl style={{ width: '100%' }}>
               <InputLabel htmlFor="controlled-open-select">
-Language
+                Language
               </InputLabel>
               <Field
                 name="language"
@@ -56,10 +56,10 @@ Language
                 fullWidth
               >
                 <MenuItem value="ru_RU">
-Russia
+                  Russia
                 </MenuItem>
                 <MenuItem value="en_GB">
-English
+                  English
                 </MenuItem>
               </Field>
             </FormControl>
