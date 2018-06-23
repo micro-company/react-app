@@ -1,12 +1,18 @@
+import * as SESSION from '../constants/session'
 import * as USER from '../constants/user'
 import { history } from '../store/configureStore'
 
-function checkStatus(response) {
+function checkStatus(response, dispatch) {
   if (response.status >= 200 && response.status < 300) {
     return response.json()
   }
 
   if (response.status === 401) {
+    dispatch({
+      type: SESSION.LOGOUT,
+      payload: response,
+    })
+
     history.push('/auth')
     throw response.json()
   }
@@ -24,7 +30,7 @@ export function list() {
     },
     credentials: 'include',
   })
-    .then(checkStatus)
+    .then(response => checkStatus(response, dispatch))
     .then(response => {
       dispatch({
         type: USER.LIST,
@@ -45,7 +51,7 @@ export function add(data) {
     credentials: 'include',
     body: JSON.stringify(data),
   })
-    .then(checkStatus)
+    .then(response => checkStatus(response, dispatch))
     .then(response => {
       dispatch({
         type: USER.ADD,
@@ -68,7 +74,7 @@ export function update(data) {
     credentials: 'include',
     body: JSON.stringify(data),
   })
-    .then(checkStatus)
+    .then(response => checkStatus(response, dispatch))
     .then(response => {
       dispatch({
         type: USER.UPDATE,
@@ -89,7 +95,7 @@ export function remove(data) {
     credentials: 'include',
     body: JSON.stringify(data),
   })
-    .then(checkStatus)
+    .then(response => checkStatus(response, dispatch))
     .then(response => {
       dispatch({
         type: USER.REMOVE,

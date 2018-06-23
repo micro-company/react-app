@@ -2,12 +2,17 @@ import * as SESSION from '../constants/session'
 import * as EVENT from '../constants/event'
 import { history } from '../store/configureStore'
 
-function checkStatus(response) {
+function checkStatus(response, dispatch) {
   if (response.status >= 200 && response.status < 300) {
     return response.json()
   }
 
   if (response.status === 401) {
+    dispatch({
+      type: SESSION.LOGOUT,
+      payload: response,
+    })
+
     history.push('/auth')
     throw response.json()
   }
@@ -32,7 +37,7 @@ export function login(data) {
     },
     body: JSON.stringify(data),
   })
-    .then(checkStatus)
+    .then(response => checkStatus(response, dispatch))
     .then(response => {
       dispatch({
         type: SESSION.LOGIN,
@@ -53,7 +58,7 @@ export function registration(data) {
     },
     body: JSON.stringify(data),
   })
-    .then(checkStatus)
+    .then(response => checkStatus(response, dispatch))
     .then(() => {
       dispatch({
         type: EVENT.ADD,
@@ -75,7 +80,7 @@ export function logout() {
       Authorization: getState().session.tokens.access,
     },
   })
-    .then(checkStatus)
+    .then(response => checkStatus(response, dispatch))
     .then(() => dispatch({
       type: SESSION.LOGOUT,
       payload: null,
@@ -91,7 +96,7 @@ export function logout() {
 }
 
 export function recovery(data) {
-  return () => fetch(`${process.env.REACT_APP_API_URL}/auth/recovery`, {
+  return dispatch => fetch(`${process.env.REACT_APP_API_URL}/auth/recovery`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -99,12 +104,12 @@ export function recovery(data) {
     },
     body: JSON.stringify(data),
   })
-    .then(checkStatus)
+    .then(response => checkStatus(response, dispatch))
     .catch(error => formError(error))
 }
 
 export function recoveryPassword(data) {
-  return () => fetch(`${process.env.REACT_APP_API_URL}/auth/recovery/${data.recoveryToken}`, {
+  return dispatch => fetch(`${process.env.REACT_APP_API_URL}/auth/recovery/${data.recoveryToken}`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -112,7 +117,7 @@ export function recoveryPassword(data) {
     },
     body: JSON.stringify(data),
   })
-    .then(checkStatus)
+    .then(response => checkStatus(response, dispatch))
     .catch(error => formError(error))
 }
 
@@ -131,7 +136,7 @@ export function refresh(tokenRefresh) {
         Authorization: tokenRefresh,
       },
     })
-      .then(checkStatus)
+      .then(response => checkStatus(response, dispatch))
       .then(response => {
         dispatch({
           type: SESSION.REQUEST_REFRESH_TOKEN,
