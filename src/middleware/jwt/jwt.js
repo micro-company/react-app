@@ -2,6 +2,7 @@ import _ from 'lodash'
 import isFuture from 'date-fns/is_future'
 import * as SESSION from '../../constants/session'
 import { refresh } from '../../actions/session'
+import { history } from '../../store/configureStore'
 
 export default store => next => action => {
   // only worry about expiring token for async actions
@@ -22,7 +23,10 @@ export default store => next => action => {
       if (!isRequestRefreshToken && action.type && action.type !== SESSION.REQUEST_REFRESH_TOKEN) {
         store.dispatch(refresh(tokenRefresh))
           .then(() => next(action))
-          .catch(error => console.warn('ERROR', error))
+          .catch(error => {
+            history.push('/auth')
+            console.warn('ERROR', error)
+          })
       }
     }
   }

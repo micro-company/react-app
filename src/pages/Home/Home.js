@@ -10,7 +10,7 @@ import * as COUNTER from '../../actions/counter'
 class Home extends PureComponent {
   static propTypes = {
     count: PropTypes.number.isRequired,
-    initActions: PropTypes.bool.isRequired,
+    initActions: PropTypes.func.isRequired,
     isIncrementing: PropTypes.bool.isRequired,
     isDecrementing: PropTypes.bool.isRequired,
 
