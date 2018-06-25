@@ -48,16 +48,11 @@ const styles = theme => ({
 class Auth extends PureComponent {
   static propTypes = {
     classes: PropTypes.object.isRequired,
-    error: PropTypes.array,
     mode: PropTypes.string.isRequired,
 
     onSubmit: PropTypes.func.isRequired,
     onChangeMode: PropTypes.func.isRequired,
     onRecaptcha: PropTypes.func.isRequired,
-  }
-
-  static defaultProps = {
-    error: [],
   }
 
   static getDerivedStateFromProps(nextProps) {
@@ -87,7 +82,7 @@ class Auth extends PureComponent {
 
   render() {
     const {
-      mode, error, onChangeMode, onSubmit, classes,
+      mode, onChangeMode, onSubmit, classes,
     } = this.props
 
     return (
@@ -123,9 +118,9 @@ class Auth extends PureComponent {
                 </form>
                 <div>
                   {
-                    _.get(submitError, '_error', []).forEach(err => (
+                    _.get(submitError, '_error', []).forEach(error => (
                       <Typography variant="subheading" gutterBottom>
-                        We have probelem: {err}
+                        We have probelem: {error}
                       </Typography>
                     ))
                   }
