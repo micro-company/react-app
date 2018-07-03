@@ -1,4 +1,5 @@
-import React, { PureComponent } from 'react'
+import _ from 'lodash'
+import React, { Fragment, PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import { Form } from 'react-final-form'
@@ -47,16 +48,11 @@ const styles = theme => ({
 class Auth extends PureComponent {
   static propTypes = {
     classes: PropTypes.object.isRequired,
-    error: PropTypes.array,
     mode: PropTypes.string.isRequired,
 
     onSubmit: PropTypes.func.isRequired,
     onChangeMode: PropTypes.func.isRequired,
     onRecaptcha: PropTypes.func.isRequired,
-  }
-
-  static defaultProps = {
-    error: [],
   }
 
   static getDerivedStateFromProps(nextProps) {
@@ -86,7 +82,7 @@ class Auth extends PureComponent {
 
   render() {
     const {
-      mode, error, onChangeMode, onSubmit, classes,
+      mode, onChangeMode, onSubmit, classes,
     } = this.props
 
     return (
@@ -108,14 +104,41 @@ class Auth extends PureComponent {
 
           <Form
             onSubmit={onSubmit}
-            render={({ handleSubmit }) => (
-              <form
-                id="AuthFormId"
-                className={classes.form}
-                onSubmit={handleSubmit}
-              >
-                { getForm(mode) }
-              </form>
+            render={({
+              handleSubmit,
+              submitError,
+            }) => (
+              <Fragment>
+                <form
+                  id="AuthFormId"
+                  className={classes.form}
+                  onSubmit={handleSubmit}
+                >
+                  { getForm(mode) }
+                </form>
+                <div>
+                  {
+                    _.get(submitError, '_error', []).forEach(error => (
+                      <Typography variant="subheading" gutterBottom>
+                        We have probelem: {error}
+                      </Typography>
+                    ))
+                  }
+
+                  <ul>
+                    {
+                      submitError && submitError._error.length > 0 && (
+                        <Typography variant="subheading" gutterBottom>
+                          We have probelem: {submitError._error.length}
+                        </Typography>
+                      )
+                    }
+                    {
+                      _.get(submitError, '_error', []).map((issue, index) => <FormHelperText error key={index}>{issue}</FormHelperText>) // eslint-disable-line
+                    }
+                  </ul>
+                </div>
+              </Fragment>
             )}
           />
 
@@ -125,17 +148,6 @@ class Auth extends PureComponent {
             onChange={this.props.onRecaptcha}
             theme="light"
           />
-
-          { error.length ? (
-            <Typography variant="subheading" gutterBottom>
-              We have probelem:
-            </Typography>
-          ) : null }
-          <ul>
-            {
-              error.map((issue, index) => <FormHelperText error key={index}>{issue}</FormHelperText>) // eslint-disable-line
-            }
-          </ul>
         </CardContent>
 
         <CardActions className={classes.root}>

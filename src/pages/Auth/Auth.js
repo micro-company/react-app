@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
+import { FORM_ERROR } from 'final-form'
 import Snackbar from '@material-ui/core/Snackbar'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
@@ -48,7 +49,9 @@ class Auth extends PureComponent {
           ...data,
           captcha: this.state.captcha,
         })
-        // .catch(error => { throw new SubmissionError(error.error) })
+          .catch(error => ({
+            [FORM_ERROR]: error.error,
+          }))
       case 'signOn':
         return this.props.registrationActions({
           ...data,

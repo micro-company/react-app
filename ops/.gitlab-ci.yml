@@ -114,5 +114,7 @@ deploy:staging:
   <<: *job_deploy
   variables:
     HELM_NAMESPACE: minikube
+  environment:
+    name: Staging
   only:
     - /^(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)-rc(?:0|[1-9]\d*)$/

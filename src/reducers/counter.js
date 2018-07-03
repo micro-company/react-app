@@ -10,6 +10,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case COUNTER.INIT:
       return {
+        ...state,
         isIncrementing: false,
         isDecrementing: false,
       }
