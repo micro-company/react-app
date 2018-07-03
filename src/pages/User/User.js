@@ -7,11 +7,7 @@ import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
 import ReactTable from 'react-table'
 import IconButton from '@material-ui/core/IconButton'
-import Button from '@material-ui/core/Button'
 import Tooltip from '@material-ui/core/Tooltip'
-import Typography from '@material-ui/core/Typography'
-import UpdateIcon from '@material-ui/icons/Update'
-import AddIcon from '@material-ui/icons/Add'
 import EditIcon from '@material-ui/icons/ModeEdit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import {
@@ -21,13 +17,13 @@ import { objectListToArrayList } from '../../utils/structure'
 import AddUserDialog from './UI/AddUserDialog'
 import UpdateUserDialog from './UI/UpdateUserDialog'
 import DeleteUserDialog from './UI/DeleteUserDialog'
+import HeaderUserList from './UI/HeaderUserList'
 
 const styles = theme => ({
   box: {
-    display: 'flex',
-  },
-  dividers: {
-    flex: 1,
+    display: 'grid',
+    gridTemplateColumns: '1fr auto auto',
+    alignItems: 'center',
   },
   button: {
     margin: theme.spacing.unit,
@@ -142,8 +138,6 @@ class User extends PureComponent {
       <div className={this.props.classes.box}>
         {row.value}
 
-        <div className={this.props.classes.dividers} />
-
         <Tooltip placement="bottom" title="Edit user">
           <IconButton
             color="primary"
@@ -168,8 +162,6 @@ class User extends PureComponent {
   }
 
   render() {
-    const { classes } = this.props
-
     return (
       <Fragment>
         <Helmet title="User" />
@@ -203,41 +195,10 @@ class User extends PureComponent {
           onChangeDeleteUserDialog={this.onChangeDeleteUserDialog}
         />
 
-        <Typography
-          variant="headline"
-          gutterBottom
-          className={classes.typography}
-        >
-          Users list
-        </Typography>
-
-        <div className={classes.dividers} />
-
-        <Tooltip placement="bottom" title="Update users list">
-          <Button
-            variant="fab"
-            mini
-            color="primary"
-            aria-label="update"
-            className={classes.button}
-            onClick={this.props.listActions}
-          >
-            <UpdateIcon />
-          </Button>
-        </Tooltip>
-
-        <Tooltip placement="bottom" title="Add user">
-          <Button
-            variant="fab"
-            mini
-            color="primary"
-            aria-label="add"
-            className={classes.button}
-            onClick={this.onChangeAddUserDialog}
-          >
-            <AddIcon />
-          </Button>
-        </Tooltip>
+        <HeaderUserList
+          listActions={this.props.listActions}
+          onChangeAddUserDialog={this.onChangeAddUserDialog}
+        />
 
         <ReactTable
           data={this.state.users}
