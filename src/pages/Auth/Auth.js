@@ -12,6 +12,7 @@ import {
   login, registration, recovery, recoveryPassword,
 } from '../../actions/session'
 import FormAuth from './UI/Form'
+import OAuth from './UI/OAuth'
 
 class Auth extends PureComponent {
   static propTypes = {
@@ -116,6 +117,8 @@ class Auth extends PureComponent {
           onRecaptcha={this.onRecaptcha}
           onSubmit={this.onSubmitForm}
         />
+
+        <OAuth />
       </Fragment>
     )
   }
