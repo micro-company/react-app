@@ -204,8 +204,8 @@ class User extends PureComponent {
           data={this.state.users}
           columns={[
             {
-              Header: 'Mail',
-              accessor: 'mail',
+              Header: 'Email',
+              accessor: 'email',
               Cell: this.renderCell,
             },
           ]}

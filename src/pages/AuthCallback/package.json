@@ -1,0 +1,6 @@
+{
+  "name": "AuthCallback",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./AuthCallback"
+}

@@ -12,8 +12,8 @@ export default function getForm(currentTab) {
       return (
         <Fragment>
           <Field
-            name="mail"
-            label="Mail"
+            name="email"
+            label="Email"
             component={TextField}
             fullWidth
           />
@@ -40,8 +40,8 @@ export default function getForm(currentTab) {
       return (
         <Fragment>
           <Field
-            name="mail"
-            label="Mail"
+            name="email"
+            label="Email"
             component={TextField}
             fullWidth
           />
@@ -81,8 +81,8 @@ English
       return (
         <Fragment>
           <Field
-            name="mail"
-            label="Mail"
+            name="email"
+            label="Email"
             component={TextField}
             fullWidth
           />

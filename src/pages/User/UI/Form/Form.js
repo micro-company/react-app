@@ -26,9 +26,9 @@ class FormUser extends PureComponent {
         render={({ handleSubmit }) => (
           <form id="UserFormId" onSubmit={handleSubmit}>
             <Field
-              key="mail"
-              name="mail"
-              label="Mail"
+              key="email"
+              name="email"
+              label="Email"
               component={TextField}
               fullWidth
             />

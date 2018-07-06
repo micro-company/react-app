@@ -1,7 +1,10 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
+import { oauthRequest } from '../../../../actions/session'
 
 const styles = theme => ({
   box: {
@@ -17,6 +20,19 @@ const styles = theme => ({
 class OAuth extends PureComponent { // eslint-disable-line
   static propTypes = {
     classes: PropTypes.object.isRequired,
+
+    oauthRequestActions: PropTypes.func.isRequired,
+  }
+
+  constructor() {
+    super()
+
+    this.onClickOauth = this.onClickOauth.bind(this)
+  }
+
+  onClickOauth(type) {
+    this.props.oauthRequestActions(type)
+      .then(response => window.open(response.url, '_blank'))
   }
 
   render() {
@@ -28,6 +44,7 @@ class OAuth extends PureComponent { // eslint-disable-line
           color="secondary"
           variant="outlined"
           className={classes.button}
+          onClick={() => this.onClickOauth('google')}
         >
           Google
         </Button>
@@ -36,6 +53,7 @@ class OAuth extends PureComponent { // eslint-disable-line
           color="secondary"
           variant="outlined"
           className={classes.button}
+          onClick={() => this.onClickOauth('github')}
         >
           Github
         </Button>
@@ -44,4 +62,17 @@ class OAuth extends PureComponent { // eslint-disable-line
   }
 }
 
-export default withStyles(styles)(OAuth)
+function mapStateToProps() {
+  return {}
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    oauthRequestActions: bindActionCreators(oauthRequest, dispatch),
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withStyles(styles)(OAuth))

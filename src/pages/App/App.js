@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import Authenticated from '../../containers/Authenticated'
 import Main from '../Main'
 import Auth from '../Auth'
+import AuthCallback from '../AuthCallback'
 
 class App extends PureComponent {
   static propTypes = {
@@ -24,6 +25,10 @@ class App extends PureComponent {
         <Route
           path="/recovery/:recoveryToken"
           component={Auth}
+        />
+        <Route
+          path="/auth/:type/:name"
+          component={AuthCallback}
         />
         <Route
           path="/auth"

@@ -1,8 +1,8 @@
 import React, { PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
-import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import { Helmet } from 'react-helmet'
 import { FORM_ERROR } from 'final-form'
 import Snackbar from '@material-ui/core/Snackbar'
@@ -97,7 +97,7 @@ class Auth extends PureComponent {
           onClose={this.handleRequestClose}
           message={(
             <span>
-              Data sent to the specified mail
+              Data sent to the specified email
             </span>
           )}
           action={[

@@ -158,3 +158,51 @@ export function refresh(tokenRefresh) {
       })
   }
 }
+
+export function oauthRequest(type) {
+  return dispatch => fetch(`${process.env.REACT_APP_API_URL}/oauth/${type}`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(response => checkStatus(response, dispatch))
+    .then(response => response)
+    .catch(error => {
+      dispatch({
+        type: SESSION.REQUEST_REFRESH_TOKEN,
+        payload: false,
+      })
+
+      formError(error)
+    })
+}
+
+export function oauthGetProtectedResources({ name, code }) {
+  return dispatch => fetch(`${process.env.REACT_APP_API_URL}/oauth/callback/${name}`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ code }),
+  })
+    .then(response => checkStatus(response, dispatch))
+    .then(response => response)
+    .catch(error => {
+      dispatch({
+        type: SESSION.REQUEST_REFRESH_TOKEN,
+        payload: false,
+      })
+
+      formError(error)
+    })
+}
+
+export function oauthLogin(data) {
+  return dispatch => dispatch({
+    type: SESSION.LOGIN,
+    payload: data,
+  })
+}
