@@ -44,7 +44,7 @@
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsx-a11y": "^6.1.0",
     "eslint-plugin-react": "^7.10.0",
-    "flow-bin": "^0.75.0",
+    "flow-bin": "^0.76.0",
     "lodash": "^4.17.10",
     "react-helmet": "^5.2.0",
     "react-router-dom": "^4.3.1"
