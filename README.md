@@ -22,13 +22,13 @@ An example of demonstration work with a micro-service architecture
 
 ```
 # Add repo to Helm
-helm repo add micro-company https://micro-company.github.io/charts/
+helm repo add batazor https://batazor.github.io/charts/
 
 # Update repo charts
 helm repo update
 
 # Install project
-helm install micro-company/react-app
+helm install batazor/react-app
 ```
 
 #### Enviroment variables
