@@ -22,7 +22,7 @@
     "react": "^16.4.1",
     "react-async-script": "^0.9.1",
     "react-dom": "^16.4.1",
-    "react-final-form": "^3.6.4",
+    "react-final-form": "^3.6.5",
     "react-google-recaptcha": "^0.12.0",
     "react-redux": "^5.0.7",
     "react-router-redux": "^5.0.0-alpha.9",
