@@ -8,7 +8,7 @@ import { Helmet } from 'react-helmet'
 import ReactTable from 'react-table'
 import IconButton from '@material-ui/core/IconButton'
 import Tooltip from '@material-ui/core/Tooltip'
-import EditIcon from '@material-ui/icons/ModeEdit'
+import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import {
   list, add, update, remove,
