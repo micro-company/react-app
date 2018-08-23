@@ -22,6 +22,8 @@ const styles = theme => ({
     alignItems: 'center',
     marginTop: '4em !important',
     justifyContent: 'flex-start !important',
+    display: 'flex',
+    flexDirection: 'column',
   },
   Icon: {
     fontSize: '15em',

@@ -9,7 +9,8 @@
     "eject": "react-scripts eject",
     "lint": "$(npm bin)/eslint ./src",
     "lint:fix": "$(npm bin)/eslint --fix ./src",
-    "flow": "$(npm bin)/flow"
+    "flow": "$(npm bin)/flow",
+    "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "dependencies": {
     "classnames": "^2.2.6",
@@ -37,6 +38,10 @@
   "devDependencies": {
     "@material-ui/core": "^1.5.1",
     "@material-ui/icons": "^2.0.3",
+    "@storybook/addon-info": "^3.4.10",
+    "@storybook/addon-knobs": "^3.4.10",
+    "@storybook/addon-options": "^3.4.10",
+    "@storybook/react": "^3.4.10",
     "babel-eslint": "^8.2.6",
     "date-fns": "^1.29.0",
     "eslint": "^5.4.0",
