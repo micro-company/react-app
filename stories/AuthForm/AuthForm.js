@@ -48,7 +48,7 @@ stories.add('main page', withInfo()(() => (
       />
 
       <FormAuth
-        mode={select('Mode', options, 'logIn', 'mode')}
+        mode={select('Mode', options, 'recovery', 'mode')}
 
         onChangeMode={this.onChangeMode}
         onRecaptcha={this.onRecaptcha}
