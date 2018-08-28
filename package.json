@@ -42,7 +42,7 @@
     "@storybook/addon-knobs": "^3.4.10",
     "@storybook/addon-options": "^3.4.10",
     "@storybook/react": "^3.4.10",
-    "babel-eslint": "^8.2.6",
+    "babel-eslint": "^9.0.0",
     "date-fns": "^1.29.0",
     "eslint": "^5.4.0",
     "eslint-config-airbnb": "^17.1.0",
