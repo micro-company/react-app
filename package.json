@@ -24,7 +24,7 @@
     "react-async-script": "^1.0.0",
     "react-dom": "^16.4.2",
     "react-final-form": "^3.6.5",
-    "react-google-recaptcha": "^1.0.0",
+    "react-google-recaptcha": "^1.0.1",
     "react-redux": "^5.0.7",
     "react-router-redux": "^5.0.0-alpha.9",
     "react-scripts": "^1.1.5",
