@@ -33,7 +33,7 @@
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
     "redux-ui": "^0.1.1",
-    "whatwg-fetch": "^2.0.4"
+    "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
     "@material-ui/core": "^3.0.3",
@@ -53,6 +53,6 @@
     "lodash": "^4.17.10",
     "react-helmet": "^5.2.0",
     "react-router-dom": "^4.3.1",
-    "storybook-addon-material-ui": "^0.9.0-alpha.8"
+    "storybook-addon-material-ui": "^0.9.0-alpha.14"
   }
 }
