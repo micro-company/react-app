@@ -1,8 +1,0 @@
-.job_template_best_practices: &job_best_practices
-  image: node:8-alpine
-  type: best_practices
-  before_script:
-    - npm i --ignore-scripts
-  only:
-    - tags
-  allow_failure: true
