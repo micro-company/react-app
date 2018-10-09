@@ -156,7 +156,7 @@ class Auth extends PureComponent {
           <Button
             className={classes.button}
             color="primary"
-            variant="raised"
+            variant="contained"
             type="submit"
             onClick={() => document
               .getElementById('AuthFormId')

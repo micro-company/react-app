@@ -39,7 +39,7 @@ class Home extends PureComponent {
 
         <p>
           <Button
-            variant="raised"
+            variant="contained"
             color="primary"
             disabled={this.props.isIncrementing}
 
@@ -49,7 +49,7 @@ class Home extends PureComponent {
           </Button>
 
           <Button
-            variant="raised"
+            variant="contained"
             color="primary"
             disabled={this.props.isIncrementing}
 
@@ -61,7 +61,7 @@ class Home extends PureComponent {
 
         <p>
           <Button
-            variant="raised"
+            variant="contained"
             color="secondary"
             disabled={this.props.isDecrementing}
 
@@ -71,7 +71,7 @@ class Home extends PureComponent {
           </Button>
 
           <Button
-            variant="raised"
+            variant="contained"
             color="secondary"
             disabled={this.props.isDecrementing}
 
