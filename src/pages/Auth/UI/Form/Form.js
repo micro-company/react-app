@@ -1,8 +1,7 @@
-import _ from 'lodash'
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import { Form } from 'react-final-form'
+import Form from 'react-final-form-generator'
 import Recaptcha from 'react-google-recaptcha'
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
@@ -10,8 +9,6 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Tab from '@material-ui/core/Tab'
 import Tabs from '@material-ui/core/Tabs'
-import FormHelperText from '@material-ui/core/FormHelperText'
-import Typography from '@material-ui/core/Typography'
 import AppBar from '@material-ui/core/AppBar'
 import SaveIcon from '@material-ui/icons/Send'
 import Icon from '../../../../components/Icon'
@@ -105,43 +102,11 @@ class Auth extends PureComponent {
           </AppBar>
 
           <Form
-            onSubmit={onSubmit}
-            render={({
-              handleSubmit,
-              submitError,
-            }) => (
-              <Fragment>
-                <form
-                  id="AuthFormId"
-                  className={classes.form}
-                  onSubmit={handleSubmit}
-                >
-                  { getForm(mode) }
-                </form>
-                <div>
-                  {
-                    _.get(submitError, '_error', []).forEach(error => (
-                      <Typography variant="subtitle1" gutterBottom>
-                        We have probelem: {error}
-                      </Typography>
-                    ))
-                  }
+            id="AuthFormId"
+            className={classes.form}
+            fields={getForm(mode)}
 
-                  <ul>
-                    {
-                      submitError && submitError._error.length > 0 && (
-                        <Typography variant="subtitle1" gutterBottom>
-                          We have probelem: {submitError._error.length}
-                        </Typography>
-                      )
-                    }
-                    {
-                      _.get(submitError, '_error', []).map((issue, index) => <FormHelperText error key={index}>{issue}</FormHelperText>) // eslint-disable-line
-                    }
-                  </ul>
-                </div>
-              </Fragment>
-            )}
+            onSubmit={onSubmit}
           />
 
           <Recaptcha
