@@ -31,7 +31,7 @@ function Header(props) {
           <MenuIcon />
         </IconButton>
 
-        <Typography variant="title" color="inherit">
+        <Typography variant="h6" color="inherit">
           Hello World
         </Typography>
       </Toolbar>

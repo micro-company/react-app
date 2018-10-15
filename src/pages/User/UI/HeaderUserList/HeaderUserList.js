@@ -34,7 +34,7 @@ class HeaderUserList extends PureComponent {
     return (
       <div className={classes.box}>
         <Typography
-          variant="headline"
+          variant="h5"
           gutterBottom
           className={classes.typography}
         >

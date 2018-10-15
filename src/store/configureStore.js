@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, compose, applyMiddleware } from 'redux'
 import { routerMiddleware } from 'react-router-redux'
 import { persistStore } from 'redux-persist'
 import thunk from 'redux-thunk'
@@ -19,8 +19,10 @@ if (process.env.NODE_ENV !== 'production') {
 
 const store = createStore(
   rootReducer,
-  ...enhancers,
-  applyMiddleware(jwt, thunk, routerMiddleware(history)),
+  compose(
+    ...enhancers,
+    applyMiddleware(jwt, thunk, routerMiddleware(history)),
+  ),
 )
 
 export const persistor = persistStore(store)

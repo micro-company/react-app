@@ -121,7 +121,7 @@ class Auth extends PureComponent {
                 <div>
                   {
                     _.get(submitError, '_error', []).forEach(error => (
-                      <Typography variant="subheading" gutterBottom>
+                      <Typography variant="subtitle1" gutterBottom>
                         We have probelem: {error}
                       </Typography>
                     ))
@@ -130,7 +130,7 @@ class Auth extends PureComponent {
                   <ul>
                     {
                       submitError && submitError._error.length > 0 && (
-                        <Typography variant="subheading" gutterBottom>
+                        <Typography variant="subtitle1" gutterBottom>
                           We have probelem: {submitError._error.length}
                         </Typography>
                       )

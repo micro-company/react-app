@@ -28,9 +28,6 @@ const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
   },
-  typography: {
-    margin: theme.spacing.unit,
-  },
 })
 
 class User extends PureComponent {
