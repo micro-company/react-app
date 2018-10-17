@@ -2,19 +2,15 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Form from 'react-final-form-generator'
-import Recaptcha from 'react-google-recaptcha'
-import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Tab from '@material-ui/core/Tab'
 import Tabs from '@material-ui/core/Tabs'
 import AppBar from '@material-ui/core/AppBar'
-import SaveIcon from '@material-ui/icons/Send'
 import Icon from '../../../../components/Icon'
 import getForm from './getForm'
 
-const styles = theme => ({
+const styles = () => ({
   Card: {
     alignItems: 'center',
     marginTop: '4em !important',
@@ -32,13 +28,8 @@ const styles = theme => ({
     width: '70%',
     maxWidth: '30em',
   },
-  button: {
-    flex: 1,
-  },
-  rightIcon: {
-    marginLeft: theme.spacing.unit,
-  },
   recaptcha: {
+    margin: '1em 0',
     display: 'flex',
     justifyContent: 'center',
   },
@@ -51,7 +42,6 @@ class Auth extends PureComponent {
 
     onSubmit: PropTypes.func.isRequired,
     onChangeMode: PropTypes.func.isRequired,
-    onRecaptcha: PropTypes.func.isRequired,
   }
 
   static getDerivedStateFromProps(nextProps) {
@@ -77,6 +67,12 @@ class Auth extends PureComponent {
     this.state = {
       iconName: 'login',
     }
+
+    this.onChange = this.onChange.bind(this)
+  }
+
+  onChange(form, e) {
+    console.warn('onChange', form, e)
   }
 
   render() {
@@ -104,34 +100,12 @@ class Auth extends PureComponent {
           <Form
             id="AuthFormId"
             className={classes.form}
-            fields={getForm(mode)}
+            fields={getForm({ mode, classes })}
 
+            onChange={this.onChange}
             onSubmit={onSubmit}
           />
-
-          <Recaptcha
-            className={classes.recaptcha}
-            sitekey={process.env.REACT_APP_GOOGLE_RECAPTCHA_SITEKEY}
-            onChange={this.props.onRecaptcha}
-            theme="light"
-          />
         </CardContent>
-
-        <CardActions className={classes.root}>
-          <Button
-            className={classes.button}
-            color="primary"
-            variant="contained"
-            type="submit"
-            onClick={() => document
-              .getElementById('AuthFormId')
-              .dispatchEvent(new Event('submit', { cancelable: true }))
-            }
-          >
-            Send
-            <SaveIcon className={classes.rightIcon} />
-          </Button>
-        </CardActions>
       </Card>
     )
   }
