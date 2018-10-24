@@ -18,26 +18,24 @@ const styles = () => ({
   },
 })
 
-function Header(props) {
-  return (
-    <AppBar
-      position="static"
-      color="default"
-      className={classNames(props.classes.appBar, props.classes.appBarShift)}
-      onClick={() => props.onChangeDrawer()}
-    >
-      <Toolbar>
-        <IconButton className={props.classes.menuButton} color="primary" aria-label="Menu">
-          <MenuIcon />
-        </IconButton>
+const Header = React.memo(props => (
+  <AppBar
+    position="static"
+    color="default"
+    className={classNames(props.classes.appBar, props.classes.appBarShift)}
+    onClick={() => props.onChangeDrawer()}
+  >
+    <Toolbar>
+      <IconButton className={props.classes.menuButton} color="primary" aria-label="Menu">
+        <MenuIcon />
+      </IconButton>
 
-        <Typography variant="h6" color="inherit">
-          Hello World
-        </Typography>
-      </Toolbar>
-    </AppBar>
-  )
-}
+      <Typography variant="h6" color="inherit">
+        Hello World
+      </Typography>
+    </Toolbar>
+  </AppBar>
+))
 
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
