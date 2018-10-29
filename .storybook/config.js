@@ -1,6 +1,6 @@
 import { configure, addDecorator, setAddon } from '@storybook/react'
 import infoAddon from '@storybook/addon-info'
-import { setOptions } from '@storybook/addon-options'
+import { withOptions } from '@storybook/addon-options'
 import moment from 'moment'
 
 addDecorator((story) => {
@@ -8,7 +8,7 @@ addDecorator((story) => {
   return story()
 })
 
-setOptions({
+withOptions({
   name: 'REACT-APP',
   url: 'https://github.com/micro-company/react-app',
 })

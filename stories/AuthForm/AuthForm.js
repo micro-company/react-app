@@ -33,7 +33,7 @@ stories.add('main page', withInfo()(() => (
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         open={boolean('isNotify', false)}
         autoHideDuration={6000}
-        onClose={this.handleRequestClose}
+        onClose={() => {}}
         message={(
           <span>
             Data sent to the specified email
@@ -52,9 +52,9 @@ stories.add('main page', withInfo()(() => (
       <FormAuth
         mode={select('Mode', options, 'recovery', 'mode')}
 
-        onChangeMode={this.onChangeMode}
-        onRecaptcha={this.onRecaptcha}
-        onSubmit={this.onSubmitForm}
+        onChangeMode={() => {}}
+        onRecaptcha={() => {}}
+        onSubmit={() => {}}
       />
 
       <OAuth />

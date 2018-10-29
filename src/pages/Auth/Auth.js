@@ -37,6 +37,7 @@ class Auth extends PureComponent {
 
     this.onSubmitForm = this.onSubmitForm.bind(this)
     this.onChangeMode = this.onChangeMode.bind(this)
+    this.handleRequestClose = this.handleRequestClose.bind(this)
   }
 
   onChangeMode(event, value) { this.setState({ mode: value }) }
@@ -80,7 +81,7 @@ class Auth extends PureComponent {
     }
   }
 
-  handleRequestClose = (event, reason) => {
+  handleRequestClose(event, reason) {
     if (reason === 'clickaway') { return }
     this.setState({ isNotify: false })
   }
