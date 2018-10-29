@@ -71,7 +71,7 @@ class Auth extends PureComponent {
     this.onChange = this.onChange.bind(this)
   }
 
-  onChange(form, e) {
+  onChange = (form, e) => {
     console.warn('onChange', form, e)
   }
 

@@ -14,6 +14,8 @@ class FormUser extends PureComponent {
   }
 
   constructor() {
+    super()
+
     this.state = {
       form: [
         {
