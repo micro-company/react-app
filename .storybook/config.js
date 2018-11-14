@@ -14,7 +14,11 @@ withOptions({
 })
 
 function loadStories() {
+  // auth
   require('../stories/AuthForm')
+
+  // error page
+  require('../stories/ErrorPage')
   // You can require as many stories as you need.
 }
 

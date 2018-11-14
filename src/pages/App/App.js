@@ -10,6 +10,10 @@ import Main from '../Main'
 import Auth from '../Auth'
 import AuthCallback from '../AuthCallback'
 
+import Forbidden from '../403'
+import NotFound from '../404'
+import InternalServerError from '../500'
+
 const theme = createMuiTheme({
   typography: {
     useNextVariants: true,
@@ -41,6 +45,18 @@ class App extends PureComponent {
           <Route
             path="/auth"
             component={Auth}
+          />
+          <Route
+            path="/403"
+            component={Forbidden}
+          />
+          <Route
+            path="/404"
+            component={NotFound}
+          />
+          <Route
+            path="/500"
+            component={InternalServerError}
           />
           <Authenticated>
             <Main {...this.props} />
