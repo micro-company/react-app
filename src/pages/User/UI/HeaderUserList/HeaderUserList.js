@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Tooltip from '@material-ui/core/Tooltip'
 import Button from '@material-ui/core/Button'
+import Fab from '@material-ui/core/Fab'
 import Typography from '@material-ui/core/Typography'
 import UpdateIcon from '@material-ui/icons/Update'
 import AddIcon from '@material-ui/icons/Add'
@@ -42,8 +43,7 @@ class HeaderUserList extends PureComponent {
         </Typography>
 
         <Tooltip placement="bottom" title="Update users list">
-          <Button
-            variant="fab"
+          <Fab
             mini
             color="primary"
             aria-label="update"
@@ -51,12 +51,11 @@ class HeaderUserList extends PureComponent {
             onClick={this.props.listActions}
           >
             <UpdateIcon />
-          </Button>
+          </Fab>
         </Tooltip>
 
         <Tooltip placement="bottom" title="Add user">
-          <Button
-            variant="fab"
+          <Fab
             mini
             color="primary"
             aria-label="add"
@@ -64,7 +63,7 @@ class HeaderUserList extends PureComponent {
             onClick={this.props.onChangeAddUserDialog}
           >
             <AddIcon />
-          </Button>
+          </Fab>
         </Tooltip>
       </div>
     )
