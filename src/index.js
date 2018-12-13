@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { ConnectedRouter } from 'react-router-redux'
+import { ConnectedRouter } from 'connected-react-router'
 import { PersistGate } from 'redux-persist/es/integration/react'
 import 'react-table/react-table.css'
 import store, { history, persistor } from './store/configureStore'

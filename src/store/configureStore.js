@@ -1,5 +1,5 @@
 import { createStore, compose, applyMiddleware } from 'redux'
-import { routerMiddleware } from 'react-router-redux'
+import { routerMiddleware } from 'connected-react-router'
 import { persistStore } from 'redux-persist'
 import thunk from 'redux-thunk'
 import createHistory from 'history/createBrowserHistory'
@@ -18,7 +18,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const store = createStore(
-  rootReducer,
+  rootReducer(history),
   compose(
     ...enhancers,
     applyMiddleware(jwt, thunk, routerMiddleware(history)),
