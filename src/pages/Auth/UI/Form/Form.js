@@ -89,7 +89,7 @@ class Auth extends PureComponent {
             <Tabs
               value={mode}
               onChange={onChangeMode}
-              fullWidth
+              variant="fullWidth"
             >
               <Tab label="LOG IN" value="logIn" />
               <Tab label="SIGN ON" value="signOn" />
