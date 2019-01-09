@@ -20,8 +20,8 @@ if (process.env.NODE_ENV !== 'production') {
 const store = createStore(
   rootReducer(history),
   compose(
-    ...enhancers,
     applyMiddleware(jwt, thunk, routerMiddleware(history)),
+    ...enhancers,
   ),
 )
 
