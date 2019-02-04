@@ -31,6 +31,10 @@ spec:
         build_id: "{{ .Values.CI_BUILD_ID }}"
         component: react-app
     spec:
+      dnsConfig:
+        options:
+          - name: ndots
+            value: "1"
       containers:
       - name: {{ .Values.CI_PROJECT_NAME }}
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
