@@ -17,7 +17,7 @@
     "connected-react-router": "^6.4.0",
     "final-form": "^4.11.1",
     "history": "^4.7.2",
-    "jsonwebtoken": "^8.5.0",
+    "jsonwebtoken": "^8.5.1",
     "localforage": "^1.7.3",
     "material-ui": "^1.0.0-beta.47",
     "material-ui-icons": "^1.0.0-beta.36",
