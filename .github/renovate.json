@@ -4,6 +4,6 @@
   "baseBranches": ["master"],
   "automerge": true,
   "major": {
-    "automerge": false
+    "automerge": true
   }
 }
