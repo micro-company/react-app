@@ -29,7 +29,7 @@
     "react-dom": "^16.8.6",
     "react-google-recaptcha": "^1.0.5",
     "react-redux": "^7.0.3",
-    "react-router": "^5.0.0",
+    "react-router": "^5.0.1",
     "react-scripts": "^3.0.1",
     "react-table": "^6.10.0",
     "redux": "^4.0.1",
@@ -56,7 +56,7 @@
     "lodash": "^4.17.11",
     "react-final-form-generator": "^1.4.0",
     "react-helmet": "^5.2.1",
-    "react-router-dom": "^5.0.0",
+    "react-router-dom": "^5.0.1",
     "storybook-addon-material-ui": "^0.9.0-alpha.19"
   },
   "browserslist": [
