@@ -51,7 +51,7 @@
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.14.0",
+    "eslint-plugin-react": "^7.14.1",
     "flow-bin": "^0.101.1",
     "lodash": "^4.17.11",
     "react-final-form-generator": "^1.4.0",
