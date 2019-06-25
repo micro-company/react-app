@@ -52,7 +52,7 @@
     "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.14.2",
-    "flow-bin": "^0.101.1",
+    "flow-bin": "^0.102.0",
     "lodash": "^4.17.11",
     "react-final-form-generator": "^1.4.0",
     "react-helmet": "^5.2.1",
