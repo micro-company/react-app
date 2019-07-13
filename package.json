@@ -17,7 +17,7 @@
     "@storybook/addon-links": "^5.1.9",
     "classnames": "^2.2.6",
     "connected-react-router": "^6.5.0",
-    "final-form": "^4.16.2",
+    "final-form": "^4.17.0",
     "history": "^4.9.0",
     "jsonwebtoken": "^8.5.1",
     "localforage": "^1.7.3",
