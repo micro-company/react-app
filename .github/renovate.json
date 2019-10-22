@@ -11,5 +11,6 @@
   "packageRules": [{
     "depTypeList": ["devDependencies"],
     "automerge": true
-  }]
+  }],
+  "commitBody": "Signed-off-by: {{{gitAuthor}}}"
 }
