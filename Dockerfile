@@ -16,6 +16,6 @@ COPY ./ ./
 RUN npm i --ignore-scripts
 RUN npm run build
 
-FROM nginx:1.20.0-alpine
+FROM nginx:1.21.0-alpine
 WORKDIR /usr/share/nginx/html
 COPY --from=builder /src/build ./
