@@ -1,4 +1,4 @@
-FROM node:18-alpine as builder
+FROM node:19-alpine as builder
 
 # Configuration
 ARG REACT_APP_API_URL
