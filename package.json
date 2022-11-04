@@ -34,7 +34,7 @@
     "react-table": "^6.11.5",
     "redux": "^4.2.0",
     "redux-persist": "^5.10.0",
-    "redux-thunk": "^2.4.1",
+    "redux-thunk": "^2.4.2",
     "redux-ui": "^0.1.1",
     "whatwg-fetch": "^3.6.2"
   },
