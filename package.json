@@ -56,7 +56,7 @@
     "lodash": "^4.17.21",
     "react-final-form-generator": "^1.4.0",
     "react-helmet": "^6.1.0",
-    "react-router-dom": "^6.8.0",
+    "react-router-dom": "^6.8.1",
     "storybook-addon-material-ui": "^0.9.0-alpha.24"
   },
   "browserslist": [
