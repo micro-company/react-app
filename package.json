@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@mui/material": "^5.0.0",
-    "@material-ui/icons": "^4.11.2",
+    "@mui/icons-material": "^5.0.0",
     "@storybook/addon-info": "^5.3.21",
     "@storybook/addon-knobs": "^6.4.0",
     "@storybook/addon-options": "^5.3.21",
