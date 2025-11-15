@@ -39,8 +39,8 @@
     "whatwg-fetch": "^3.6.16"
   },
   "devDependencies": {
-    "@mui/material": "^5.14.0",
-    "@mui/icons-material": "^5.14.0",
+    "@mui/material": "^5.18.0",
+    "@mui/icons-material": "^5.18.0",
     "@storybook/addon-info": "^5.3.21",
     "@storybook/addon-knobs": "^7.0.2",
     "@storybook/addon-options": "^5.3.21",
